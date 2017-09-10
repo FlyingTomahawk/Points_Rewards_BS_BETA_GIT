@@ -269,7 +269,7 @@ function validate(field) {
       $search = "where customers_id LIKE '%" . $keywords . "%' or customers_lastname like '%" . $keywords . "%' or customers_firstname LIKE '%" . $keywords . "%' or customers_points_expires like '%" . date("Y-". $keywords) . "%'";
     }
 
- $filter = $_GET['filter'];
+ $filter = isset($_GET['filter'])? $_GET['filter'] : null;
  switch ($filter) {
   case '1':
     $filter = '';
@@ -303,7 +303,7 @@ function validate(field) {
    } else {
 	   $viewedSort = "customers_lastname";
    }
-   
+   $sort = null;
    switch ($viewedSort) {
        case "lastname-asc":
          $sort .= "customers_lastname";
@@ -463,8 +463,10 @@ function validate(field) {
      } else {
         $contents[] = array('text' => '<a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=addpoints') . '">' . tep_image_button('button_add_points.gif', BUTTON_TEXT_ADD_POINTS) . '</a> <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=adjust') . '">' . tep_image_button('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . '</a> <a href="' . tep_href_link('customers.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link('orders.php', 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
        }
-        $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_ORDERS . ' ' . $currencies->format($cInfo->ordersum));
-        $contents[] = array('text' => TEXT_INFO_NUMBER_OF_PENDING . ' ' . number_format($cInfo->pending_total,POINTS_DECIMAL_PLACES));
+       if (isset($cInfo->ordersum)) {
+         $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_ORDERS . ' ' . $currencies->format($cInfo->ordersum));
+       }
+       $contents[] = array('text' => TEXT_INFO_NUMBER_OF_PENDING . ' ' . number_format($cInfo->pending_total,POINTS_DECIMAL_PLACES));
       }
       break;
   }

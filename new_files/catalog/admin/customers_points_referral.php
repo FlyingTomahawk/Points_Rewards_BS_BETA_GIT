@@ -19,6 +19,12 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
+  $comment_cancel = null;
+  $uID = null;
+  $potype = null;
+  $viewedSort = null;
+  $sort = null;
+  
   if (tep_not_null($action)) {
     switch ($action) {
       case 'confirm_points':
@@ -83,7 +89,7 @@
 	      tep_db_query("update customers_points_pending set points_status = 2 where unique_id = '". (int)$uID ."' limit 1");
 	      $sql = "optimize table customers_points_pending";
         } else {
-          $messageStack->add_session(NOTICE_RECORED_REMOVED, 'warning');
+          $messageStack->add_session(sprintf(NOTICE_RECORED_REMOVED, $uID), 'warning');
           tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
           $sql = "optimize table customers_points_pending";
         }
@@ -153,7 +159,7 @@
  	      tep_db_query("update customers_points_pending set points_status = 3 " . $set_comment . " where unique_id = '". (int)$uID ."' limit 1");
  	      $sql = "optimize table customers_points_pending";          
         $database_queue = '1';
-        $messageStack->add_session(SUCCESS_DATABASE_UPDATED, 'success');
+        $messageStack->add_session(sprintf(SUCCESS_DATABASE_UPDATED, $comment_cancel), 'success');
         } else {
            tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
            $sql = "optimize table customers_points_pending";
@@ -247,7 +253,7 @@
 
         tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
         $sql = "optimize table customers_points_pending";
-        $messageStack->add_session(NOTICE_RECORED_REMOVED, 'warning');
+        $messageStack->add_session(sprintf(NOTICE_RECORED_REMOVED, $uID), 'warning');
 
         tep_redirect(tep_href_link('customers_points_referral.php', tep_get_all_get_params(array('uID', 'action'))));
         break;
@@ -396,7 +402,7 @@ function validate(field) {
     $filter = (!isset($_GET['filter'])) ? 1 : $_GET['filter'];
     $filter = 'and p.points_status = ' . (int)tep_db_prepare_input((int)$filter);
 //    if (!isset($_GET['potype'])) $potype = "where p.points_type != 'SP'";
-    if ($_GET['filter'] == '4') $filter = 'and p.points_status != 0';
+    if (isset($_GET['filter']) && $_GET['filter'] == '4') $filter = 'and p.points_status != 0';
     $pending_points_query_raw = "select p.*, c.customers_gender, c.customers_lastname, c.customers_firstname, c.customers_email_address, c.customers_shopping_points, c.customers_points_expires from customers_points_pending p left join customers c on c.customers_id = p.customer_id $potype $filter $search order by $sort";
     $pending_points_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $pending_points_query_raw, $pending_points_query_numrows);
     $pending_points_query = tep_db_query($pending_points_query_raw);

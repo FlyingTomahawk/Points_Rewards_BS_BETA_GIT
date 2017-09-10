@@ -40,4 +40,6 @@
     $points_email = '<b>Points confirmed for the following rows...</b>'. "\n\n" . $total_points_mail;
     tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $points_subject, $points_email, STORE_OWNER,   STORE_OWNER_EMAIL_ADDRESS);
     echo 'Done!<br />You may close this window now. ';
+  } else {
+    echo 'Nothing to do!<br />You may close this window now. ';
   }

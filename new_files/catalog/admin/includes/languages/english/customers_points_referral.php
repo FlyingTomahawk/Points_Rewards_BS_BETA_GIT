@@ -104,9 +104,9 @@ define('EMAIL_TEXT_SUCCESS_POINTS', 'Points are available at your account, durin
 define('EMAIL_CONTACT', 'If you have any questions or for help with any of our online services, please email us at: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n" . 'This is an automated response, please do not reply!');
 
 define('SUCCESS_POINTS_UPDATED', 'Success: Customer Points account has been successfully updated.');
-define('SUCCESS_DATABASE_UPDATED', 'Queue Success: Database has been successfully updated and points status set to  ' . TEXT_POINTS_CANCELLED . '  with this comment " '. $comment_cancel . ' ".');
+define('SUCCESS_DATABASE_UPDATED', 'Queue Success: Database has been successfully updated and points status set to  ' . TEXT_POINTS_CANCELLED . '  with this comment "%s".');
 define('NOTICE_EMAIL_SENT_TO', 'Notice: Email sent to: %s');
-define('NOTICE_RECORED_REMOVED', 'Notice: The points record row no. ' . $uID . ' has been deleted from database.');
+define('NOTICE_RECORED_REMOVED', 'Notice: The points record row no. %s has been deleted from database.');
 define('WARNING_DATABASE_NOT_UPDATED', 'Warning: Empty fields, Nothing to change. The Database was not updated.');
 define('POINTS_ENTER_JS_ERROR', 'Invalid entry! \n Only numbers are accepted!');
 

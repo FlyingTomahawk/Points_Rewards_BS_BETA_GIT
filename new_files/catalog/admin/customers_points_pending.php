@@ -19,6 +19,9 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
+  $comment_cancel = null;
+  $uID = null;
+  
   if (tep_not_null($action)) {
     switch ($action) {
       case 'confirm_points':
@@ -73,7 +76,7 @@
         if (isset($_POST['queue_confirm'])) {
 	      tep_db_query("update customers_points_pending set points_status = 2 where unique_id = '". (int)$uID ."' limit 1");
         } else {
-          $messageStack->add_session(NOTICE_RECORED_REMOVED, 'warning');
+          $messageStack->add_session(sprintf(NOTICE_RECORED_REMOVED, $uID), 'warning');
           tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
         }
         $messageStack->add_session(SUCCESS_POINTS_UPDATED, 'success');
@@ -134,7 +137,7 @@
           }
  	      tep_db_query("update customers_points_pending set points_status = 3 " . $set_comment . " where unique_id = '". (int)$uID ."' limit 1");          
         $database_queue = '1';
-        $messageStack->add_session(SUCCESS_DATABASE_UPDATED, 'success');
+        $messageStack->add_session(sprintf(SUCCESS_DATABASE_UPDATED, $comment_cancel), 'success');
         } else {
            tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
         }
@@ -217,7 +220,7 @@
         $uID = tep_db_prepare_input($_GET['uID']);
 
         tep_db_query("delete from customers_points_pending where unique_id = '". (int)$uID ."' limit 1");
-        $messageStack->add_session(NOTICE_RECORED_REMOVED, 'warning');
+        $messageStack->add_session(sprintf(NOTICE_RECORED_REMOVED, $uID), 'warning');
 
         tep_redirect(tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action'))));
         break;
@@ -294,6 +297,9 @@ function validate(field) {
               </tr>
 <?php
 //sort view
+  $viewedSort = null;
+  $sort = null;
+  
    if (isset($_GET['viewedSort'])){
      $viewedSort = $_GET['viewedSort'];
      tep_session_register('viewedSort');

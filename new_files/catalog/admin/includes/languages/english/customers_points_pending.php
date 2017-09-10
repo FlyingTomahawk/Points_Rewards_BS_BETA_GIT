@@ -101,9 +101,9 @@ define('EMAIL_EXPIRE_DET', 'Your current points balance is %s points, points wil
 define('EMAIL_EXPIRE_TEXT', 'After this date, the total balance of your accumulated reward earnings will be forfeited and you will begin accumulating points from the start.');
 //Auto Remainder eof
 define('SUCCESS_POINTS_UPDATED', 'Success: Customer Points account has been successfully updated.');
-define('SUCCESS_DATABASE_UPDATED', 'Queue Success: Database has been successfully updated and points status set to  ' . TEXT_POINTS_CANCELLED . '  with this comment " '. $comment_cancel . ' ".');
+define('SUCCESS_DATABASE_UPDATED', 'Queue Success: Database has been successfully updated and points status set to  ' . TEXT_POINTS_CANCELLED . '  with this comment "%s".');
 define('NOTICE_EMAIL_SENT_TO', 'Notice: Email sent to: %s');
-define('NOTICE_RECORED_REMOVED', 'Notice: The points record row no. ' . $uID . ' has been deleted from database.');
+define('NOTICE_RECORED_REMOVED', 'Notice: The points record row no. %s has been deleted from database.');
 define('WARNING_DATABASE_NOT_UPDATED', 'Warning: Empty fields, Nothing to change. The Database was not updated.');
 define('POINTS_ENTER_JS_ERROR', 'Invalid entry! \n Only numbers are accepted!');
 
