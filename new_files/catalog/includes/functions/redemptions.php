@@ -370,7 +370,7 @@
         <h2><?php echo TABLE_HEADING_REFERRAL; ?></h2>       
 		<div class="alert alert-info"> 
 			<?php echo TEXT_REFERRAL_REFERRED; ?>
-			<?php echo tep_draw_input_field('customer_referred', $customer_referred, 'style="width:250px;"'); ?>
+			<?php echo tep_draw_input_field('customer_referred', ((isset($customer_referred))? $customer_referred : ''), 'style="width:250px;"'); ?>
 		</div>
 	<div class="clearfix"></div>
 <?php
