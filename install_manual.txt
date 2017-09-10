@@ -1,0 +1,869 @@
+####### POINTS AND REWARDS BS #########
+  created by Ben Zukrel, Deep Silver Accessories
+  http://www.deep-silver.com
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2017 osCommerce
+
+  Released under the GNU General Public License
+
+##################################################
+Date: April.23.2017 v1.0 for osC BS GOLD and EDGE
+Upgraded to osC BS GOLD and EDGE by Tsimi. (not compatible with regular osC 2.3.4)!!!
+
+******************* MAKE SURE TO BACKUP YOUR FILES BEFORE ***********************
+As I take no responsibility for anything going wrong.
+This module as been tested on a clean install of osC BS GOLD and EDGE.
+
+This module has been modified to work with the latest osC BS GOLD and EDGE.
+If your osCommerce version is not osC BS GOLD or EDGE, don't even start.
+
+Please use it at your own risk.
+
+The changes should be made by experienced users only.
+Also, there might already be changes in place, and they probably have to be merged with this contribution.
+------------------------------------------------------------------------------------------
+
+####### STEP BY STEP INSTALLATION ################
+
+A. ADDING NEW FILES.
+B. EDITING OSC FILES.(catalog directory).
+C. EDITING OSC FILES.(admin directory). 
+D. INSTALL ORDER TOTAL MODULE 
+
+
+A. ADDING NEW FILES.
+copy the new files provided into the same location in your catalog and admin directory.
+
+-- Add this to catalog section --------------
+
+    catalog/my_points.php
+    catalog/my_points_help.php
+    catalog/includes/functions/redemptions.php
+    catalog/includes/languages/english/my_points.php
+    catalog/includes/languages/english/my_points_help.php
+    catalog/includes/languages/english/modules/order_total/ot_redemptions.php
+    catalog/includes/modules/order_total/ot_redemptions.php
+====DONE====
+-- Add this to admin section --------------
+
+    admin/customers_points.php
+    admin/customers_points_credit.php (cron script)
+    admin/customers_points_expire.php (cron script)
+    admin/customers_points_pending.php
+    admin/customers_points_referral.php
+	admin/includes/boxes/points_rewards.php
+    admin/includes/languages/english/customers_points.php
+    admin/includes/languages/english/customers_points_pending.php
+    admin/includes/languages/english/customers_points_referral.php
+====DONE====
+	
+******************************************************************************************
+
+B. EDITING OSC FILES.(catalog directory).
+
+CATALOG STEP = 1.   open catalog/includes/modules/pages/tp_account.php
+
+**This step has 2 parts
+
+FIND:
+
+    function build() {
+      global $oscTemplate;
+
+REPLACE WITH:
+
+    function build() {
+      global $oscTemplate, $currencies;
+	  
+FIND:
+
+        $output .= '  </ul>' .
+                   '</div>';
+      }
+	  
+ADD AFTER IT:
+
+//-- // BOF POINTS REWARDS BS //-->
+    if (USE_POINTS_SYSTEM == 'true') {
+		
+	$output .= '<h2>' . MY_POINTS_TITLE . '</h2>
+           <div class="contentText">  
+			  <ul class="list-unstyled">';
+
+  $has_points = tep_get_shopping_points($customer_id);
+  if ($has_points > 0) {
+	  $output .= '<h4><span class="label label-info">' . sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_points,POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
+  }
+	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', 'SSL') . '">' . MY_POINTS_VIEW . '</a></li>    
+				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', 'SSL') . '">' . MY_POINTS_VIEW_HELP . '</a></li>
+			  </ul>
+           </div>'; 
+  }
+//-- // EOF POINTS REWARDS BS //-->       
+
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 3.   open catalog/checkout_confirmation.php
+This will add an errors checker to checkout_confirmation page.
+
+FIND:
+
+  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  }
+  
+REPLACE WITH:
+
+#####  BOF POINTS REWARDS BS  #######
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
+		  $customer_shopping_points_spending = false;
+		  // This if sentence should include check for amount of points on account compared to the transferred point from checkout_payment.php
+		  // Possible Hack Fix included
+		  if (tep_calc_shopping_pvalue($_POST['customer_shopping_points_spending']) < $order->info['total'] && !is_object($$payment) || (tep_get_shopping_points($customer_id) < $_POST['customer_shopping_points_spending'])) {
+			  $customer_shopping_points_spending = false;
+			  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REDEEM_SYSTEM_ERROR_POINTS_NOT), 'SSL'));
+		  } else {
+			  $customer_shopping_points_spending = $_POST['customer_shopping_points_spending'];
+			  if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+		  }
+	  }
+	  
+	  //To ensure only the first order of a new customer is entitled to grant point to his/her referrer. Otherwise, a hacker might hard-code the email address of  a referrer and cheat for point on every single order the new customer made.
+	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+		  if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
+			  $customer_referral = false;
+			  $check_mail = trim($_POST['customer_referred']);
+			  if (tep_validate_email($check_mail) == false) {
+				  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_NOT_VALID), 'SSL'));
+			  } else {
+				  $valid_referral_query = tep_db_query("select customers_id from customers where customers_email_address = '" . $check_mail . "' limit 1");
+				  $valid_referral = tep_db_fetch_array($valid_referral_query);
+				  if (!tep_db_num_rows($valid_referral_query)) {
+					  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_NOT_FOUND), 'SSL'));
+				  }
+				  
+				  if ($check_mail == $order->customer['email_address']) {
+					  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_SELF), 'SSL'));
+				  } else {
+					  $customer_referral = $valid_referral['customers_id'];
+					  if (!tep_session_is_registered('customer_referral')) tep_session_register('customer_referral');
+				  }
+			  }
+		  }
+	  }
+  }
+  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+	  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  }
+########  EOF POINTS REWARDS BS #################*/
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 4.   open catalog/checkout_payment.php
+This will add the javascript alart checking the box for invalid character. As well as 
+allow points to be used as payment method.
+
+**This step has 2 parts
+
+FIND:
+
+  require('includes/template_top.php');
+?>
+
+ADD AFTER IT:
+
+/*  BOF POINTS REWARDS BS  */
+var submitter = null;
+function submitFunction() {
+   submitter = 1;
+   }
+/*  EOF POINTS REWARDS BS  */
+
+FIND:
+
+<?php
+    $radio_buttons++;
+  }
+?>
+
+  </div>
+  
+ADD AFTER IT:
+
+<!-- BOF POINTS REWARDS BS -->
+<?php
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+	  //echo points_selection();
+	  $cart_show_total= $cart->show_total();
+	  echo points_selection($cart_show_total);
+	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+		  echo referral_input();
+	  }
+  }
+?>
+<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+<!-- EOF POINTS REWARDS BS -->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 5.   open catalog/checkout_process.php
+this will..
+ 1.Add pending points for a new success order with or without shipping cost.
+ 2.Balance customer shopping points account if points used.
+ 
+ ** This step has 3 parts.
+
+FIND:
+
+  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  }
+  
+REPLACE WITH:
+
+########  BOF POINTS REWARDS BS #################*/
+  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+	  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  }
+########  EOF POINTS REWARDS BS #################*/
+
+FIND:
+
+    tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
+  }
+  
+ADD AFTER IT:
+
+####  BOF POINTS REWARDS BS  ####*/
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+// customer pending points added 
+      if ($order->info['total'] > 0) {
+	      $points_toadd = get_points_toadd($order);
+	      $points_comment = 'TEXT_DEFAULT_COMMENT';
+	      $points_type = 'SP';
+	      if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
+		      tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer referral points added 
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
+	      if (!tep_db_num_rows($referral_twice_query)) {
+		      $points_toadd = USE_REFERRAL_SYSTEM;
+		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
+		      $points_type = 'RF';
+		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer shoppping points account balanced 
+      if ($customer_shopping_points_spending) {
+	      tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
+      }
+  }
+####  EOF POINTS REWARDS BS  ####*/
+   
+FIND:
+
+  tep_session_unregister('comments');
+  
+ADD AFTER IT:
+
+####  BOF POINTS REWARDS BS  ####*/
+  if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
+  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+  if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
+####  EOF POINTS REWARDS BS  ####*/
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 6.   open catalog/create_account.php
+This will add Welcome Points (and send email) defined by admin if enabled.
+
+FIND:
+
+$email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
+
+REPLACE WITH:
+
+// BOF POINTS REWARDS BS
+      if ((USE_POINTS_SYSTEM == 'true') && (NEW_SIGNUP_POINT_AMOUNT > 0)) {
+	      tep_add_welcome_points($customer_id);
+	      
+	      $points_account = '<a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><b><u>' . EMAIL_POINTS_ACCOUNT . '</u></b></a>.';
+	      $points_faq = '<a href="' . tep_href_link('my_points_help.php', '', 'NONSSL') . '"><b><u>' . EMAIL_POINTS_FAQ . '</u></b></a>.';
+	      $text_points = sprintf(EMAIL_WELCOME_POINTS , $points_account, number_format(NEW_SIGNUP_POINT_AMOUNT,POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(NEW_SIGNUP_POINT_AMOUNT)), $points_faq) ."\n\n";
+	      
+	      $email_text .= EMAIL_WELCOME . EMAIL_TEXT . $text_points . EMAIL_CONTACT . EMAIL_WARNING;
+      } else {
+	      $email_text .= EMAIL_WELCOME . EMAIL_TEXT .EMAIL_CONTACT . EMAIL_WARNING;
+      }
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 7.   open catalog/create_account_success.php
+This will add the text to notify the new signup users of the Welcome Points received,
+with a link to the points page and points FAQ page.
+
+FIND:
+
+<div class="contentContainer">
+  <div class="contentText">
+    <?php echo TEXT_ACCOUNT_CREATED; ?>
+  
+ADD AFTER IT:
+
+	  <hr>
+<!-- BOF POINTS REWARDS BS -->
+	<?php 
+	   if ((USE_POINTS_SYSTEM == 'true') && (NEW_SIGNUP_POINT_AMOUNT > 0)) {
+	?>
+		<?php echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(NEW_SIGNUP_POINT_AMOUNT,POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(NEW_SIGNUP_POINT_AMOUNT))); ?>
+      	<?php echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+		
+	<?php
+	   }
+	?>               
+<!-- EOF POINTS REWARDS BS -->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+  
+CATALOG STEP = 8.   open catalog/logoff.php
+Clear sessions used at checkout if by any chance they still active.
+
+FIND:
+
+  if ( tep_session_is_registered('comments') ) {
+    tep_session_unregister('comments');
+  }
+  
+ADD AFTER IT:
+
+#### BOF POINTS REWARDS BS ####*/
+  if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
+  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+  if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
+#### EOF POINTS REWARDS BS ####*/
+
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+  
+CATALOG STEP = 11.   open catalog/product_info.php
+This will add the points credit information (if enabled).
+
+FIND:
+
+<?php echo stripslashes($product_info['products_description']); ?>
+
+ADD BEFORE IT:
+
+<?php 
+// BOF POINTS REWARDS BS
+    if ((USE_POINTS_SYSTEM == 'true') && (DISPLAY_POINTS_INFO == 'true')) {
+	    if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
+		    $products_price_points = tep_display_points($new_price, tep_get_tax_rate($product_info['products_tax_class_id']));
+	    } else {
+		    $products_price_points = tep_display_points($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+	    }
+	    $products_points = tep_calc_products_price_points($products_price_points);
+	    $products_points_value = tep_calc_price_pvalue($products_points);
+	    if ((USE_POINTS_FOR_SPECIALS == 'true') || $new_price == false) {
+		    echo '<p>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points,POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '</p>';
+	    }
+    }
+// EOF POINTS REWARDS BS
+?>
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 12.   open catalog/product_reviews.php
+this will notify customers of points given for review and add link to points system help file
+
+FIND:
+
+<div class="page-header">
+  <div class="row">
+    <h1 class="col-sm-4" itemprop="name"><?php echo $products_name; ?></h1>
+    <h2 class="col-sm-8 text-right-not-xs"><?php echo $products_price; ?></h2>
+  </div>
+</div>
+
+ADD AFTER IT:
+
+<!-- // BOF POINTS REWARDS BS //-->
+<?php
+   if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+?>
+	<div>
+   		<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+            	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+        </div>
+<?php
+  }
+?>
+<!-- // EOF POINTS REWARDS BS //-->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 13.   open catalog/product_reviews_write.php
+this will add the points and notify customers of points given for review and add link to points system help file
+
+** this step has 2 parts.
+
+FIND:
+
+      tep_db_query("insert into " . TABLE_REVIEWS_DESCRIPTION . " (reviews_id, languages_id, reviews_text) values ('" . (int)$insert_id . "', '" . (int)$languages_id . "', '" . tep_db_input($review) . "')");
+	  
+ADD AFTER IT:
+
+/*#### BOF POINTS REWARDS BS ####*/
+    if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+            $points_toadd = USE_POINTS_FOR_REVIEWS;
+            $comment = 'TEXT_DEFAULT_REVIEWS';
+            $points_type = 'RV';
+            tep_add_pending_points($customer_id, $product_info['products_id'], $points_toadd, $comment, $points_type);
+    }
+/*#### EOF POINTS REWARDS BS ####*/	  
+
+FIND:
+
+<div class="page-header">  
+  <div class="row">
+    <h1 class="col-sm-4"><?php echo $products_name; ?></h1>
+    <h2 class="col-sm-8 text-right-not-xs"><?php echo $products_price; ?></h2>
+  </div>
+</div>
+
+ADD AFTER IT:
+
+<!-- // BOF POINTS REWARDS BS //-->
+<?php
+  if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+?>
+	<div>
+        	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+        </div>
+<?php
+  }
+?>
+<!-- // EOF POINTS REWARDS BS //-->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 14.   open catalog/reviews.php
+this will notify customers of points given for review and add link to points system help file
+
+FIND:
+
+<div class="page-header">
+  <h1><?php echo HEADING_TITLE; ?></h1>
+</div>
+
+<div class="contentContainer">
+
+ADD AFTER IT:
+
+<!-- // BOF POINTS REWARDS BS //-->
+<?php
+  if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+?>
+	<div class="contentText">
+        	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link(FILENAME_MY_POINTS_HELP,'faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+      	</div>
+<?php
+  }
+?>
+<!-- // EOF POINTS REWARDS BS //-->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 15.   open catalog/includes/application_top.php
+
+FIND:
+
+(GOLD)
+// infobox
+  require(DIR_WS_CLASSES . 'split_page_results.php');
+(EDGE)
+// split-page-results
+  require('includes/classes/split_page_results.php');
+  
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  require('includes/functions/redemptions.php');
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+ 
+CATALOG STEP = 16.    open catalog/includes/modules/boxes/templates/information.php
+This will add the link to My Points FAQ
+
+FIND:
+
+<li><a href="<?php echo tep_href_link('conditions.php'); ?>"><?php echo MODULE_BOXES_INFORMATION_BOX_CONDITIONS; ?></a></li>
+
+ADD AFTER IT:
+
+<li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo BOX_INFORMATION_MY_POINTS_HELP; ?></a></li> <!-- POINTS REWARDS BS //-->
+
+SAVE AND CLOSE!
+
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 17.    open catalog/includes/modules/boxes/bm_shopping_cart.php(optional)
+This is in order to display points info.(customers must login).
+This will only show up when a customer points is bigger then 0
+
+FIND:
+
+$cart_contents_string .= '<li class="text-right"><hr>' . $currencies->format($cart->show_total()) . '</li>';
+								 
+ADD AFTER IT:
+
+### BOF POINTS REWARDS BS ####*/
+  if (USE_REDEEM_SYSTEM == 'true') {
+          $has_points = tep_get_shopping_points($customer_id);
+          if ($has_points > 0) {
+                  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. TEXT_POINTS_BALANCE . '</a></strong></div>' . TEXT_POINTS . '&nbsp;' . number_format($has_points,POINTS_DECIMAL_PLACES) . '<br />' .  TEXT_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
+          }   
+  }
+/*#### EOF POINTS REWARDS BS ####*/
+						 
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 18.   open catalog/includes/classes/payment.php
+This will add the check box error to the java payment error.
+
+FIND:
+
+               '  if (error == 1) {' . "\n" .
+			   
+REPLACE WITH:
+
+// POINTS REWARDS BS
+               '  if (error == 1 && submitter != 1) {' . "\n" .
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+                                          
+CATALOG STEP = 19.   open catalog/includes/languages/english.php
+This will define the language used for My Points FAQ link in information box
+and the language used for error checker used druing checkout procces
+(Please translate and repeat this step to any of your other languages)
+
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('BOX_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
+define('REDEEM_SYSTEM_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');
+define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
+define('REFERRAL_ERROR_SELF', 'Sorry you can not refer yourself.');
+define('REFERRAL_ERROR_NOT_VALID', 'The referral email does not appear to be valid - please make any necessary corrections.');
+define('REFERRAL_ERROR_NOT_FOUND', 'The referral email address you entered was not found.');
+define('TEXT_POINTS_BALANCE', 'Points Status');
+define('TEXT_POINTS', 'Points :');
+define('TEXT_VALUE', 'Value:');
+define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
+// EOF POINTS REWARDS BS
+
+ SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 20.   open catalog/includes/languages/english/account.php
+This will define the language used for My Points box links in customer account page.
+(Please translate and repeat this step to any of your other languages)
+
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('MY_POINTS_TITLE', 'My Points and Redemptions');
+define('MY_POINTS_VIEW', 'View my Points Balance and Points received.');
+define('MY_POINTS_VIEW_HELP', 'Reward Point Program FAQ.');
+define('MY_POINTS_CURRENT_BALANCE', 'Shopping Points Balance : %s points. Valued at : %s ');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 21.   open catalog/includes/languages/english/checkout_payment.php
+This will define the language used for Redemptions box in checkout_payment page.
+(Please translate and repeat this step to any of your other languages)
+
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
+define('TABLE_HEADING_REFERRAL', 'Referral System');
+define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
+define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
+define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
+define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 22.   open catalog/includes/languages/english/create_account.php
+This will define the language used for email Welcome Points offerd by admin if enabled..
+(Please translate and repeat this step to any of your other languages)
+	
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('EMAIL_WELCOME_POINTS', '<li><strong>Reward Point Program</strong> - As part of our Welcome to new customers, we have credited your %s with a total of %s Shopping Points worth %s .' . "\n" . 'Please refer to the %s as conditions may apply.');
+define('EMAIL_POINTS_ACCOUNT', 'Shopping Points Accout');
+define('EMAIL_POINTS_FAQ', 'Reward Point Program FAQ');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 23.  open catalog/includes/languages/english/create_account_success.php
+This will define the language used for Welcome Points offerd by admin if enabled..
+(Please translate and repeat this step to any of your other languages)
+
+Note: This option disabled by default. If you sure you don't want to use this option ever you can skip this step.
+
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('TEXT_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
+define('TEXT_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 24.   open catalog/includes/languages/english/product_info.php
+This will define the language used for points info if enabled..
+(Please translate and repeat this step to any of your other languages)
+
+ADD THIS ADD THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('TEXT_PRODUCT_POINTS', 'Buy this item and earn %s points valued at %s.');
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 25.   open catalog/includes/modules/payment/paypal_standard.php
+(This is an optional step and only needed if you use the PayPal Standard payment method.)
+
+** this step has 2 parts.
+
+FIND (around line 240):
+(GOLD)
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
+          }
+		  
+(EDGE)
+            tep_db_perform('orders_total', $sql_data_array);
+          }
+
+ADD AFTER IT:
+
+/*#### BOF POINTS REWARDS BS ####*/
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+// customer pending points added
+      if ($order->info['total'] > 0) {
+          $points_toadd = get_points_toadd($order);
+          $points_comment = 'TEXT_DEFAULT_COMMENT';
+          $points_type = 'SP';
+          if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
+              tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
+          }
+      }
+// customer referral points added
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+          $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
+          if (!tep_db_num_rows($referral_twice_query)) {
+              $points_toadd = USE_REFERRAL_SYSTEM;
+              $points_comment = 'TEXT_DEFAULT_REFERRAL';
+              $points_type = 'RF';
+              tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
+          }
+      }
+// customer shoppping points account balanced
+      if ($customer_shopping_points_spending) {
+          tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
+      }
+  }
+/*#### EOF POINTS REWARDS BS ####*/
+
+
+FIND:
+
+	tep_session_unregister('comments');
+
+ADD AFTER IT:
+
+// BOF POINTS REWARDS BS
+      tep_session_unregister('customer_shopping_points');
+      tep_session_unregister('customer_shopping_points_spending');
+      tep_session_unregister('customer_referral');
+// EOF POINTS REWARDS BS	
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+
+***********************************************************************************************
+
+CONGRATULATIONS ! YOU ARE HALF WAY DONE! NOW LET'S DO THE ADMIN SECTION AND FINISH THE JOB!
+
+***********************************************************************************************
+
+C. EDITING OSC FILES.(admin directory).
+
+ADMIN STEP = 1.   open admin/orders.php
+This will add a quick pending points conformation check box.
+To be used when confirming order or updating order status.
+This option will only show up when there are pending points for that order
+and only if Auto Credit Pending Points is set to "false".
+
+**note that this step has 2 parts**
+
+FIND:
+
+            $customer_notified = '1';
+          }
+		  
+ADD AFTER IT:
+
+######## BOF POINTS REWARDS BS ##################
+          if ((USE_POINTS_SYSTEM == 'true') && !tep_not_null(POINTS_AUTO_ON)) {
+                  if ((isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on'))||(isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on'))) {
+                          $comments = ENTRY_CONFIRMED_POINTS  . $comments;
+                          $customer_query = tep_db_query("select customer_id, points_pending from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
+                          $customer_points = tep_db_fetch_array($customer_query);
+                          if (tep_db_num_rows($customer_query)) {
+                                  if (tep_not_null(POINTS_AUTO_EXPIRES)) {
+                                          $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+                                          tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
+                                  } else {
+                                          tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
+                                  }
+
+                                  if (isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on')) {
+                                          tep_db_query("delete from customers_points_pending where orders_id = '" . (int)$oID . "' and points_type = 'SP' limit 1");
+                                          $sql = "optimize table customers_points_pending";
+                                  }
+
+                                  if (isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on')) {
+                                          tep_db_query("update customers_points_pending set points_status = 2 where orders_id = '" . (int)$oID . "' and points_type = 'SP' limit 1");
+                                          $sql = "optimize table customers_points_pending";
+                                  }
+                          }
+                  }
+          }
+######## EOF POINTS REWARDS BS ##################
+
+FIND:
+
+      <tr>
+        <td colspan="2" align="right"><?php echo tep_draw_button(IMAGE_UPDATE, 'disk', null, 'primary'); ?></td>
+      </tr>	
+	  
+ADD AFTER IT:
+			
+<!-- // BOF POINTS REWARDS BS //-->
+<?php
+    if ((USE_POINTS_SYSTEM == 'true') && !tep_not_null(POINTS_AUTO_ON)) {
+            $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
+            if (tep_db_num_rows($p_status_query)) {
+                    echo '<tr><td colspan="2" align="right"><strong>' . ENTRY_NOTIFY_POINTS . '</strong>&nbsp;' . ENTRY_QUE_POINTS . tep_draw_checkbox_field('confirm_points', '', false) . '&nbsp;' . ENTRY_QUE_DEL_POINTS . tep_draw_checkbox_field('delete_points', '', false) . '</td></tr>';
+            }
+    }
+?>
+<!-- // EOF POINTS REWARDS BS //-->
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+                                         
+ADMIN STEP = 2.   open admin/includes/functions/general.php
+This is to make sure that pending points for any order you delete will also deleted,
+(please note that this will delete points in a pending status only, if you delete and order that
+its points already approved you will have to delete those points manually)
+
+FIND:
+
+    tep_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "'");
+
+ADD AFTER IT:
+
+// BOF POINTS REWARDS BS
+    tep_db_query("delete from customers_points_pending where orders_id = '" . (int)$order_id . "'");
+    $sql = "optimize table customers_points_pending";
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+                                         
+ADMIN STEP = 3.   open admin/includes/languages/english.php
+This will define the language used in admin/includes/boxes/customers.php for customers_points.php
+ and customers_points_pending.php
+(Please translate and repeat this step to any of your other languages) 
+
+ADD THIS AT THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('BOX_CUSTOMERS_POINTS', 'Customers Points');
+define('BOX_CUSTOMERS_POINTS_PENDING', 'Pending Points');
+define('BOX_CUSTOMERS_POINTS_REFERRAL', 'Referral Points');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+                                         
+ADMIN STEP = 4.   open admin/includes/languages/english/orders.php
+This will define the language used for confirming pending points addon
+(Please translate and repeat this step to any of your other languages) 
+
+ADD THIS AT THE END OF YOUR FILE
+
+// BOF POINTS REWARDS BS
+define('ENTRY_NOTIFY_POINTS', 'Confirm Pending Points:');
+define('ENTRY_QUE_POINTS', 'and Que');
+define('ENTRY_QUE_DEL_POINTS', 'and Delete:');
+define('ENTRY_CONFIRMED_POINTS', 'Points Confirmed.  ');
+// EOF POINTS REWARDS BS
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+##################  END OF STEP BY STEP INSTALLATION      ################################
+------------------------------------------------------------------------------------------
+******************************************************************************************
+
+D. INSTALL ORDER TOTAL MODULE
+
+Access your admin area and install the order total module. (Modules -> Order Total)
+This option must appear after "Sub-Total" and before "Total". 
+When you first install "Points Redemptions" the sort order no is set at a default of 4, which is the same as "Total" .
+YOU MUST change your value for "Total" sort order to any number higher then 4 (e.g. 5).
+
+Still in the OSC admin, under "Configuration" you should see Points/Rewards
+Click on the link and make change to suite your site.
+
+***************************************************************
+THAT'S IT!
+***************************************************************

@@ -1,0 +1,29 @@
+Currently known bugs
+----------------------
+
+1.) 
+
+*The checkbox "Queue customers points table?" means that the customer will be able to see the point additions listed in his customer account section.
+
+In the admin area you can manually add points to a customer.
+So let's say we give a customer 500 points, we uncheck "Notify Customer" and check "Set new expire date" and "Queue customers points table?".
+Now inside the cusstomer account -> points section you can see the added points and it should show this #---  ----------- 
+Now back in the admin area remove those added 500 points and this time only check the "Queue customers points table?" checkbox.
+Go back to the customer account and you'll see that the points are deducted but it doesn't list up any minus amount even though we checked the "Queue customers points table?" checkbox.
+
+That is not really ideal.
+
+2.) 
+
+When going through the checkout on the checkout_payment.php page, if you have enough points to pay for the full total amount then you would not need to select any payment method.
+In the original install in a normal 2.3.4 shop that function works fine but in a BS shop it doesn't. The javascript validation ignores the ticked checkbox and points calculation.
+Check install_manual step 4/1 and step 18  
+Inside the ..functions/redemptions.php file around line 356 you should see an "onclick" inline javascript code which is connected to step 4/1 (checkout_payment.php) of the install which then again is connected to step 18 (classes/payment.php)
+
+That validation doesn't seem to work.
+
+3.)
+
+In the admin area, if you adjust the points and remove all of them the expire date remains.
+
+Date should idealy reset to 0000-00-00
