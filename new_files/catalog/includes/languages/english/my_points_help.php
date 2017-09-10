@@ -62,13 +62,12 @@ define('TEXT_FAQ_2', 'When an order is placed, the total amount<small><font colo
 These points are added to your Shopping Points account as pending points.
 <br />All pending points are listed in your <a href="' . tep_href_link('my_points.php') . '"> <u>Shopping Points account </u></a> and will stay there until approved/confirmed by ' . STORE_NAME . '.
 <br /><br />Once any pending points have been approved, they will be released and your account will be credited with the value of those points.  Ready for you to spend on whatever you want.
-<br />' . $points_expire . '
 <br />You must login to your account in order to view the status of your points.
 <br /><br />During the checkout procces you\'ll be able to pay for your order with your points balance.
 <p align="right"<small><font color="FF6633">*</font> in most cases shipping fees and taxes excluded. See refered FAQ for more details.</small></p>');
 
 // FAQ3
-define('TEXT_FAQ_3', 'Currently, for every ' .  $currencies->format(1) . ' spent at ' . STORE_NAME . ' you\'ll earn ' . number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES)  . ' ' . $point_or_points . '
+define('TEXT_FAQ_3', 'Currently, for every ' .  $currencies->format(1) . ' spent at ' . STORE_NAME . ' you\'ll earn ' . number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES)  . ' Point(s).
 <br />For example:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Product Cost:</b>&nbsp; ' .  $currencies->format(100) . '<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Value of Points Earned:</b>&nbsp; ' .  $currencies->format(tep_calc_shopping_pvalue(100 * POINTS_PER_AMOUNT_PURCHASE)) . '<br /><br />
