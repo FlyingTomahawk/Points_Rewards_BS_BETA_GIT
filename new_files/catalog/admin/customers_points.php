@@ -426,7 +426,7 @@ function validate(field) {
     case 'adjust':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_ADJUST_POINTS . '</b>');
 
-      $contents = array('form' => tep_draw_form('points', 'customers_points.php', tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=adjustpoints'));
+      $contents = array('form' => tep_draw_form('points', 'customers_points.php', tep_get_all_get_params(array('oID', 'action')) . '&action=adjustpoints'));
       $contents[] = array('text' => '<b>'. TEXT_INFO_HEADING_ADJUST_POINTS . '</b><br>');
       $value_field = TEXT_ADJUST_INTRO . '<br><br>' . TEXT_POINTS_TO_ADJUST . '<br>'. tep_draw_input_field('points_to_aj', '' , 'onkeyup="validate(this)"');
       $contents[] = array('text' => $value_field); 
@@ -435,7 +435,7 @@ function validate(field) {
       }
       $contents[] = array('text' => tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));
            
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . ' <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . ' <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('oID', 'action'))) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'deletepoints':
       $heading[] = array('text' => '<b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
