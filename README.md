@@ -1,7 +1,6 @@
 # Points_Rewards_BS_BETA_GIT
-Tsimnis original Beta version
 
-To do list:
+To do list and tasks asigend:
 
  Steps proposal:
 
