@@ -15,6 +15,8 @@ To do list and tasks asigend:
     - change all configuration constants to ht constants DONE 11/09/2017 @raiwa
     - Replace all "true/false" to core spelling "True/False" DONE 11/09/2017 @raiwa
     - add code for the pages where it is possible and remove from core files
+      - logoff.php DONE 11/09/2017 @raiwa
+      - product_reviews_write.php first part DONE 11/09/2017 @raiwa
     - add language definitions to header tag language file where possible
 
 - create hook:
