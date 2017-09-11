@@ -26,4 +26,8 @@ To do list and tasks asigend:
 
 - revise all html tags for BS integration
 
+- revise and fix "known bugs"
+
 - add installation script to header tag module (hooks register and calls) 
+
+- write new installation user guide. (PDF/WORD) native english speaker?
