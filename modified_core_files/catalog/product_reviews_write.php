@@ -55,14 +55,6 @@
       $insert_id = tep_db_insert_id();
 
       tep_db_query("insert into " . TABLE_REVIEWS_DESCRIPTION . " (reviews_id, languages_id, reviews_text) values ('" . (int)$insert_id . "', '" . (int)$languages_id . "', '" . tep_db_input($review) . "')");
-/*#### BOF POINTS REWARDS BS ####*/
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-            $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS;
-            $comment = 'TEXT_DEFAULT_REVIEWS';
-            $points_type = 'RV';
-            tep_add_pending_points($customer_id, $product_info['products_id'], $points_toadd, $comment, $points_type);
-    }
-/*#### EOF POINTS REWARDS BS ####*/	  
 
       $messageStack->add_session('product_reviews', TEXT_REVIEW_RECEIVED, 'success');
       tep_redirect(tep_href_link('product_reviews.php', tep_get_all_get_params(array('action'))));

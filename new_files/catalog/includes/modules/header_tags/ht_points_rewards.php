@@ -29,13 +29,21 @@
     }
 
     function execute() {
-      global $PHP_SELF, $oscTemplate;
+      global $PHP_SELF, $oscTemplate, $customer_id, $product_info;
 
       switch (basename($PHP_SELF) ) {
         case 'logoff.php':
           if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
           if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
           if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
+          break;
+        case 'product_reviews_write.php':
+          if ( (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)) ) {
+            $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS;
+            $comment = 'TEXT_DEFAULT_REVIEWS';
+            $points_type = 'RV';
+            tep_add_pending_points($customer_id, $product_info['products_id'], $points_toadd, $comment, $points_type);
+          }
           break;
       }
 

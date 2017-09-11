@@ -409,20 +409,8 @@ this will add the points and notify customers of points given for review and add
 
 ** this step has 2 parts.
 
-FIND:
+MOVED INTO HEADER TAG
 
-      tep_db_query("insert into " . TABLE_REVIEWS_DESCRIPTION . " (reviews_id, languages_id, reviews_text) values ('" . (int)$insert_id . "', '" . (int)$languages_id . "', '" . tep_db_input($review) . "')");
-	  
-ADD AFTER IT:
-
-/*#### BOF POINTS REWARDS BS ####*/
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-            $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS;
-            $comment = 'TEXT_DEFAULT_REVIEWS';
-            $points_type = 'RV';
-            tep_add_pending_points($customer_id, $product_info['products_id'], $points_toadd, $comment, $points_type);
-    }
-/*#### EOF POINTS REWARDS BS ####*/	  
 
 FIND:
 
