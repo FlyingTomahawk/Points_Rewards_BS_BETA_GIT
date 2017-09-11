@@ -6,7 +6,7 @@ To do list and tasks asigend:
 
 - fixes for undefined errors (already partly done, working on this 10/09/2017 @raiwa)
 
-- fixes for known bugs like the one posted by @LeeFoster
+- fixes for known bugs like the one posted by @LeeFoster (asigned to @Tsimi 11/09/2017)
 
 - create header tag module: (will begin with this 11/09/2017 @raiwa)
 
