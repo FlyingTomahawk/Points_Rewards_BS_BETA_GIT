@@ -31,6 +31,14 @@
     function execute() {
       global $PHP_SELF, $oscTemplate;
 
+      switch (basename($PHP_SELF) ) {
+        case 'logoff.php':
+          if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
+          if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+          if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
+          break;
+      }
+
     }
 
     function isEnabled() {
