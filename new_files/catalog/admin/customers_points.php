@@ -108,9 +108,13 @@
         $Cexpire_date = tep_db_prepare_input($_POST['customers_points_expires']);
 
         $points_deleted = false;
-        if ($pointstodel > 0) {
+		  if ($pointstodel > 0) {
           if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on') && ($balance > 0)) {
-            $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
+            $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+            $expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($expire));
+	        tep_db_query("update customers set customers_shopping_points = customers_shopping_points - '". $pointstodel ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customers_id ."'");
+          } else if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on') && ($balance == '0')) {
+            $expire  = null;
             $expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($expire));
 	        tep_db_query("update customers set customers_shopping_points = customers_shopping_points - '". $pointstodel ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customers_id ."'");
           } else {
@@ -159,7 +163,7 @@
           }
           
           $database_queue = '0';
-          if (isset($_POST['queue_add']) && ($_POST['queue_add'] == 'on')) {
+          if (isset($_POST['queue_delete']) && ($_POST['queue_delete'] == 'on')) { 
 
             $sql_data_array = array('customer_id' => $customers_id,
                                     'orders_id' => 0,

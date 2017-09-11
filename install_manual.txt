@@ -108,7 +108,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 3.   open catalog/checkout_confirmation.php
+CATALOG STEP = 2.   open catalog/checkout_confirmation.php
 This will add an errors checker to checkout_confirmation page.
 
 FIND:
@@ -158,15 +158,15 @@ REPLACE WITH:
 		  }
 	  }
   }
-  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-	  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
 ########  EOF POINTS REWARDS BS #################*/
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 4.   open catalog/checkout_payment.php
+CATALOG STEP = 3.   open catalog/checkout_payment.php
 This will add the javascript alart checking the box for invalid character. As well as 
 allow points to be used as payment method.
 
@@ -179,12 +179,14 @@ FIND:
 
 ADD AFTER IT:
 
-/*  BOF POINTS REWARDS BS  */
+<script type="text/javascript">
+// BOF POINTS REWARDS BS
 var submitter = null;
 function submitFunction() {
    submitter = 1;
    }
-/*  EOF POINTS REWARDS BS  */
+// EOF POINTS REWARDS BS
+</script>
 
 FIND:
 
@@ -214,7 +216,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 5.   open catalog/checkout_process.php
+CATALOG STEP = 4.   open catalog/checkout_process.php
 this will..
  1.Add pending points for a new success order with or without shipping cost.
  2.Balance customer shopping points account if points used.
@@ -285,7 +287,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 6.   open catalog/create_account.php
+CATALOG STEP = 5.   open catalog/create_account.php
 This will add Welcome Points (and send email) defined by admin if enabled.
 
 FIND:
@@ -311,7 +313,7 @@ REPLACE WITH:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 7.   open catalog/create_account_success.php
+CATALOG STEP = 6.   open catalog/create_account_success.php
 This will add the text to notify the new signup users of the Welcome Points received,
 with a link to the points page and points FAQ page.
 
@@ -339,13 +341,13 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
   
-CATALOG STEP = 8.   open catalog/logoff.php
+CATALOG STEP = 7.   open catalog/logoff.php
 
 MOVED INTO HEADER TAG
 
 ------------------------------------------------------------------------------------------
   
-CATALOG STEP = 11.   open catalog/product_info.php
+CATALOG STEP = 8.   open catalog/product_info.php
 This will add the points credit information (if enabled).
 
 FIND:
@@ -374,7 +376,7 @@ ADD BEFORE IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 12.   open catalog/product_reviews.php
+CATALOG STEP = 9.   open catalog/product_reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -404,7 +406,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 13.   open catalog/product_reviews_write.php
+CATALOG STEP = 10.   open catalog/product_reviews_write.php
 this will add the points and notify customers of points given for review and add link to points system help file
 
 ** this step has 2 parts.
@@ -439,7 +441,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 14.   open catalog/reviews.php
+CATALOG STEP = 11.   open catalog/reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -468,7 +470,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 15.   open catalog/includes/application_top.php
+CATALOG STEP = 12.   open catalog/includes/application_top.php
 
 FIND:
 
@@ -487,7 +489,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
  
-CATALOG STEP = 16.    open catalog/includes/modules/boxes/templates/information.php
+CATALOG STEP = 13.    open catalog/includes/modules/boxes/templates/information.php
 This will add the link to My Points FAQ
 
 FIND:
@@ -502,7 +504,7 @@ SAVE AND CLOSE!
 
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 17.    open catalog/includes/modules/boxes/bm_shopping_cart.php(optional)
+CATALOG STEP = 14.    open catalog/includes/modules/boxes/bm_shopping_cart.php(optional)
 This is in order to display points info.(customers must login).
 This will only show up when a customer points is bigger then 0
 
@@ -525,7 +527,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 18.   open catalog/includes/classes/payment.php
+CATALOG STEP = 15.   open catalog/includes/classes/payment.php
 This will add the check box error to the java payment error.
 
 FIND:
@@ -540,7 +542,7 @@ REPLACE WITH:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
                                           
-CATALOG STEP = 19.   open catalog/includes/languages/english.php
+CATALOG STEP = 16.   open catalog/includes/languages/english.php
 This will define the language used for My Points FAQ link in information box
 and the language used for error checker used druing checkout procces
 (Please translate and repeat this step to any of your other languages)
@@ -563,7 +565,7 @@ define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<
  SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 20.   open catalog/includes/languages/english/account.php
+CATALOG STEP = 17.   open catalog/includes/languages/english/account.php
 This will define the language used for My Points box links in customer account page.
 (Please translate and repeat this step to any of your other languages)
 
@@ -579,7 +581,7 @@ define('MY_POINTS_CURRENT_BALANCE', 'Shopping Points Balance : %s points. Valued
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 21.   open catalog/includes/languages/english/checkout_payment.php
+CATALOG STEP = 18.   open catalog/includes/languages/english/checkout_payment.php
 This will define the language used for Redemptions box in checkout_payment page.
 (Please translate and repeat this step to any of your other languages)
 
@@ -597,7 +599,7 @@ define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our custo
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 22.   open catalog/includes/languages/english/create_account.php
+CATALOG STEP = 19.   open catalog/includes/languages/english/create_account.php
 This will define the language used for email Welcome Points offerd by admin if enabled..
 (Please translate and repeat this step to any of your other languages)
 	
@@ -612,7 +614,7 @@ define('EMAIL_POINTS_FAQ', 'Reward Point Program FAQ');
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 23.  open catalog/includes/languages/english/create_account_success.php
+CATALOG STEP = 20.  open catalog/includes/languages/english/create_account_success.php
 This will define the language used for Welcome Points offerd by admin if enabled..
 (Please translate and repeat this step to any of your other languages)
 
@@ -628,7 +630,7 @@ define('TEXT_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 24.   open catalog/includes/languages/english/product_info.php
+CATALOG STEP = 21.   open catalog/includes/languages/english/product_info.php
 This will define the language used for points info if enabled..
 (Please translate and repeat this step to any of your other languages)
 
@@ -640,7 +642,7 @@ define('TEXT_PRODUCT_POINTS', 'Buy this item and earn %s points valued at %s.');
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 25.   open catalog/includes/modules/payment/paypal_standard.php
+CATALOG STEP = 22.   open catalog/includes/modules/payment/paypal_standard.php
 (This is an optional step and only needed if you use the PayPal Standard payment method.)
 
 ** this step has 2 parts.
