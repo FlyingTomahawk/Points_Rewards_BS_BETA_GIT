@@ -10,8 +10,10 @@ To do list and tasks asigend:
 
 - create header tag module: (will begin with this 11/09/2017 @raiwa)
 
-    - add installation scripts for database
-    - add configuration entries
+    - add installation scripts for database DONE 11/09/2017 @raiwa
+    - add configuration entries DONE 11/09/2017 @raiwa
+    - change all configuration constants to ht constants DONE 11/09/2017 @raiwa
+    - Replace all "true/false" to core spelling "True/False" DONE 11/09/2017 @raiwa
     - add code for the pages where it is possible and remove from core files
     - add language definitions to header tag language file where possible
 
