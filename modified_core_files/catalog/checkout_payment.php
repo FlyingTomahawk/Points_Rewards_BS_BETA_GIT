@@ -246,11 +246,11 @@ function submitFunction() {
   </div>
 <!-- BOF POINTS REWARDS BS -->
 <?php
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 	  //echo points_selection();
 	  $cart_show_total= $cart->show_total();
 	  echo points_selection($cart_show_total);
-	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
 		  echo referral_input();
 	  }
   }

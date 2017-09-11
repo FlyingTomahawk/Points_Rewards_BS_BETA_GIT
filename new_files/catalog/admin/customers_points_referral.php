@@ -32,8 +32,8 @@
         $customer_id = $_POST['customer_id'];
         $points_pending = tep_db_prepare_input($_POST['points_pending']);
 
-        if (tep_not_null(POINTS_AUTO_EXPIRES)){
-          $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+        if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
+          $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
           $expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($expire));
 	      tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $points_pending ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customer_id ."'");
         } else {
@@ -48,7 +48,7 @@
           $points_disc = (($_POST['points_type'] == 'RF') ? TEXT_TYPE_REFERRAL : TEXT_DEFAULT_REVIEWS);
           $products_name = $_POST['products_name'];
           $balance = ($_POST['customers_shopping_points'] + $points_pending);
-          $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,POINTS_DECIMAL_PLACES), $currencies->format($balance * REDEEM_POINT_VALUE));
+          $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($balance * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE));
           $customers_email_address = $_POST['customers_email_address'];
           $customer_name = $_POST['customer_name'];
           $gender = $_POST['customers_gender'];
@@ -66,14 +66,14 @@
 
           $greet = sprintf(EMAIL_GREET_NONE, $first_name);
           }
-          if (tep_not_null(POINTS_AUTO_EXPIRES)){
+          if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
             $points_expire_date = $expire_date;
           }
           if ($points_type == 'RF') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
           if ($points_type == 'RV') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
           $can_use = "\n\n" . EMAIL_TEXT_SUCCESS_POINTS;
 
@@ -131,17 +131,17 @@
               $greet = sprintf(EMAIL_GREET_NONE, $first_name);
           }
           if ($balance > 0) {
-            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,POINTS_DECIMAL_PLACES), $currencies->format($balance * REDEEM_POINT_VALUE));
+            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($balance * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE));
             $can_use = "\n\n" . EMAIL_TEXT_SUCCESS_POINTS;
-            if (tep_not_null(POINTS_AUTO_EXPIRES)){
+            if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
               $points_expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($customer['customers_points_expires']));
             }
           }
           if ($points_type == 'RF') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
           if ($points_type == 'RV') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
 
           $email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . EMAIL_TEXT_BALANCE_CANCELLED . "\n" . $details . "\n" . $notify_comment . $customer_balance . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
@@ -224,17 +224,17 @@
               $greet = sprintf(EMAIL_GREET_NONE, $first_name);
           }
           if ($balance > 0) {
-            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,POINTS_DECIMAL_PLACES), $currencies->format($balance * REDEEM_POINT_VALUE));
+            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($balance * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE));
             $can_use = "\n\n" . EMAIL_TEXT_SUCCESS_POINTS;
-            if (tep_not_null(POINTS_AUTO_EXPIRES)){
+            if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
               $points_expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($customer['customers_points_expires']));
             }
           }
           if ($points_type == 'RF') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_REFERRED . ' ' . $customer_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
           if ($points_type == 'RV') {
-            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
+            $details = EMAIL_SEPARATOR . "\n" . TABLE_HEADING_POINTS_TYPE . ': ' . $points_disc . "\n" . TABLE_HEADING_DATE_ADDED . ': ' . tep_date_short($date_added) . "\n" . TEXT_INFO_PRODUCT_NAME . ' ' . $products_name . "\n" . TABLE_HEADING_POINTS . ': ' . number_format($points_pending,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . "\n" . TABLE_HEADING_POINTS_VALUE . ': ' . $currencies->format($points_pending * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE) . "\n" . EMAIL_SEPARATOR;
           }
 
           $email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . EMAIL_TEXT_BALANCE_ROLL_BACK . "\n" . $details . "\n" . $notify_comment . $customer_balance . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
@@ -300,12 +300,12 @@ function validate(field) {
                                    array('id' => '2', 'text' => TEXT_TYPE_REFERRAL),
                                    array('id' => '3', 'text' => TEXT_TYPE_REVIEW));
                                    
-     $point_or_points = ((POINTS_PER_AMOUNT_PURCHASE > 1) ? HEADING_POINTS : HEADING_POINT);
+     $point_or_points = ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE > 1) ? HEADING_POINTS : HEADING_POINT);
 ?>
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE . '<br /><span class="smallText">' . HEADING_RATE . '&nbsp;&nbsp;&nbsp;' .  HEADING_AWARDS . $currencies->format(1) . ' = ' . number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES) .'&nbsp;' . $point_or_points . '&nbsp;&nbsp;&nbsp;' . HEADING_REDEEM  .  number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES) . '&nbsp;' . $point_or_points . ' = ' . $currencies->format(POINTS_PER_AMOUNT_PURCHASE * REDEEM_POINT_VALUE); ?></td>
+            <td class="pageHeading"><?php echo HEADING_TITLE . '<br /><span class="smallText">' . HEADING_RATE . '&nbsp;&nbsp;&nbsp;' .  HEADING_AWARDS . $currencies->format(1) . ' = ' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) .'&nbsp;' . $point_or_points . '&nbsp;&nbsp;&nbsp;' . HEADING_REDEEM  .  number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '&nbsp;' . $point_or_points . ' = ' . $currencies->format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE); ?></td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr><?php echo tep_draw_form('filterthis', 'customers_points_referral.php', '', 'get'); ?>
                 <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search', '', 'size="12"'); ?></td>
@@ -442,8 +442,8 @@ function validate(field) {
 ?>
                 <td class="dataTableContent">&nbsp;<?php echo $link . $pending_points['customers_lastname'] . '&nbsp;' . $pending_points['customers_firstname']; ?></td>
                 <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo $type; ?></td>
-                <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo number_format($pending_points['points_pending'],POINTS_DECIMAL_PLACES); ?></td>
-                <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo $currencies->format($pending_points['points_pending'] * REDEEM_POINT_VALUE); ?></td>
+                <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo number_format($pending_points['points_pending'],MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES); ?></td>
+                <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo $currencies->format($pending_points['points_pending'] * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE); ?></td>
                 <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo tep_date_short($pending_points['date_added']); ?></td>
                 <td class="dataTableContent">&nbsp;&nbsp;&nbsp;<?php echo $points_status_name; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($uInfo) && is_object($uInfo) && ($pending_points['unique_id'] == $uInfo->unique_id)) { echo tep_image('images/icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers_points_referral.php', tep_get_all_get_params(array('uID')) . 'uID=' . $pending_points['unique_id']) . '">' . tep_image('images/icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
@@ -585,7 +585,7 @@ function validate(field) {
           $contents[] = array('text' => TEXT_INFO_ORDER_TOTAL . ' ' . strip_tags($uInfo->order_total));
           $contents[] = array('text' => TEXT_INFO_PAYMENT_METHOD . ' ' . $uInfo->payment_method);
           $contents[] = array('text' => TEXT_INFO_ORDER_STATUS . ' ' . $uInfo->orders_status_name);
-          $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_BALANCE . ' ' . number_format($uInfo->customers_shopping_points,POINTS_DECIMAL_PLACES). ' ' . HEADING_POINTS);
+          $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_BALANCE . ' ' . number_format($uInfo->customers_shopping_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES). ' ' . HEADING_POINTS);
         }
 		if ($uInfo->points_type == 'RV') {
 		  $review_link = '<a href="' . tep_href_link('reviews.php', 'page=' . $_GET['page'] . '&rID=' . $uInfo->reviews_id . '&action=edit') . '">' . tep_image('images/icons/preview.gif', ICON_REVIEWS_EDIT) . '</a>&nbsp;';
@@ -594,7 +594,7 @@ function validate(field) {
           $contents[] = array('text' => '<br>' . TEXT_INFO_PRODUCT_ID . ' ' . $uInfo->orders_id);
           $contents[] = array('text' => TEXT_INFO_PRODUCT_NAME . '<br>' . $uInfo->products_name);
           $contents[] = array('text' => TEXT_INFO_REVIEW_ID . ' ' . $uInfo->reviews_id . ' ' . $review_link);
-          $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_BALANCE . ' ' . number_format($uInfo->customers_shopping_points,POINTS_DECIMAL_PLACES). ' ' . HEADING_POINTS);
+          $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_BALANCE . ' ' . number_format($uInfo->customers_shopping_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES). ' ' . HEADING_POINTS);
         }
       }
       break;

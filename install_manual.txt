@@ -87,7 +87,7 @@ FIND:
 ADD AFTER IT:
 
 //-- // BOF POINTS REWARDS BS //-->
-    if (USE_POINTS_SYSTEM == 'true') {
+    if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
 		
 	$output .= '<h2>' . MY_POINTS_TITLE . '</h2>
            <div class="contentText">  
@@ -95,7 +95,7 @@ ADD AFTER IT:
 
   $has_points = tep_get_shopping_points($customer_id);
   if ($has_points > 0) {
-	  $output .= '<h4><span class="label label-info">' . sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_points,POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
+	  $output .= '<h4><span class="label label-info">' . sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
   }
 	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', 'SSL') . '">' . MY_POINTS_VIEW . '</a></li>    
 				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', 'SSL') . '">' . MY_POINTS_VIEW_HELP . '</a></li>
@@ -120,7 +120,7 @@ FIND:
 REPLACE WITH:
 
 #####  BOF POINTS REWARDS BS  #######
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
 		  $customer_shopping_points_spending = false;
 		  // This if sentence should include check for amount of points on account compared to the transferred point from checkout_payment.php
@@ -135,7 +135,7 @@ REPLACE WITH:
 	  }
 	  
 	  //To ensure only the first order of a new customer is entitled to grant point to his/her referrer. Otherwise, a hacker might hard-code the email address of  a referrer and cheat for point on every single order the new customer made.
-	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
 		  if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
 			  $customer_referral = false;
 			  $check_mail = trim($_POST['customer_referred']);
@@ -199,11 +199,11 @@ ADD AFTER IT:
 
 <!-- BOF POINTS REWARDS BS -->
 <?php
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 	  //echo points_selection();
 	  $cart_show_total= $cart->show_total();
 	  echo points_selection($cart_show_total);
-	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
 		  echo referral_input();
 	  }
   }
@@ -243,7 +243,7 @@ FIND:
 ADD AFTER IT:
 
 ####  BOF POINTS REWARDS BS  ####*/
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 // customer pending points added 
       if ($order->info['total'] > 0) {
 	      $points_toadd = get_points_toadd($order);
@@ -254,10 +254,10 @@ ADD AFTER IT:
 	      }
       }
 // customer referral points added 
-      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
 	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
 	      if (!tep_db_num_rows($referral_twice_query)) {
-		      $points_toadd = USE_REFERRAL_SYSTEM;
+		      $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
 		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
 		      $points_type = 'RF';
 		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
@@ -295,12 +295,12 @@ $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
 REPLACE WITH:
 
 // BOF POINTS REWARDS BS
-      if ((USE_POINTS_SYSTEM == 'true') && (NEW_SIGNUP_POINT_AMOUNT > 0)) {
+      if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
 	      tep_add_welcome_points($customer_id);
 	      
 	      $points_account = '<a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><b><u>' . EMAIL_POINTS_ACCOUNT . '</u></b></a>.';
 	      $points_faq = '<a href="' . tep_href_link('my_points_help.php', '', 'NONSSL') . '"><b><u>' . EMAIL_POINTS_FAQ . '</u></b></a>.';
-	      $text_points = sprintf(EMAIL_WELCOME_POINTS , $points_account, number_format(NEW_SIGNUP_POINT_AMOUNT,POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(NEW_SIGNUP_POINT_AMOUNT)), $points_faq) ."\n\n";
+	      $text_points = sprintf(EMAIL_WELCOME_POINTS , $points_account, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT)), $points_faq) ."\n\n";
 	      
 	      $email_text .= EMAIL_WELCOME . EMAIL_TEXT . $text_points . EMAIL_CONTACT . EMAIL_WARNING;
       } else {
@@ -326,9 +326,9 @@ ADD AFTER IT:
 	  <hr>
 <!-- BOF POINTS REWARDS BS -->
 	<?php 
-	   if ((USE_POINTS_SYSTEM == 'true') && (NEW_SIGNUP_POINT_AMOUNT > 0)) {
+	   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
 	?>
-		<?php echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(NEW_SIGNUP_POINT_AMOUNT,POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(NEW_SIGNUP_POINT_AMOUNT))); ?>
+		<?php echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT))); ?>
       	<?php echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
 		
 	<?php
@@ -371,7 +371,7 @@ ADD BEFORE IT:
 
 <?php 
 // BOF POINTS REWARDS BS
-    if ((USE_POINTS_SYSTEM == 'true') && (DISPLAY_POINTS_INFO == 'true')) {
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_DISPLAY_POINTS_INFO == 'True')) {
 	    if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
 		    $products_price_points = tep_display_points($new_price, tep_get_tax_rate($product_info['products_tax_class_id']));
 	    } else {
@@ -379,8 +379,8 @@ ADD BEFORE IT:
 	    }
 	    $products_points = tep_calc_products_price_points($products_price_points);
 	    $products_points_value = tep_calc_price_pvalue($products_points);
-	    if ((USE_POINTS_FOR_SPECIALS == 'true') || $new_price == false) {
-		    echo '<p>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points,POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '</p>';
+	    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'True') || $new_price == false) {
+		    echo '<p>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '</p>';
 	    }
     }
 // EOF POINTS REWARDS BS
@@ -405,11 +405,11 @@ ADD AFTER IT:
 
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-   if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
 ?>
 	<div>
    		<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-            	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+            	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
         </div>
 <?php
   }
@@ -431,8 +431,8 @@ FIND:
 ADD AFTER IT:
 
 /*#### BOF POINTS REWARDS BS ####*/
-    if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
-            $points_toadd = USE_POINTS_FOR_REVIEWS;
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
+            $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS;
             $comment = 'TEXT_DEFAULT_REVIEWS';
             $points_type = 'RV';
             tep_add_pending_points($customer_id, $product_info['products_id'], $points_toadd, $comment, $points_type);
@@ -452,11 +452,11 @@ ADD AFTER IT:
 
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-  if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
 ?>
 	<div>
         	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
         </div>
 <?php
   }
@@ -481,11 +481,11 @@ ADD AFTER IT:
 
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-  if ((USE_POINTS_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
 ?>
 	<div class="contentText">
         	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link(FILENAME_MY_POINTS_HELP,'faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link(FILENAME_MY_POINTS_HELP,'faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
       	</div>
 <?php
   }
@@ -540,10 +540,10 @@ $cart_contents_string .= '<li class="text-right"><hr>' . $currencies->format($ca
 ADD AFTER IT:
 
 ### BOF POINTS REWARDS BS ####*/
-  if (USE_REDEEM_SYSTEM == 'true') {
+  if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True') {
           $has_points = tep_get_shopping_points($customer_id);
           if ($has_points > 0) {
-                  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. TEXT_POINTS_BALANCE . '</a></strong></div>' . TEXT_POINTS . '&nbsp;' . number_format($has_points,POINTS_DECIMAL_PLACES) . '<br />' .  TEXT_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
+                  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. TEXT_POINTS_BALANCE . '</a></strong></div>' . TEXT_POINTS . '&nbsp;' . number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '<br />' .  TEXT_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
           }   
   }
 /*#### EOF POINTS REWARDS BS ####*/
@@ -684,7 +684,7 @@ FIND (around line 240):
 ADD AFTER IT:
 
 /*#### BOF POINTS REWARDS BS ####*/
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 // customer pending points added
       if ($order->info['total'] > 0) {
           $points_toadd = get_points_toadd($order);
@@ -695,10 +695,10 @@ ADD AFTER IT:
           }
       }
 // customer referral points added
-      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
           $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
           if (!tep_db_num_rows($referral_twice_query)) {
-              $points_toadd = USE_REFERRAL_SYSTEM;
+              $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
               $points_comment = 'TEXT_DEFAULT_REFERRAL';
               $points_type = 'RF';
               tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
@@ -751,14 +751,14 @@ FIND:
 ADD AFTER IT:
 
 ######## BOF POINTS REWARDS BS ##################
-          if ((USE_POINTS_SYSTEM == 'true') && !tep_not_null(POINTS_AUTO_ON)) {
+          if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
                   if ((isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on'))||(isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on'))) {
                           $comments = ENTRY_CONFIRMED_POINTS  . $comments;
                           $customer_query = tep_db_query("select customer_id, points_pending from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
                           $customer_points = tep_db_fetch_array($customer_query);
                           if (tep_db_num_rows($customer_query)) {
-                                  if (tep_not_null(POINTS_AUTO_EXPIRES)) {
-                                          $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+                                  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
+                                          $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
                                           tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
                                   } else {
                                           tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
@@ -788,7 +788,7 @@ ADD AFTER IT:
 			
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-    if ((USE_POINTS_SYSTEM == 'true') && !tep_not_null(POINTS_AUTO_ON)) {
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
             $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
             if (tep_db_num_rows($p_status_query)) {
                     echo '<tr><td colspan="2" align="right"><strong>' . ENTRY_NOTIFY_POINTS . '</strong>&nbsp;' . ENTRY_QUE_POINTS . tep_draw_checkbox_field('confirm_points', '', false) . '&nbsp;' . ENTRY_QUE_DEL_POINTS . tep_draw_checkbox_field('delete_points', '', false) . '</td></tr>';

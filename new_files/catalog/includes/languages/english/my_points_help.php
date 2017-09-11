@@ -14,13 +14,13 @@
 ************************************************************/
 
 // Initialisation of some required parameters for the FAQ answers
- if (tep_not_null(POINTS_AUTO_EXPIRES)){
-   $answer_expire = 'Reward answer will expire ' . POINTS_AUTO_EXPIRES . ' months from the date issuance.';
+ if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
+   $answer_expire = 'Reward answer will expire ' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES . ' months from the date issuance.';
  } else {
    $answer_expire = 'Reward answer do not expire and can be accumulated until you decide to use them.';
  }
 
-if (POINTS_PER_AMOUNT_PURCHASE > 1) {
+if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE > 1) {
   $point_or_answer = 'answer';
 } else {
   $point_or_answer = 'point';
@@ -67,12 +67,12 @@ These points are added to your Shopping Points account as pending points.
 <p align="right"<small><font color="FF6633">*</font> in most cases shipping fees and taxes excluded. See refered FAQ for more details.</small></p>');
 
 // FAQ3
-define('TEXT_FAQ_3', 'Currently, for every ' .  $currencies->format(1) . ' spent at ' . STORE_NAME . ' you\'ll earn ' . number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES)  . ' Point(s).
+define('TEXT_FAQ_3', 'Currently, for every ' .  $currencies->format(1) . ' spent at ' . STORE_NAME . ' you\'ll earn ' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES)  . ' Point(s).
 <br />For example:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Product Cost:</b>&nbsp; ' .  $currencies->format(100) . '<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Value of Points Earned:</b>&nbsp; ' .  $currencies->format(tep_calc_shopping_pvalue(100 * POINTS_PER_AMOUNT_PURCHASE)) . '<br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Value of Points Earned:</b>&nbsp; ' .  $currencies->format(tep_calc_shopping_pvalue(100 * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE)) . '<br /><br />
 Please note, we reserve the right to make changes to the above rate at any time without prior notice.  The rate shown here will always be current.
-<p align="right"><small>Last updated: ' . tep_get_last_date('REDEEM_POINT_VALUE') . '</small><p>');
+<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE') . '</small><p>');
 
 // FAQ4
 define('TEXT_FAQ_4', 'If you have a balance in your Shopping Points Account, you can use those points to pay for purchases made at ' . STORE_NAME . '.
@@ -84,95 +84,95 @@ is not enough in your Shopping Points Account to cover the cost of your purchase
 
 
 // FAQ5 - conditionnal depending on the point limit value set in admin
-if (POINTS_LIMIT_VALUE  > 0)  {
-	define('TEXT_FAQ_5', 'Currently, a minimum balance of <b>' . number_format(POINTS_LIMIT_VALUE) . '</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(POINTS_LIMIT_VALUE)) . ')' . '</b> is required before you can redeem them.
+if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE  > 0)  {
+	define('TEXT_FAQ_5', 'Currently, a minimum balance of <b>' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE) . '</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE)) . ')' . '</b> is required before you can redeem them.
 	<br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('POINTS_LIMIT_VALUE') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE') . '</small></p>');
 } else {
 	define('TEXT_FAQ_5', 'Currently, no minimum balance is required to redeem your points.  Please note, you\'ll still have to select another payment method if there isn\'t enough in your Shopping Points account to cover the cost of your purchase.<br />
 	<br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('POINTS_LIMIT_VALUE') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE') . '</small></p>');
 }
 
 // FAQ6 - conditionnal depending on the point min amount value set in admin
-if(tep_not_null(POINTS_MIN_AMOUNT))  {
-	define('TEXT_FAQ_6', 'Currently, a minimum of <b>' . $currencies->format(POINTS_MIN_AMOUNT) . '</b> in total (per purchase) is required before any Points Redemptions can take place.
+if(tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT))  {
+	define('TEXT_FAQ_6', 'Currently, a minimum of <b>' . $currencies->format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT) . '</b> in total (per purchase) is required before any Points Redemptions can take place.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('POINTS_MIN_AMOUNT') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT') . '</small></p>');
 } else {
 	define('TEXT_FAQ_6', 'Currently, no Minimum Purchase Amount required to redeem your points.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('POINTS_MIN_AMOUNT') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT') . '</small></p>');
 }
 
 // FAQ7
-define('TEXT_FAQ_7', 'A maximum of <b>' . number_format(POINTS_MAX_VALUE) . '</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(POINTS_MAX_VALUE)) . ')' . '</b> is allowed to redeem per order.
+define('TEXT_FAQ_7', 'A maximum of <b>' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE) . '</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE)) . ')' . '</b> is allowed to redeem per order.
 <br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-<p align="right"><small>Last updated: ' . tep_get_last_date('POINTS_MAX_VALUE') . '</small></p>');
+<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE') . '</small></p>');
 
 // FAQ8 - conditionnal depending on the use point for shipping value set in admin
-if(USE_POINTS_FOR_SHIPPING == 'false')  {
+if(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING == 'False')  {
 	define('TEXT_FAQ_8', 'No. When calculating the amount of points earned, the shipping fees are excluded.
-	<p align="right"><small>Last updated ' . tep_get_last_date('USE_POINTS_FOR_SHIPPING') . '</small></p>');
+	<p align="right"><small>Last updated ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING') . '</small></p>');
 } else {
 #---------------------- DO NOT EDIT  EOF ----------------------------  
  	define('TEXT_FAQ_8', 'Yes. When calculating the amount of points earned, the shipping fees are included.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_SHIPPING') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING') . '</small></p>');
 }
 
 // FAQ9 - conditionnal depending on the value set in admin for ginving point for tax value
-if(USE_POINTS_FOR_TAX == 'false')  {
+if(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX == 'False')  {
 	define('TEXT_FAQ_9', 'No. When calculating the amount of points earned, the taxes are excluded.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_TAX') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX') . '</small></p>');
 } else {
 	define('TEXT_FAQ_9', 'Yes. When calculating the amount of points earned, the taxes are included.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_TAX') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX') . '</small></p>');
 }	 
 
 // FAQ10 - conditionnal depending on value set in admin for giving point on specials
-if(USE_POINTS_FOR_SPECIALS == 'false')  {
+if(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'False')  {
 	define('TEXT_FAQ_10', 'No. When calculating the amount of points earned, all items which have been discounted are excluded.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_SPECIALS') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS') . '</small></p>');
 } else {
 	define('TEXT_FAQ_10', 'Yes. When calculating the amount of points earned, all items which have been discounted are included.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_SPECIALS') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS') . '</small></p>');
 }
 
 // FAQ11
-if(USE_POINTS_FOR_REDEEMED == 'false')  {
+if(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED == 'False')  {
 	define('TEXT_FAQ_11', 'No. When calculating the amount of points earned. Any purchase made by redeeming points are excluded.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_REDEEMED') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED') . '</small></p>');
 } else {
 	define('TEXT_FAQ_11', 'Yes. Please note, any purchase made by redeeming points will only be rewarded with additional points for the amount spent other then points.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_REDEEMED') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED') . '</small></p>');
 }
 
 // FAQ12
-if (tep_not_null(USE_REFERRAL_SYSTEM)){
+if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM)){
 	define('TEXT_FAQ_12', '<em>"Word-of-mouth" advertising is the most powerful form of advertising there is.</em>
 	<br />Referral Points is based on the idea that we should both benefit from your referrals.
 	<br />When referred friend place an order, during the checkout procces on the same page that you select a payment method there will be a box to enter a Referral code .
 	Your Referral code is your registered email address with us.
-	<br />When we receive your referred friends completed and approved order, we will reward your Points account with <b>' .  USE_REFERRAL_SYSTEM . '</b> points .
+	<br />When we receive your referred friends completed and approved order, we will reward your Points account with <b>' .  MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM . '</b> points .
 	<br />The more first time orders we receive from your referrals, the more reward points you will receive.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_REFERRAL_SYSTEM') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM') . '</small></p>');
 } else {
 	define('TEXT_FAQ_12', 'Currently this feature is disabled.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_REFERRAL_SYSTEM') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM') . '</small></p>');
 }
 
 // FAQ13
-if (tep_not_null(USE_POINTS_FOR_REVIEWS)){
+if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)){
 	define('TEXT_FAQ_13', '<em>"Writing Review is ego boost knowing others read your opinions, and maybe even take your advice."</em>
 	<br />Sharing Your Product Reviews will assist us to continually improve our offers and service to you as well as helps others to choose the right products.
-	<br />We would like to thank you for helpful review that you gave us, therefore for every quality review, we will reward your Points account with <b>' .  $currencies->format(tep_calc_shopping_pvalue(USE_POINTS_FOR_REVIEWS)) . '</b> worth of points .
+	<br />We would like to thank you for helpful review that you gave us, therefore for every quality review, we will reward your Points account with <b>' .  $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)) . '</b> worth of points .
 	<br />Your Review must meet all of the following conditions:
 	<ul>
   	   <li>Your Reviews must be original.</li>
@@ -185,20 +185,20 @@ if (tep_not_null(USE_POINTS_FOR_REVIEWS)){
 	' . STORE_NAME .' reserves the right to refuse or remove any review that does not comply with above conditions.
 	<br />' . STORE_NAME .' staff reserves the right to correct misspelled words, grammatical errors.
 	<br />' . STORE_NAME .' is not responsible or liable in any way for ratings and reviews posted by its customers.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_REVIEWS') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS') . '</small></p>');
 } else {
 	define('TEXT_FAQ_13', 'Currently this feature is disabled.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('USE_POINTS_FOR_REVIEWS') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS') . '</small></p>');
 }
 
 // FAQ14
-if (tep_not_null(RESTRICTION_MODEL)) {
-	define('TEXT_FAQ_14', 'Currently, only items which have the model <b>[' . RESTRICTION_MODEL . ']</b> can be purchased using your points balance.
+if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
+	define('TEXT_FAQ_14', 'Currently, only items which have the model <b>[' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL . ']</b> can be purchased using your points balance.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('RESTRICTION_MODEL') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL') . '</small></p>');
 }
-if (tep_not_null(RESTRICTION_PID)) { 
-	$p_ids = split("[,]", RESTRICTION_PID);
+if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) { 
+	$p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
 	for ($i = 0; $i < count($p_ids); $i++) {
 		$prods_query = tep_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "'and products.products_id = '" . $p_ids[$i] . "'");
 		if ($list = tep_db_fetch_array($prods_query)) {
@@ -208,10 +208,10 @@ if (tep_not_null(RESTRICTION_PID)) {
 	
 	define('TEXT_FAQ_14', 'Currently, only  the following items can be purchased using your points balance.<ul>' . $prods . '</ul>
 	<br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('RESTRICTION_PID') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID') . '</small></p>');
 }
-if (tep_not_null(RESTRICTION_PATH)) {
-	$cat_path = split("[,]", RESTRICTION_PATH);
+if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH)) {
+	$cat_path = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
         for ($i = 0; $i < count($cat_path); $i++) {
         	$cat_path_query = tep_db_query("select * from categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id='" . $cat_path[$i] . "'");
         	if ($list = tep_db_fetch_array($cat_path_query)) {
@@ -220,22 +220,22 @@ if (tep_not_null(RESTRICTION_PATH)) {
         }
 	define('TEXT_FAQ_14', 'Currently, only items in the following categories and their corresponding sub-categories can be purchased using your points balance.<ul>' . $cats . '</ul>
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('RESTRICTION_PATH') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH') . '</small></p>');
  } else {
 	define('TEXT_FAQ_14', 'Currently, no restrictions apply to what items may be purchased using your points balance.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('RESTRICTION_PATH') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH') . '</small></p>');
 }
 
 // FAQ15
-if (REDEMPTION_DISCOUNTED == 'true') {
+if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED == 'True') {
 	define('TEXT_FAQ_15', 'Currently, no items which have been discounted can be purchased using your points balance.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('REDEMPTION_DISCOUNTED') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED') . '</small></p>');
 } else {
 	define('TEXT_FAQ_15', 'Currently, no restrictions apply to the kind of items which may be purchased using your points balance.
 	<br /><br />We strongly advise you to check this page often as we may make changes to this policy.
-	<p align="right"><small>Last updated: ' . tep_get_last_date('REDEMPTION_DISCOUNTED') . '</small></p>');
+	<p align="right"><small>Last updated: ' . tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED') . '</small></p>');
 }
 
 // FAQ16

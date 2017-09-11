@@ -53,7 +53,7 @@
   $payment_modules->update_status();
 
 #####  BOF POINTS REWARDS BS  #######
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
 		  $customer_shopping_points_spending = false;
 		  // This if sentence should include check for amount of points on account compared to the transferred point from checkout_payment.php
@@ -68,7 +68,7 @@
 	  }
 	  
 	  //To ensure only the first order of a new customer is entitled to grant point to his/her referrer. Otherwise, a hacker might hard-code the email address of  a referrer and cheat for point on every single order the new customer made.
-	  if (tep_not_null(USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
 		  if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
 			  $customer_referral = false;
 			  $check_mail = trim($_POST['customer_referred']);

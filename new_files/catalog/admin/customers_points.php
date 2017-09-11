@@ -30,7 +30,7 @@
         $points_added = false;
         if ($pointstoadd > 0) {
           if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on')) {
-            $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+            $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
             $expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($expire));
 	        tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $pointstoadd ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customers_id ."'");
           } else {
@@ -41,7 +41,7 @@
           $customer_notified = '0';
           if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
             $balance = ($_POST['customers_shopping_points'] + $pointstoadd);
-            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,POINTS_DECIMAL_PLACES), $currencies->format($balance * REDEEM_POINT_VALUE));
+            $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($balance * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE));
             $gender = $_POST['customers_gender'];
             $first_name = $_POST['customers_firstname'];
             $last_name = $_POST['customers_lastname'];
@@ -61,11 +61,11 @@
             } else {
                 $greet = sprintf(EMAIL_GREET_NONE, $first_name);
             }
-            if (tep_not_null(POINTS_AUTO_EXPIRES)){
+            if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
               $points_expire_date = $expire_date;
             }
             $can_use = "\n\n" . EMAIL_TEXT_SUCCESS_POINTS;
-            $email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . sprintf(EMAIL_TEXT_BALANCE_ADD, $pointstoadd, $currencies->format($pointstoadd * REDEEM_POINT_VALUE)) . "\n" . $notify_comment . $customer_balance  . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
+            $email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . sprintf(EMAIL_TEXT_BALANCE_ADD, $pointstoadd, $currencies->format($pointstoadd * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE)) . "\n" . $notify_comment . $customer_balance  . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
 
             tep_mail($name, $customers_email_address, EMAIL_TEXT_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
@@ -110,7 +110,7 @@
         $points_deleted = false;
         if ($pointstodel > 0) {
           if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on') && ($balance > 0)) {
-            $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+            $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
             $expire_date = "\n" . sprintf(EMAIL_TEXT_EXPIRE, tep_date_short($expire));
 	        tep_db_query("update customers set customers_shopping_points = customers_shopping_points - '". $pointstodel ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customers_id ."'");
           } else {
@@ -143,14 +143,14 @@
             }
 
             if ($balance> 0) {
-              $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,POINTS_DECIMAL_PLACES), $currencies->format($balance * REDEEM_POINT_VALUE));
+              $customer_balance = sprintf(EMAIL_TEXT_BALANCE, number_format($balance,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($balance * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE));
               $can_use = "\n\n" . EMAIL_TEXT_SUCCESS_POINTS;
             }
-            if (tep_not_null(POINTS_AUTO_EXPIRES)){
+            if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
               $points_expire_date = $expire_date;
             }
 
-			$email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . sprintf(EMAIL_TEXT_BALANCE_DEL, $pointstodel, $currencies->format($pointstodel * REDEEM_POINT_VALUE)) . "\n" . $notify_comment . $customer_balance  . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
+			$email_text = $greet  . "\n" . EMAIL_TEXT_INTRO . "\n" . sprintf(EMAIL_TEXT_BALANCE_DEL, $pointstodel, $currencies->format($pointstodel * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE)) . "\n" . $notify_comment . $customer_balance  . $points_expire_date . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL, tep_catalog_href_link('my_points.php', '', 'SSL')) . "\n\n" . sprintf(EMAIL_TEXT_POINTS_URL_HELP, tep_catalog_href_link('my_points_help.php', '', 'NONSSL')) . $can_use . "\n" . EMAIL_CONTACT . "\n" . EMAIL_SEPARATOR . "\n" . '<b>' . STORE_NAME . '</b>.' . "\n";
 
 			tep_mail($name, $customers_email_address, EMAIL_TEXT_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
@@ -190,8 +190,8 @@
 
         if (tep_not_null($adjust) && is_numeric($adjust) && ($adjust>=0)) {
 	        if ($adjust != 0) {
-		        if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on') && tep_not_null(POINTS_AUTO_EXPIRES)) {
-			        $expire  = date('Y-m-d', strtotime('+ '. POINTS_AUTO_EXPIRES .' month'));
+		        if (isset($_POST['set_exp']) && ($_POST['set_exp'] == 'on') && tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
+			        $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
 			        tep_db_query("update customers set customers_shopping_points = '". $adjust ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customers_id ."'");
 		        } else {
 			        tep_db_query("update customers set customers_shopping_points = '". $adjust ."' where customers_id = '". (int)$customers_id ."'");
@@ -215,7 +215,7 @@
                          array('id' => '7', 'text' => TEXT_SORT_EXPIRE_NEXT),
                          array('id' => '8', 'text' => TEXT_SORT_EXPIRE_WIN));
 
-  $point_or_points = ((POINTS_PER_AMOUNT_PURCHASE > 1) ? HEADING_POINTS : HEADING_POINT);
+  $point_or_points = ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE > 1) ? HEADING_POINTS : HEADING_POINT);
 require('includes/template_top.php');
 ?>
 <script language="javascript"><!--
@@ -239,7 +239,7 @@ function validate(field) {
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE . '<br /><span class="smallText">' . HEADING_RATE . '&nbsp;&nbsp;&nbsp;' .  HEADING_AWARDS . $currencies->format(1) . ' = ' . number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES) .'&nbsp;' . $point_or_points . '&nbsp;&nbsp;&nbsp;' . HEADING_REDEEM  .  number_format(POINTS_PER_AMOUNT_PURCHASE,POINTS_DECIMAL_PLACES) . '&nbsp;' . $point_or_points . ' = ' . $currencies->format(POINTS_PER_AMOUNT_PURCHASE * REDEEM_POINT_VALUE); ?></td>
+            <td class="pageHeading"><?php echo HEADING_TITLE . '<br /><span class="smallText">' . HEADING_RATE . '&nbsp;&nbsp;&nbsp;' .  HEADING_AWARDS . $currencies->format(1) . ' = ' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) .'&nbsp;' . $point_or_points . '&nbsp;&nbsp;&nbsp;' . HEADING_REDEEM  .  number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '&nbsp;' . $point_or_points . ' = ' . $currencies->format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE); ?></td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0"><?php echo tep_draw_form('orders', 'customers_points.php', '', 'get'); ?>
             <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
               </form>
@@ -369,8 +369,8 @@ function validate(field) {
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link('orders.php', (isset($cInfo)? 'cID=' . $cInfo->customers_id : '')) . '">' . tep_image('images/icons/preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $customers['customers_lastname']; ?></td>
                 <td class="dataTableContent"><?php echo $customers['customers_firstname']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_date_short($customers['customers_dob']); ?></td>
-                <td class="dataTableContent" align="right"><?php echo number_format($customers['customers_shopping_points'],POINTS_DECIMAL_PLACES); ?></td>
-                <td class="dataTableContent" align="right"><?php if ($customers['customers_shopping_points'] > 0) echo $currencies->format($customers['customers_shopping_points'] * REDEEM_POINT_VALUE); ?></td>
+                <td class="dataTableContent" align="right"><?php echo number_format($customers['customers_shopping_points'],MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES); ?></td>
+                <td class="dataTableContent" align="right"><?php if ($customers['customers_shopping_points'] > 0) echo $currencies->format($customers['customers_shopping_points'] * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE); ?></td>
                 <td class="dataTableContent" align="right"><?php if ($customers['customers_points_expires'] > 0) echo tep_date_short($customers['customers_points_expires']); ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id)) { echo tep_image('images/icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '">' . tep_image('images/icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
@@ -415,7 +415,7 @@ function validate(field) {
       $value_field = TEXT_COMMENT. '<br>'. tep_draw_input_field('comment', 0);
       $contents[] = array('text' => $value_field);
       $contents[] = array('text' => tep_draw_checkbox_field('notify', '', true) . ' ' . TEXT_NOTIFY_CUSTOMER);
-      if (tep_not_null(POINTS_AUTO_EXPIRES)){
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
         $contents[] = array('text' => tep_draw_checkbox_field('set_exp', '', true) . ' ' . TEXT_SET_EXPIRE);
       }
       $contents[] = array('text' => tep_draw_checkbox_field('queue_add') . ' ' . TEXT_QUEUE_POINTS_TABLE);
@@ -430,7 +430,7 @@ function validate(field) {
       $contents[] = array('text' => '<b>'. TEXT_INFO_HEADING_ADJUST_POINTS . '</b><br>');
       $value_field = TEXT_ADJUST_INTRO . '<br><br>' . TEXT_POINTS_TO_ADJUST . '<br>'. tep_draw_input_field('points_to_aj', '' , 'onkeyup="validate(this)"');
       $contents[] = array('text' => $value_field); 
-      if (tep_not_null(POINTS_AUTO_EXPIRES)){
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
         $contents[] = array('text' => tep_draw_checkbox_field('set_exp', '', false) . ' ' . TEXT_SET_EXPIRE);
       }
       $contents[] = array('text' => tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));
@@ -447,7 +447,7 @@ function validate(field) {
       $contents[] = array('text' => $value_field);
       $contents[] = array('text' => tep_draw_checkbox_field('queue_delete') . ' ' . TEXT_QUEUE_POINTS_TABLE);
       $contents[] = array('text' => tep_draw_checkbox_field('notify', '', true) . ' ' . TEXT_NOTIFY_CUSTOMER);
-      if (tep_not_null(POINTS_AUTO_EXPIRES)){
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
         $contents[] = array('text' => tep_draw_checkbox_field('set_exp', '', true) . ' ' . TEXT_SET_EXPIRE);
       }
       $contents[] = array('text' => tep_draw_hidden_field('customers_firstname', $cInfo->customers_firstname) . tep_draw_hidden_field('customers_lastname', $cInfo->customers_lastname) . tep_draw_hidden_field('customers_gender', $cInfo->customers_gender) . tep_draw_hidden_field('customers_email_address', $cInfo->customers_email_address) . tep_draw_hidden_field('customers_shopping_points', $cInfo->customers_shopping_points) . tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));      
@@ -466,7 +466,7 @@ function validate(field) {
        if (isset($cInfo->ordersum)) {
          $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_ORDERS . ' ' . $currencies->format($cInfo->ordersum));
        }
-       $contents[] = array('text' => TEXT_INFO_NUMBER_OF_PENDING . ' ' . number_format($cInfo->pending_total,POINTS_DECIMAL_PLACES));
+       $contents[] = array('text' => TEXT_INFO_NUMBER_OF_PENDING . ' ' . number_format($cInfo->pending_total,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES));
       }
       break;
   }

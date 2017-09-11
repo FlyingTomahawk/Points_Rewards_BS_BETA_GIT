@@ -133,7 +133,7 @@
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
 ####  BOF POINTS REWARDS BS  ####*/
-  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 // customer pending points added 
       if ($order->info['total'] > 0) {
 	      $points_toadd = get_points_toadd($order);
@@ -144,10 +144,10 @@
 	      }
       }
 // customer referral points added 
-      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
 	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
 	      if (!tep_db_num_rows($referral_twice_query)) {
-		      $points_toadd = USE_REFERRAL_SYSTEM;
+		      $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
 		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
 		      $points_type = 'RF';
 		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);

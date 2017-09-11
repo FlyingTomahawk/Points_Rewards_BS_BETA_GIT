@@ -43,10 +43,10 @@
 <div class="alert alert-info">
 <div class="row">
 	<div class="col-sm-6">
-		<?php echo sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_point,POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_point))); ?>
+		<?php echo sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_point,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_point))); ?>
 	</div>
 <?php
-  if (tep_not_null(POINTS_AUTO_EXPIRES)) {
+  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
 	  $expires_query = tep_db_query("select customers_points_expires from customers where customers_id = '" . (int)$customer_id . "' and customers_points_expires > curdate() limit 1");
 	  $expires = tep_db_fetch_array($expires_query);
 ?>
@@ -62,7 +62,7 @@
 
 <?php
     $pending_points_query = "select unique_id, orders_id, points_pending, points_comment, date_added, points_status, points_type from customers_points_pending where customer_id = '" . (int)$customer_id . "' order by unique_id desc";
-    $pending_points_split = new splitPageResults($pending_points_query, MAX_DISPLAY_POINTS_RECORD);
+    $pending_points_split = new splitPageResults($pending_points_query, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_MAX_DISPLAY_POINTS_RECORD);
     $pending_points_query = tep_db_query($pending_points_split->sql_query);
 
     if (tep_db_num_rows($pending_points_query)) {
@@ -139,7 +139,7 @@
 		<td><?php echo '#' . $pending_points['orders_id'] . '&nbsp;&nbsp;' . $orders_status['orders_status_name']; ?></td>
 		<td><?php echo  $pending_points['points_comment'] .'&nbsp;' . $referred_name['customers_name']; ?></td>
 		<td><?php echo  $points_status_name; ?></td>
-		<td><?php echo number_format($pending_points['points_pending'],POINTS_DECIMAL_PLACES); ?></td>
+		<td><?php echo number_format($pending_points['points_pending'],MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES); ?></td>
 	</tr>
 <?php
 	}

@@ -14,16 +14,16 @@
 
   include_once('includes/application_top.php');
   
-  if ((USE_POINTS_SYSTEM == 'true') && (POINTS_AUTO_ON > 0)){
-    $auto_credit_query = "select unique_id, customer_id, orders_id, date_added, points_pending, points_type from customers_points_pending where date_added <= (CURDATE() - '" . (int)POINTS_AUTO_ON . "') and points_status = 1 order by customer_id";
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON > 0)){
+    $auto_credit_query = "select unique_id, customer_id, orders_id, date_added, points_pending, points_type from customers_points_pending where date_added <= (CURDATE() - '" . (int)MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON . "') and points_status = 1 order by customer_id";
     $credit_rows = tep_db_query($auto_credit_query);
     
     echo '<p style="font-family: Tahoma, Arial, sans-serif; font-size: 12px;"><b>Points confirmed for the following rows...</b><br><br>For your convenience here is the cron command for your site:<br><br>php&nbsp; ' . $_SERVER["PATH_TRANSLATED"] . '<form><input name="print" type="button" value="Print this" onclick="window.print()"></form></p>';
       
     while($auto_credit = tep_db_fetch_array($credit_rows)){
 	    
-      if (tep_not_null(POINTS_AUTO_EXPIRES)){
-        tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '" . $auto_credit['points_pending'] . "', customers_points_expires = DATE_ADD(NOW(),INTERVAL '" . POINTS_AUTO_EXPIRES . "' MONTH) where customers_id = '" . (int)$auto_credit['customer_id'] . "'");
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
+        tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '" . $auto_credit['points_pending'] . "', customers_points_expires = DATE_ADD(NOW(),INTERVAL '" . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES . "' MONTH) where customers_id = '" . (int)$auto_credit['customer_id'] . "'");
       } else {
         tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '" . $auto_credit['points_pending'] . "' where customers_id = '" . (int)$auto_credit['customer_id'] . "'");
       }
@@ -32,8 +32,8 @@
       
       $sql = "optimize table customers_points_pending";
 
-      print $total_points_awarded = '<li style="font-family: Tahoma, Arial, sans-serif; font-size: 12px;">Customer id :' . (int)$auto_credit['customer_id'] .'&nbsp;&nbsp;Order id :' . (int)$auto_credit['orders_id'] .'&nbsp;&nbsp;Date :' . tep_date_short($auto_credit['date_added']) .'&nbsp;&nbsp;Total Points :' . number_format($auto_credit['points_pending'],POINTS_DECIMAL_PLACES) .'&nbsp;&nbsp;Points Type =' . $auto_credit['points_type'] .'</li>';
-      $total_points_mail = $total_points_mail .= 'Customer id :' . (int)$auto_credit['customer_id'] .' Order id :' . (int)$auto_credit['orders_id'] .' Date :' . tep_date_short($auto_credit['date_added']) .' Total Points :' . number_format($auto_credit['points_pending'],POINTS_DECIMAL_PLACES) .' Points Type =' . $auto_credit['points_type']. "\n";
+      print $total_points_awarded = '<li style="font-family: Tahoma, Arial, sans-serif; font-size: 12px;">Customer id :' . (int)$auto_credit['customer_id'] .'&nbsp;&nbsp;Order id :' . (int)$auto_credit['orders_id'] .'&nbsp;&nbsp;Date :' . tep_date_short($auto_credit['date_added']) .'&nbsp;&nbsp;Total Points :' . number_format($auto_credit['points_pending'],MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) .'&nbsp;&nbsp;Points Type =' . $auto_credit['points_type'] .'</li>';
+      $total_points_mail = $total_points_mail .= 'Customer id :' . (int)$auto_credit['customer_id'] .' Order id :' . (int)$auto_credit['orders_id'] .' Date :' . tep_date_short($auto_credit['date_added']) .' Total Points :' . number_format($auto_credit['points_pending'],MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) .' Points Type =' . $auto_credit['points_type']. "\n";
   
     }
     $points_subject = 'Points Auto confirmed.';

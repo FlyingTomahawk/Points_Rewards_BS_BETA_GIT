@@ -95,8 +95,8 @@ define('EMAIL_TEXT_COMMENT', 'Cancellation Reason :');
 define('EMAIL_TEXT_SUCCESS_POINTS', 'Points are available at your account, during the checkout procces you\'ll be able to pay for your order with your points balance. '. "\n" .'Thank you for shopping at ' . STORE_NAME . ' and we looking forward to serving you again.');
 define('EMAIL_CONTACT', 'If you have any questions or for help with any of our online services, please email us at: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n" . 'This is an automated response, please do not reply!');
 //Auto Remainder bof
-define('EMAIL_EXPIRE_SUBJECT', 'Points expire in ' . POINTS_EXPIRES_REMIND.' days');
-define('EMAIL_EXPIRE_INTRO', 'This is an automated ' . POINTS_EXPIRES_REMIND.' days expiration remainder.');
+define('EMAIL_EXPIRE_SUBJECT', 'Points expire in ' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND.' days');
+define('EMAIL_EXPIRE_INTRO', 'This is an automated ' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND.' days expiration remainder.');
 define('EMAIL_EXPIRE_DET', 'Your current points balance is %s points, points will expire at %s .');
 define('EMAIL_EXPIRE_TEXT', 'After this date, the total balance of your accumulated reward earnings will be forfeited and you will begin accumulating points from the start.');
 //Auto Remainder eof
