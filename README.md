@@ -25,10 +25,14 @@ To do list and tasks asigend:
     add language definitions to hook language file and remove from core language files
 
 - create modified content modules to replace core modules
+  - info box
+  - info footer module
+  - shopping cart box
+  - shopping cart navbar (header?) module
 
 - revise all html tags for BS integration
 
-- revise and fix "known bugs"
+- revise and fix "known bugs" asigend to @LeeFoster
 
 - add installation script to header tag module (hooks register and calls) 
 
