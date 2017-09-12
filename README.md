@@ -27,12 +27,16 @@ To do list and tasks asigend:
 - create modified content modules to replace core modules
   - info box
   - info footer module
-  - shopping cart box
+  - shopping cart box asigned @Tsimi 12/09/2017
   - shopping cart navbar (header?) module
+  
+- create product info content module
+  - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
+  - point module for core product info 12/09/2017 @raiwa
 
 - revise all html tags for BS integration
 
-- revise and fix "known bugs" asigend to @LeeFoster
+- revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
 
 - add installation script to header tag module (hooks register and calls) 
 
