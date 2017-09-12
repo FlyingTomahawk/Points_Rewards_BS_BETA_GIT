@@ -27,7 +27,7 @@ To do list and tasks asigend:
     add language definitions to hook language file and remove from core language files
 
 - create modified content modules to replace core modules
-  - info box
+  - info box asigned @LeeFoster
   - info footer module
   - shopping cart box asigned @Tsimi 12/09/2017
   - shopping cart navbar (header?) module
@@ -39,6 +39,9 @@ To do list and tasks asigend:
 - revise all html tags for BS integration
 
 - revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
+  - 1 fixed 12/09/20017 @LeeFoster and @Tsimi
+  - 2 pending
+  - 3 fixed 12/09/20017 @LeeFoster and @Tsimi
 
 - add installation script to header tag module (hooks register and calls) 
 
