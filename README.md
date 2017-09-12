@@ -27,8 +27,8 @@ To do list and tasks asigend:
     add language definitions to hook language file and remove from core language files
 
 - create modified content modules to replace core modules
-  - info box asigned @LeeFoster
-  - info footer module
+  - info box
+  - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned @Tsimi 12/09/2017
   - shopping cart navbar (header?) module
   
