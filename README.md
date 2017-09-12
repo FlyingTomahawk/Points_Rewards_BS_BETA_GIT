@@ -32,7 +32,7 @@ To do list and tasks asigend:
   
 - create product info content module
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
-  - point module for core product info 12/09/2017 @raiwa
+  - point module for core product info DONE 12/09/2017 @raiwa
 
 - revise all html tags for BS integration
 
