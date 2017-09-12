@@ -17,6 +17,8 @@ To do list and tasks asigend:
     - add code for the pages where it is possible and remove from core files
       - logoff.php DONE 11/09/2017 @raiwa
       - product_reviews_write.php first part DONE 11/09/2017 @raiwa
+      - checkout_confirmation.php DONE 12/09/2017 @raiwa
+      - checkout_payment.php javascript 13/09/2017 @raiwa
     - add language definitions to header tag language file where possible
 
 - create hook:
