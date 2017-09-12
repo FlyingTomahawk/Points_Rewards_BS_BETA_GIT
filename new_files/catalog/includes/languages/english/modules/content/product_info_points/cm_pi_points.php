@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id cm_pi_description.php, v1.0 20160227 Kymation$
+  $Id cm_pi_description.php
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

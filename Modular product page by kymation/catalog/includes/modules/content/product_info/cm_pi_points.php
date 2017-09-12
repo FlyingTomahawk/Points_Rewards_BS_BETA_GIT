@@ -34,22 +34,37 @@
     }
 
     public function execute() {
-      global $oscTemplate, $product_info, $currencies, $currency;
+      global $oscTemplate, $product_info, $currencies, $new_price;
       
       $content_width = (int)MODULE_CONTENT_PRODUCT_INFO_POINTS_CONTENT_WIDTH;
 
       if (isset($product_info) && $product_info->product_exists() === true) {
         
-        ob_start();
-        include('includes/modules/content/' . $this->group . '/templates/' . basename(__FILE__));
-        $template = ob_get_clean();
+        if ($new_price = tep_get_products_special_price($product_info->products_id)) {
+          $products_price_points = tep_display_points($new_price, tep_get_tax_rate($product_info->products_tax_class_id));
+        } else {
+          $products_price_points = tep_display_points($product_info->products_price(), tep_get_tax_rate($product_info->products_tax_class_id));
+        }
+        $products_points = tep_calc_products_price_points($products_price_points);
+        $products_points_value = tep_calc_price_pvalue($products_points);
+        if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'True') || $new_price == false) {
+          $points_output = sprintf(MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS , number_format($products_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($products_points_value));
 
-        $oscTemplate->addContent($template, $this->group);
+          ob_start();
+          include('includes/modules/content/' . $this->group . '/templates/' . basename(__FILE__));
+          $template = ob_get_clean();
+
+          $oscTemplate->addContent($template, $this->group);
+        }
       }
     }
 
     public function isEnabled() {
-      return $this->enabled;
+      if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') || (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_DISPLAY_POINTS_INFO != 'True')) {
+    		$this->enabled = false;
+    	} else {
+    		return $this->enabled;
+    	}
     }
 
     public function check() {

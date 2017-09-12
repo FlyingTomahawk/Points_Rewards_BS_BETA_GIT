@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id cm_pi_points.php, v1.0 20160227 Kymation$
+  $Id points.php
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -11,11 +11,8 @@
 */
 
 ?>
-
 <!-- Start cm_pi_points module -->
 <div id="cm_pi_points" class="col-sm-<?php echo $content_width; ?>">
-
 	<?php echo '<p>' . $points_output . '</p>'; ?>
-	
 </div>
 <!-- End cm_pi_points module -->
