@@ -52,46 +52,6 @@
 
   $payment_modules->update_status();
 
-#####  BOF POINTS REWARDS BS  #######
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
-		  $customer_shopping_points_spending = false;
-		  // This if sentence should include check for amount of points on account compared to the transferred point from checkout_payment.php
-		  // Possible Hack Fix included
-		  if (tep_calc_shopping_pvalue($_POST['customer_shopping_points_spending']) < $order->info['total'] && !is_object($$payment) || (tep_get_shopping_points($customer_id) < $_POST['customer_shopping_points_spending'])) {
-			  $customer_shopping_points_spending = false;
-			  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REDEEM_SYSTEM_ERROR_POINTS_NOT), 'SSL'));
-		  } else {
-			  $customer_shopping_points_spending = $_POST['customer_shopping_points_spending'];
-			  if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
-		  }
-	  }
-	  
-	  //To ensure only the first order of a new customer is entitled to grant point to his/her referrer. Otherwise, a hacker might hard-code the email address of  a referrer and cheat for point on every single order the new customer made.
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
-		  if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
-			  $customer_referral = false;
-			  $check_mail = trim($_POST['customer_referred']);
-			  if (tep_validate_email($check_mail) == false) {
-				  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_NOT_VALID), 'SSL'));
-			  } else {
-				  $valid_referral_query = tep_db_query("select customers_id from customers where customers_email_address = '" . $check_mail . "' limit 1");
-				  $valid_referral = tep_db_fetch_array($valid_referral_query);
-				  if (!tep_db_num_rows($valid_referral_query)) {
-					  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_NOT_FOUND), 'SSL'));
-				  }
-				  
-				  if ($check_mail == $order->customer['email_address']) {
-					  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(REFERRAL_ERROR_SELF), 'SSL'));
-				  } else {
-					  $customer_referral = $valid_referral['customers_id'];
-					  if (!tep_session_is_registered('customer_referral')) tep_session_register('customer_referral');
-				  }
-			  }
-		  }
-	  }
-  }
-
   if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }

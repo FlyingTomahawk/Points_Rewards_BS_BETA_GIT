@@ -17,6 +17,8 @@ To do list and tasks asigend:
     - add code for the pages where it is possible and remove from core files
       - logoff.php DONE 11/09/2017 @raiwa
       - product_reviews_write.php first part DONE 11/09/2017 @raiwa
+      - checkout_confirmation.php DONE 12/09/2017 @raiwa
+      - checkout_payment.php javascript 13/09/2017 @raiwa
     - add language definitions to header tag language file where possible
 
 - create hook:
@@ -26,13 +28,20 @@ To do list and tasks asigend:
 
 - create modified content modules to replace core modules
   - info box
-  - info footer module
-  - shopping cart box
+  - info footer module DONE @LeeFoster 12/09/2017
+  - shopping cart box asigned @Tsimi 12/09/2017
   - shopping cart navbar (header?) module
+  
+- create product info content module
+  - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
+  - point module for core product info DONE 12/09/2017 @raiwa
 
 - revise all html tags for BS integration
 
-- revise and fix "known bugs" asigend to @LeeFoster
+- revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
+  - 1 fixed 12/09/20017 @LeeFoster and @Tsimi
+  - 2 pending
+  - 3 fixed 12/09/20017 @LeeFoster and @Tsimi
 
 - add installation script to header tag module (hooks register and calls) 
 

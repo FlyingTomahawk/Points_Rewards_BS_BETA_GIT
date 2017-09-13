@@ -231,11 +231,7 @@ define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '');
 
 // BOF POINTS REWARDS BS
 define('BOX_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
-define('REDEEM_SYSTEM_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');
 define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
-define('REFERRAL_ERROR_SELF', 'Sorry you can not refer yourself.');
-define('REFERRAL_ERROR_NOT_VALID', 'The referral email does not appear to be valid - please make any necessary corrections.');
-define('REFERRAL_ERROR_NOT_FOUND', 'The referral email address you entered was not found.');
 define('TEXT_POINTS_BALANCE', 'Points Status');
 define('TEXT_POINTS', 'Points :');
 define('TEXT_VALUE', 'Value:');

@@ -134,24 +134,12 @@
     }
 ?>
 
+<div class="row">
+  <?php echo $oscTemplate->getContent('product_info_points'); ?>
+</div>
+
 <div itemprop="description">
-<?php 
-// BOF POINTS REWARDS BS
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_DISPLAY_POINTS_INFO == 'True')) {
-	    if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
-		    $products_price_points = tep_display_points($new_price, tep_get_tax_rate($product_info['products_tax_class_id']));
-	    } else {
-		    $products_price_points = tep_display_points($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
-	    }
-	    $products_points = tep_calc_products_price_points($products_price_points);
-	    $products_points_value = tep_calc_price_pvalue($products_points);
-	    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'True') || $new_price == false) {
-		    echo '<p>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '</p>';
-	    }
-    }
-// EOF POINTS REWARDS BS
-?>
-  <?php echo stripslashes($product_info['products_description']); ?>
+<?php echo stripslashes($product_info['products_description']); ?>
 </div>
 
 <?php
