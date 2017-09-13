@@ -301,9 +301,11 @@ This will add the points credit information content module (if enabled).
 
 FIND:
 
-<div itemprop="description">
-<?php echo stripslashes($product_info['products_description']); ?>
-</div>
+<?php
+  if ($messageStack->size('product_action') > 0) {
+    echo $messageStack->output('product_action');
+  }
+?>
 
 ADD BEFORE IT:
 
