@@ -34,3 +34,12 @@ Date should idealy reset to 0000-00-00
 4.)
 
 If you add points through admin and don't "queue the customers table" the page counter in the account page goes crazy.
+
+5.)
+
+In the Points FAQ page the "Last updated:" won't show any date no matter if you change anything or not.
+
+6.)
+
+If the customer has never received points before and you add points to him through the admin area and keep every checkbox unchecked the points don't show up inside the account page and/or shopping cart box/navbar
+Unless you click on the adjust button and enter the points then it will show them. 
