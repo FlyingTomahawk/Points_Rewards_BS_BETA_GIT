@@ -14,4 +14,8 @@
   define('MODULE_BOXES_SHOPPING_CART_POINTS_DESCRIPTION', 'Show shopping cart with points contents');
   define('MODULE_BOXES_SHOPPING_CART_POINTS_BOX_TITLE', 'Shopping Cart');
   define('MODULE_BOXES_SHOPPING_CART_POINTS_BOX_CART_EMPTY', '0 items');
+  
+  define('TEXT_POINTS_BALANCE', 'Points Status');
+  define('TEXT_POINTS', 'Points :');
+  define('TEXT_VALUE', 'Value:');
 ?>
