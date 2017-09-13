@@ -719,6 +719,7 @@ ADD THIS AT THE END OF YOUR FILE
 define('BOX_CUSTOMERS_POINTS', 'Customers Points');
 define('BOX_CUSTOMERS_POINTS_PENDING', 'Pending Points');
 define('BOX_CUSTOMERS_POINTS_REFERRAL', 'Referral Points');
+define('TEXT_POINTS', 'Points:');
 // EOF POINTS REWARDS BS
 
 SAVE AND CLOSE!
