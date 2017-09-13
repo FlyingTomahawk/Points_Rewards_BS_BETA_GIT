@@ -86,7 +86,7 @@ FIND:
 	  
 ADD AFTER IT:
 
-//-- // BOF POINTS REWARDS BS //-->
+// BOF POINTS REWARDS BS //-->
     if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
 		
 	$output .= '<h2>' . MY_POINTS_TITLE . '</h2>
@@ -102,7 +102,7 @@ ADD AFTER IT:
 			  </ul>
            </div>'; 
   }
-//-- // EOF POINTS REWARDS BS //-->       
+// EOF POINTS REWARDS BS //-->       
 
 
 SAVE AND CLOSE!
@@ -143,6 +143,8 @@ FIND:
     $radio_buttons++;
   }
 ?>
+      </tbody>
+    </table>
 
   </div>
   
@@ -274,18 +276,15 @@ FIND:
   
 ADD AFTER IT:
 
-	  <hr>
 <!-- BOF POINTS REWARDS BS -->
+	  <hr>
 	<?php 
 	   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
-	?>
-		<?php echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT))); ?>
-      	<?php echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-		
-	<?php
-	   }
+			echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT))); 
+			echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); 
+	    }
 	?>               
-<!-- EOF POINTS REWARDS BS -->
+<!-- EOF POINTS REWARDS BS -->	
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -307,9 +306,11 @@ FIND:
 
 ADD BEFORE IT:
 
+<!-- BOF POINTS REWARDS BS -->
 <div class="row">
   <?php echo $oscTemplate->getContent('product_info_points'); ?>
 </div>
+<!-- EOF POINTS REWARDS BS -->
 
 OR place it anywhere you wish the information to be shown
 
@@ -333,13 +334,8 @@ ADD AFTER IT:
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-?>
-	<div>
-   		<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-            	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-        </div>
-<?php
-  }
+		echo '<div>' . sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>') . '</div>';
+    }
 ?>
 <!-- // EOF POINTS REWARDS BS //-->
 
@@ -367,14 +363,9 @@ ADD AFTER IT:
 
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-?>
-	<div>
-        	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-        </div>
-<?php
-  }
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
+		echo '<div>' . sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>') . '</div>';
+    }
 ?>
 <!-- // EOF POINTS REWARDS BS //-->
 
@@ -438,7 +429,9 @@ FIND:
 
 ADD AFTER IT:
 
-<li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo BOX_INFORMATION_MY_POINTS_HELP; ?></a></li> <!-- POINTS REWARDS BS //-->
+<!-- BOF POINTS REWARDS BS //-->
+	  <li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo BOX_INFORMATION_MY_POINTS_HELP; ?></a></li> 
+<!-- EOF POINTS REWARDS BS //-->
 
 SAVE AND CLOSE!
 
@@ -448,20 +441,7 @@ CATALOG STEP = 14.    open catalog/includes/modules/boxes/bm_shopping_cart.php(o
 This is in order to display points info.(customers must login).
 This will only show up when a customer points is bigger then 0
 
-FIND:
-
-$cart_contents_string .= '<li class="text-right"><hr>' . $currencies->format($cart->show_total()) . '</li>';
-								 
-ADD AFTER IT:
-
-### BOF POINTS REWARDS BS ####*/
-  if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True') {
-          $has_points = tep_get_shopping_points($customer_id);
-          if ($has_points > 0) {
-                  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. TEXT_POINTS_BALANCE . '</a></strong></div>' . TEXT_POINTS . '&nbsp;' . number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '<br />' .  TEXT_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
-          }   
-  }
-/*#### EOF POINTS REWARDS BS ####*/
+MOVED INTO NEW BOXES MODULE
 						 
 
 SAVE AND CLOSE!
@@ -496,9 +476,9 @@ define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value ca
 MOVED INTO HT MODULE language file
 MOVED INTO HT MODULE language file
 MOVED INTO HT MODULE language file
-define('TEXT_POINTS_BALANCE', 'Points Status');
-define('TEXT_POINTS', 'Points :');
-define('TEXT_VALUE', 'Value:');
+MOVED INTO BOXES MODULE language file
+MOVED INTO BOXES MODULE language file
+MOVED INTO BOXES MODULE language file
 define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
 // EOF POINTS REWARDS BS
 
@@ -698,7 +678,7 @@ ADD AFTER IT:
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
     if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
-            $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
+        $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
             if (tep_db_num_rows($p_status_query)) {
                     echo '<tr><td colspan="2" align="right"><strong>' . ENTRY_NOTIFY_POINTS . '</strong>&nbsp;' . ENTRY_QUE_POINTS . tep_draw_checkbox_field('confirm_points', '', false) . '&nbsp;' . ENTRY_QUE_DEL_POINTS . tep_draw_checkbox_field('delete_points', '', false) . '</td></tr>';
             }
@@ -756,7 +736,6 @@ define('ENTRY_QUE_POINTS', 'and Que');
 define('ENTRY_QUE_DEL_POINTS', 'and Delete:');
 define('ENTRY_CONFIRMED_POINTS', 'Points Confirmed.  ');
 // EOF POINTS REWARDS BS
-
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 ##################  END OF STEP BY STEP INSTALLATION      ################################
