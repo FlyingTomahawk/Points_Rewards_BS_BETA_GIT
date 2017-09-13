@@ -45,7 +45,7 @@ To do list and tasks asigend:
   - 2 fixed 13/09/20017 @LeeFoster
   - 3 fixed 12/09/20017 @LeeFoster and @Tsimi
   - 4 pending
-  - 5 pending
+  - 5 fixed 13/09/20017 @raiwa
   - 6 pending
 
 - add installation script to header tag module (hooks register and calls) 
