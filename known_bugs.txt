@@ -13,6 +13,7 @@ Go back to the customer account and you'll see that the points are deducted but 
 
 That is not really ideal.
 
+
 2.) PENDING
 
 When going through the checkout on the checkout_payment.php page, if you have enough points to pay for the full total amount then you would not need to select any payment method.
@@ -22,8 +23,14 @@ Inside the ..functions/redemptions.php file around line 356 you should see an "o
 
 That validation doesn't seem to work.
 
+
 3.) FIXED!
 
 In the admin area, if you adjust the points and remove all of them the expire date remains.
 
 Date should idealy reset to 0000-00-00
+
+
+4.)
+
+If you add points through admin and don't "queue the customers table" the page counter in the account page goes crazy.
