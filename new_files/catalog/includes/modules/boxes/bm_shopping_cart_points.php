@@ -107,4 +107,12 @@
 				   'MODULE_BOXES_SHOPPING_CART_POINTS_SORT_ORDER');
     }
   }
+  
+    ////
+  // Function to show a disabled entry (Value is shown but cannot be changed)
+  if( !function_exists( 'tep_cfg_disabled' ) ) {
+    function tep_cfg_disabled( $value ) {
+      return tep_draw_input_field( 'configuration_value', $value, ' disabled' );
+    }
+  }
 ?>
