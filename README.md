@@ -25,12 +25,14 @@ To do list and tasks asigend:
 
     add functions for the pages where it makes sense and remove code changes from core files
     add language definitions to hook language file and remove from core language files
+    
+    - create_account.php DONE 13/09/2017_@raiwa
 
 - create modified content modules to replace core modules
   - info box
   - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned @Tsimi 12/09/2017
-  - shopping cart navbar (header?) module
+  - shopping cart navbar module asigned @Tsimi 13/09/2017
   
 - create product info content module
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
@@ -40,8 +42,9 @@ To do list and tasks asigend:
 
 - revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
   - 1 fixed 12/09/20017 @LeeFoster and @Tsimi
-  - 2 pending
+  - 2 fixed 13/09/20017 @LeeFoster
   - 3 fixed 12/09/20017 @LeeFoster and @Tsimi
+  - 4 pending
 
 - add installation script to header tag module (hooks register and calls) 
 

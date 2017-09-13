@@ -77,6 +77,10 @@
   </div>
 </div>
 
+<div class="row">
+  <?php echo $oscTemplate->getContent('product_info_points'); ?>
+</div>
+
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
@@ -133,10 +137,6 @@
       }
     }
 ?>
-
-<div class="row">
-  <?php echo $oscTemplate->getContent('product_info_points'); ?>
-</div>
 
 <div itemprop="description">
 <?php echo stripslashes($product_info['products_description']); ?>
