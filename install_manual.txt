@@ -239,27 +239,8 @@ SAVE AND CLOSE!
 CATALOG STEP = 5.   open catalog/create_account.php
 This will add Welcome Points (and send email) defined by admin if enabled.
 
-FIND:
+MOVED INTO HOOK
 
-$email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
-
-REPLACE WITH:
-
-// BOF POINTS REWARDS BS
-      if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
-	      tep_add_welcome_points($customer_id);
-	      
-	      $points_account = '<a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><b><u>' . EMAIL_POINTS_ACCOUNT . '</u></b></a>.';
-	      $points_faq = '<a href="' . tep_href_link('my_points_help.php', '', 'NONSSL') . '"><b><u>' . EMAIL_POINTS_FAQ . '</u></b></a>.';
-	      $text_points = sprintf(EMAIL_WELCOME_POINTS , $points_account, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT)), $points_faq) ."\n\n";
-	      
-	      $email_text .= EMAIL_WELCOME . EMAIL_TEXT . $text_points . EMAIL_CONTACT . EMAIL_WARNING;
-      } else {
-	      $email_text .= EMAIL_WELCOME . EMAIL_TEXT .EMAIL_CONTACT . EMAIL_WARNING;
-      }
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 6.   open catalog/create_account_success.php
@@ -545,15 +526,8 @@ CATALOG STEP = 19.   open catalog/includes/languages/english/create_account.php
 This will define the language used for email Welcome Points offerd by admin if enabled..
 (Please translate and repeat this step to any of your other languages)
 	
-ADD THIS ADD THE END OF YOUR FILE
+MOVED INTO HOOK LANGUAGE FILE
 
-// BOF POINTS REWARDS BS
-define('EMAIL_WELCOME_POINTS', '<li><strong>Reward Point Program</strong> - As part of our Welcome to new customers, we have credited your %s with a total of %s Shopping Points worth %s .' . "\n" . 'Please refer to the %s as conditions may apply.');
-define('EMAIL_POINTS_ACCOUNT', 'Shopping Points Accout');
-define('EMAIL_POINTS_FAQ', 'Reward Point Program FAQ');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 20.  open catalog/includes/languages/english/create_account_success.php
