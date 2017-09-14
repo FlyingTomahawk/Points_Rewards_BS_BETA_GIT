@@ -14,7 +14,7 @@ Go back to the customer account and you'll see that the points are deducted but 
 That is not really ideal.
 
 
-2.) PENDING
+2.) FIXED! *needs code improvement/cleaning
 
 When going through the checkout on the checkout_payment.php page, if you have enough points to pay for the full total amount then you would not need to select any payment method.
 In the original install in a normal 2.3.4 shop that function works fine but in a BS shop it doesn't. The javascript validation ignores the ticked checkbox and points calculation.
@@ -31,7 +31,7 @@ In the admin area, if you adjust the points and remove all of them the expire da
 Date should idealy reset to 0000-00-00
 
 
-4.)
+4.) FIXED!
 
 If you add points through admin and don't "queue the customers table" the page counter in the account page goes crazy.
 
@@ -39,7 +39,7 @@ If you add points through admin and don't "queue the customers table" the page c
 
 In the Points FAQ page the "Last updated:" won't show any date no matter if you change anything or not.
 
-6.)
+6.) FIXED!
 
 If the customer has never received points before and you add points to him through the admin area and keep every checkbox unchecked the points don't show up inside the account page and/or shopping cart box/navbar
 Unless you click on the adjust button and enter the points then it will show them. 
