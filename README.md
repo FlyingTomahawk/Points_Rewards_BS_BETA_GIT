@@ -29,7 +29,7 @@ To do list and tasks asigend:
     - create_account.php DONE 13/09/2017 @raiwa
 
 - create modified content modules to replace core modules
-  - info box
+  - info box asigned 14/09/2017 @Tsimi
   - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned DONE 12/09/2017 @Tsimi 
   - shopping cart navbar module asigned DONE 13/09/2017 @Tsimi
