@@ -75,6 +75,11 @@
               }
             }
           }
+          
+          if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+          if (isset($_POST['customer_shopping_points_spending']) && tep_not_null($_POST['customer_shopping_points_spending'])) {
+            $customer_shopping_points_spending = tep_db_prepare_input($_POST['customer_shopping_points_spending']);
+          }
           break;
         case 'logoff.php':
           if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
