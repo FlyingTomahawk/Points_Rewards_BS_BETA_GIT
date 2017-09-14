@@ -51,7 +51,11 @@
 	  $expires = tep_db_fetch_array($expires_query);
 ?>
 	<div class="col-sm-6 text-right">
-		<?php echo '<strong>' . MY_POINTS_EXPIRE . '</strong> ' . tep_date_short($expires['customers_points_expires']); ?>
+		<?php 
+			if (tep_not_null($expires['customers_points_expires'])) {
+				echo '<strong>' . MY_POINTS_EXPIRE . '</strong> ' . tep_date_short($expires['customers_points_expires']); 
+			}
+		?>
 	</div>
 </div>
 </div>
@@ -151,12 +155,16 @@
   }
 ?>
 
+<?php 
+	if ($pending_points_split->number_of_rows > 0) { 
+?>
 <div class="row">
   <div class="col-md-6 pagenumber"><?php echo $pending_points_split->display_count(TEXT_DISPLAY_NUMBER_OF_RECORDS); ?></div>
-  <div class="col-md-6"><span class="pull-right pagenav"><ul class="pagination"><?php echo $pending_points_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></ul></span><span class="pull-right"><?php echo TEXT_RESULT_PAGE; ?></span></div>
+  <div class="col-md-6"><span class="pull-right pagenav"><ul class="pagination"><?php echo $pending_points_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info'))); ?></ul></span><span class="pull-right"><?php echo TEXT_RESULT_PAGE; ?></span></div>
   </div>
-<?php  
- } else {
+<?php 
+	}
+	} else {
 ?>
 
 	<div class="alert alert-info">
