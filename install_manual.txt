@@ -76,7 +76,8 @@ FIND:
 REPLACE WITH:
 
     function build() {
-      global $oscTemplate, $currencies;
+      global $oscTemplate;
+      global $customer_id, $currencies; // POINTS REWARDS BS
 	  
 FIND:
 
