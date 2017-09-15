@@ -38,7 +38,13 @@ To do list and tasks asigend:
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
   - point module for core product info DONE 12/09/2017 @raiwa
   
-- clean up my_points_help.php language file asigend 13/09/2017 @raiwa
+- clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
+
+- alternative fix for bug 2
+  - create payment module "points"
+  - modify info box on checkout payment for payment module selection
+  - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into ht module.
+  - remove all related and obsolete changes in checkout_payment.php, checkout_confirmation_php and payment class
 
 - revise all html tags for BS integration
 
