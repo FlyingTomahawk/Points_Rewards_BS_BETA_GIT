@@ -49,12 +49,13 @@ To do list and tasks asigend:
 - revise all html tags for BS integration
 
 - revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
-  - 1 fixed 12/09/20017 @LeeFoster and @Tsimi
-  - 2 fixed 13/09/20017 @LeeFoster
-  - 3 fixed 12/09/20017 @LeeFoster and @Tsimi
-  - 4 fixed 14/09/20017 @LeeFoster
-  - 5 fixed 13/09/20017 @raiwa
-  - 6 fixed 14/09/20017 @LeeFoster 
+  - 1 fixed 12/09/2017 @LeeFoster and @Tsimi
+  - 2 fixed 13/09/2017 @LeeFoster
+  - 3 fixed 12/09/2017 @LeeFoster and @Tsimi
+  - 4 fixed 14/09/2017 @LeeFoster
+  - 5 fixed 13/09/2017 @raiwa
+  - 6 fixed 14/09/2017 @LeeFoster
+  - 7 fixed 15/09/2017 @raiwa
 
 - add installation script to header tag module (hooks register and calls) 
 
