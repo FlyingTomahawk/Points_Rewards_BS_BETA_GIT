@@ -38,7 +38,7 @@
 	        $order->info['payment_method'] = ( $order->info['total'] > 0) ? $order->info['payment_method'] . '+' . str_replace(':', '', TEXT_POINTS) : str_replace(':', '', TEXT_POINTS);
 	      
 	        $this->output[] = array('title' =>''. MODULE_ORDER_TOTAL_REDEMPTIONS_TEXT . ':',
-                                    'text' => '<span class="pointWarning">-' . $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points_spending), true, $order->info['currency'], $order->info['currency_value'].'</span>'),
+                                    'text' => '<span class="text-warning">-' . $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points_spending), true, $order->info['currency'], $order->info['currency_value']) . '</span>',
                                     'value' => tep_calc_shopping_pvalue($customer_shopping_points_spending));
         }
     }
