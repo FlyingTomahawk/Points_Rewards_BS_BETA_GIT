@@ -28,8 +28,8 @@ To do list and tasks asigend:
     
     - create_account.php DONE 13/09/2017 @raiwa
 
-- create modified content modules to replace core modules
-  - info box asigned 14/09/2017 @Tsimi
+- create modified content modules to replace core modules DONE 15/09/2017
+  - info box asigned DONE 15/09/2017 @Tsimi
   - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned DONE 12/09/2017 @Tsimi 
   - shopping cart navbar module asigned DONE 13/09/2017 @Tsimi
@@ -43,7 +43,7 @@ To do list and tasks asigend:
 - alternative fix for bug 2 asigned DONE (needs hardcore check) @raiwa 15/09/2017
   - create payment module "points"
   - modify info box on checkout payment for payment module selection
-  - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into ht module.
+  - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into hook.
   - remove all related and obsolete changes in checkout_payment.php, checkout_confirmation_php and payment class
 
 - revise all html tags for BS integration
