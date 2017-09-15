@@ -333,7 +333,7 @@
   }
 
   function points_selection($cart_show_total) {
-	  global $currencies, $order;
+	  global $currencies, $order, $points;
 	  
 	  if (($customer_shopping_points = tep_get_shopping_points()) && $customer_shopping_points > 0) {
 		  if (get_redemption_rules($order) && (get_points_rules_discounted($order) || get_cart_mixed($order))) {
@@ -352,8 +352,14 @@
 		<h2><?php echo TABLE_HEADING_REDEEM_SYSTEM; ?></h2>
           <div class="alert alert-info"> 
                 <?php printf(TEXT_REDEEM_SYSTEM_START, $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points)), $currencies->format($order->info['total']). $note); ?><br />
-                <?php printf(TEXT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points))); ?>   
-		     <div class="pull-right"><?php echo tep_draw_checkbox_field('customer_shopping_points_spending', $customer_shopping_points_spending,'','onclick="submitFunction()"'); ?></div>
+                <?php
+                if ($points->enabled == true) {
+                  printf(TEXT_REDEEM_SYSTEM_PAYING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                } else {
+                  printf(TEXT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                  echo '<div class="pull-right">' . tep_draw_checkbox_field('customer_shopping_points_spending', $customer_shopping_points_spending,'','onclick="submitFunction()"') . '</div>';
+                }
+                ?>   
 		  </div>
 <div class="clearfix"></div>
 <?php 
