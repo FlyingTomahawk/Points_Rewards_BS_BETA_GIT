@@ -43,3 +43,8 @@ In the Points FAQ page the "Last updated:" won't show any date no matter if you 
 
 If the customer has never received points before and you add points to him through the admin area and keep every checkbox unchecked the points don't show up inside the account page and/or shopping cart box/navbar
 Unless you click on the adjust button and enter the points then it will show them. 
+
+7.) FIXED!
+
+ot module used obsolete style "points-Warning", replaced by BS core style "text-warning.
+closing ")" moved to correct place.
