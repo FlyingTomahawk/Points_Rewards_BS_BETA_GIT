@@ -40,7 +40,7 @@ To do list and tasks asigend:
   
 - clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
 
-- alternative fix for bug 2
+- alternative fix for bug 2 asigned @raiwa 15/09/2017
   - create payment module "points"
   - modify info box on checkout payment for payment module selection
   - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into ht module.
