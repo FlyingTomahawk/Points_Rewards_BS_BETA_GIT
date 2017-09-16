@@ -273,9 +273,6 @@
     <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
       <div class="panel-body">
         <?php 
-          if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
-            echo sprintf(TEXT_FAQ_14_A, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL'));
-          }
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) { 
             $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
             $prods = null;
@@ -286,7 +283,7 @@
               }
             }
 	
-            echo sprintf(TEXT_FAQ_14_B, $prods, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID'));
+            echo sprintf(TEXT_FAQ_14_A, $prods, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID'));
           }
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH)) {
             $cat_path = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
@@ -297,9 +294,9 @@
                 $cats .= '<li>' . $list['categories_name'] .'</li>';
               }
             }
-            echo sprintf(TEXT_FAQ_14_C, $cats, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
+            echo sprintf(TEXT_FAQ_14_B, $cats, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
           } else {
-            echo sprintf(TEXT_FAQ_14_D, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
+            echo sprintf(TEXT_FAQ_14_C, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
           }
 	      ?>
       </div>

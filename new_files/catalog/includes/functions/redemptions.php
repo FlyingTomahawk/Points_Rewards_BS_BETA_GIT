@@ -79,14 +79,7 @@
 // products restriction by model.
   function get_redemption_rules($order) {
 	  
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)||tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)||tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH)) {
-		  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL))   
-          for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-	          if (!(substr($order->products[$i]['model'], 0, 10) == MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
-		          return false;
-	          }
-             return true;
-          }
+	  if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) || tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) ) {
           
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID))   
 		  for ($i=0; $i<sizeof($order->products); $i++) {
@@ -286,18 +279,7 @@
           }
       }
       
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
-	      $model_points = 0;
-	      for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-              if ($order->products[$i]['model'] != MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL) {
-	              $model_price = $order->products[$i]['price'];
-                  $model_points = $model_points + (($model_price*$order->products[$i]['qty'])/MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE);
-                  $max_points = $max_points - (($model_price*$order->products[$i]['qty'])/MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE);
-              }
-          }
-      }
-      
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) {
 	      $pid_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
 		      $p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
@@ -310,7 +292,7 @@
 	      }
       }
       
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
+      if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) ) {
 	      $path_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
 		      $cat_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
