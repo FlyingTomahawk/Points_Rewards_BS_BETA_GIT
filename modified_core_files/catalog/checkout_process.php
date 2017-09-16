@@ -12,6 +12,9 @@
 
   include('includes/application_top.php');
 
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
@@ -68,11 +71,9 @@
 
   $payment_modules->update_status();
 
-########  BOF POINTS REWARDS BS #################*/
-  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-	  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
-########  EOF POINTS REWARDS BS #################*/
 
   require('includes/classes/order_total.php');
   $order_total_modules = new order_total;
@@ -132,33 +133,9 @@
                             'sort_order' => $order_totals[$i]['sort_order']);
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
-####  BOF POINTS REWARDS BS  ####*/
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-// customer pending points added 
-      if ($order->info['total'] > 0) {
-	      $points_toadd = get_points_toadd($order);
-	      $points_comment = 'TEXT_DEFAULT_COMMENT';
-	      $points_type = 'SP';
-	      if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
-		      tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
-	      }
-      }
-// customer referral points added 
-      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
-	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
-	      if (!tep_db_num_rows($referral_twice_query)) {
-		      $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
-		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
-		      $points_type = 'RF';
-		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
-	      }
-      }
-// customer shoppping points account balanced 
-      if ($customer_shopping_points_spending) {
-	      tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
-      }
-  }
-####  EOF POINTS REWARDS BS  ####*/
+
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessAddPoints');
 
   $customer_notification = (SEND_EMAILS == 'true') ? '1' : '0';
   $sql_data_array = array('orders_id' => $insert_id, 
@@ -322,11 +299,9 @@
   tep_session_unregister('shipping');
   tep_session_unregister('payment');
   tep_session_unregister('comments');
-####  BOF POINTS REWARDS BS  ####*/
-  if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
-  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
-  if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
-####  EOF POINTS REWARDS BS  ####*/
+
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessUnregister');
 
   tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
 
