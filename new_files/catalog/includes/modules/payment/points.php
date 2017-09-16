@@ -31,7 +31,7 @@
     }
 
     function update_status() {
-      global $order, $max_points;
+      global $order, $cart, $max_points;
 
       if ( ($this->enabled == true) && ((int)MODULE_PAYMENT_POINTS_ZONE > 0) ) {
         $check_flag = false;
@@ -52,16 +52,11 @@
       }
 
       if ($this->enabled == true) {
-        if (($customer_shopping_points = tep_get_shopping_points()) && $customer_shopping_points > 0) {
-          if (get_redemption_rules($order) && (get_points_rules_discounted($order) || get_cart_mixed($order))) {
-            if ($customer_shopping_points >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE) {
-              if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT == '') || ($cart_show_total >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT) ) {
-                $max_points = calculate_max_points($customer_shopping_points);
-                if ($order->info['total'] > tep_calc_shopping_pvalue($max_points)) {
-                  $this->enabled = false;
-                }
-              }
-            }
+        $this->enabled = false;
+        $cart_show_total = $cart->show_total();
+        if ( tep_not_null($max_points = check_points_redemtion ($cart_show_total)) ) {
+          if ($order->info['total'] <= tep_calc_shopping_pvalue($max_points)) {
+            $this->enabled = true;
           }
         }
       }

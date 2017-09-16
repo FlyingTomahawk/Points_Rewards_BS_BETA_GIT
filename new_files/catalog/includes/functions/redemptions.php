@@ -305,22 +305,33 @@
       return $max_points;
   }
 
-  function points_selection($cart_show_total) {
-	  global $currencies, $order, $points;
+  function check_points_redemtion ($cart_show_total) {
+	  global $order, $customer_shopping_points;
 	  
 	  if (($customer_shopping_points = tep_get_shopping_points()) && $customer_shopping_points > 0) {
 		  if (get_redemption_rules($order) && (get_points_rules_discounted($order) || get_cart_mixed($order))) {
 			  if ($customer_shopping_points >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE) {
 
 				 if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT == '') || ($cart_show_total >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT) ) {
-					  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
-					  
 					  $max_points = calculate_max_points($customer_shopping_points);
+				   return $max_points;
+				 }
+			  }
+		  }
+	  }
+  }
+
+  function points_selection($cart_show_total) {
+	  global $currencies, $order, $points, $customer_shopping_points;
+	  
+	  if ( tep_not_null($max_points = check_points_redemtion ($cart_show_total)) ) {
+					  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+					  $customer_shopping_points_spending = $max_points;
+					  $note = null;
 					  if ($order->info['total'] > tep_calc_shopping_pvalue($max_points)) {
 						  $note = '<br /><small>' . TEXT_REDEEM_SYSTEM_NOTE .'</small>';
 					  }
 					  
-					  $customer_shopping_points_spending = $max_points;
 ?>
 		<h2><?php echo TABLE_HEADING_REDEEM_SYSTEM; ?></h2>
           <div class="alert alert-info"> 
@@ -338,9 +349,6 @@
 <?php 
 				  }
 			  }
-		  }
-	  }
-  }
   
   function referral_input() {
 	  

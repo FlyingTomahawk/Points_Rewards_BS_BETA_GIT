@@ -46,9 +46,6 @@
     $comments = tep_db_prepare_input($_POST['comments']);
   }
 
-// POINTS REWARDS BS
-   echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
-
 // load the selected payment module
   require('includes/classes/payment.php');
   $payment_modules = new payment($payment);
@@ -57,6 +54,9 @@
   $order = new order;
 
   $payment_modules->update_status();
+
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
 
   if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
@@ -93,8 +93,6 @@
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2);
 
-echo '<br><br>$_GET' . var_dump($_GET);  
-  
   require('includes/template_top.php');
 ?>
 

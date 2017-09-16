@@ -110,10 +110,29 @@ SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 2.   open catalog/checkout_confirmation.php
-This will add an errors checker to checkout_confirmation page.
+This will add hook register and call to checkout_confirmation page.
 
-MOVED INTO HT MODULE
+**This step has 2 parts
 
+FIND:
+
+  require('includes/application_top.php');
+
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
+FIND:
+
+  $payment_modules->update_status();
+
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
+
+SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 3.   open catalog/checkout_payment.php
@@ -124,19 +143,12 @@ allow points to be used as payment method.
 
 FIND:
 
-  require('includes/template_top.php');
-?>
+  require('includes/application_top.php');
 
 ADD AFTER IT:
 
-<script type="text/javascript">
-// BOF POINTS REWARDS BS
-var submitter = null;
-function submitFunction() {
-   submitter = 1;
-   }
-// EOF POINTS REWARDS BS
-</script>
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
 
 FIND:
 
@@ -151,19 +163,10 @@ FIND:
   
 ADD AFTER IT:
 
-<!-- BOF POINTS REWARDS BS -->
 <?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-	  //echo points_selection();
-	  $cart_show_total= $cart->show_total();
-	  echo points_selection($cart_show_total);
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
-		  echo referral_input();
-	  }
-  }
+// POINTS REWARDS BS
+   echo $OSCOM_Hooks->call('points', 'PointsCheckoutPayment');
 ?>
-<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-<!-- EOF POINTS REWARDS BS -->
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -489,18 +492,8 @@ CATALOG STEP = 18.   open catalog/includes/languages/english/checkout_payment.ph
 This will define the language used for Redemptions box in checkout_payment page.
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
+MOVED INTO HOOK LANGUAGE FILE
 
-// BOF POINTS REWARDS BS
-define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
-define('TABLE_HEADING_REFERRAL', 'Referral System');
-define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
-define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
-define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 19.   open catalog/includes/languages/english/create_account.php
