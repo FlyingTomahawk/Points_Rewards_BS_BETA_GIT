@@ -40,7 +40,7 @@
     </div>
     <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
       <div class="panel-body">
-          <?php echo sprintf(TEXT_FAQ_1, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM'));?>
+          <?php echo TEXT_FAQ_1;?>
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@
     </div>
     <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
       <div class="panel-body">
-        <?php echo sprintf(TEXT_FAQ_3, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE'));?>
+        <?php echo TEXT_FAQ_3;?>
       </div>
     </div>
   </div>
