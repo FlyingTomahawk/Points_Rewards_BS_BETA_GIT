@@ -83,7 +83,7 @@
           
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID))   
 		  for ($i=0; $i<sizeof($order->products); $i++) {
-			  $p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
+			  $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
 			  for ($ii = 0; $ii < count($p_ids); $ii++) {
 				  if ($order->products[$i]['id'] == $p_ids[$ii]) {
 					  return true;
@@ -93,8 +93,8 @@
 		  
 		  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH))   
 		  for ($i=0; $i<sizeof($order->products); $i++) {
-			  $cat_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
-			  $sub_cat_ids = split("[_]", tep_get_product_path($order->products[$i]['id']));
+			  $cat_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
+			  $sub_cat_ids = explode("[_]", tep_get_product_path($order->products[$i]['id']));
 			   for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
 				   for ($ii = 0; $ii < count($cat_ids); $ii++) {
 					   if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
@@ -282,7 +282,7 @@
       if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) {
 	      $pid_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
-		      $p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
+		      $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
 		      for ($ii = 0; $ii < count($p_ids); $ii++) {
 			      if ($order->products[$i]['id'] == $p_ids[$ii]) {
 				      $pid_points = ($order->products[$i]['price']*$order->products[$i]['qty'])+($order->info['shipping_cost']+$order->info['tax']);
@@ -295,8 +295,8 @@
       if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) ) {
 	      $path_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
-		      $cat_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
-		      $sub_cat_ids = split("[_]", tep_get_product_path($order->products[$i]['id']));
+		      $cat_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
+		      $sub_cat_ids = explode("[_]", tep_get_product_path($order->products[$i]['id']));
 		      for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
 			      for ($ii = 0; $ii < count($cat_ids); $ii++) {
 				      if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
