@@ -48,3 +48,12 @@ Unless you click on the adjust button and enter the points then it will show the
 
 ot module used obsolete style "points-Warning", replaced by BS core style "text-warning.
 closing ")" moved to correct place.
+
+8.) FIXED!
+
+replace removed "split" by "explode" in redemptions functions
+
+7.) FIXED!
+
+fixed buggy restricted products and categories listing in my_points_help.php
+only one/last products/categories were shown
