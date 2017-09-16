@@ -27,6 +27,9 @@ To do list and tasks asigend:
     add language definitions to hook language file and remove from core language files
     
     - create_account.php DONE 13/09/2017 @raiwa
+    - checkout_payment.php DONE 16/09/2017 @raiwa
+    - checkout_confirmation.php DONE 16/09/2017 @raiwa
+    - checkout_process.php DONE 16/09/2017 @raiwa
 
 - create modified content modules to replace core modules DONE 15/09/2017
   - info box asigned DONE 15/09/2017 @Tsimi
