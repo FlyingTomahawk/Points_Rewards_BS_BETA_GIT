@@ -225,15 +225,6 @@
 		  tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '" . $welcome_points . "' where customers_id = '" . (int)$customer_id . "' limit 1");
 	  }
   }
-
-// get the last update value for any key
-  function tep_get_last_date($key) {
-	  
-	  $key_date_query = tep_db_query("select last_modified from configuration where configuration_key = '". $key ."' limit 1");
-      $key_date = tep_db_fetch_array($key_date_query);
-
-      return tep_date_long($key_date['last_modified']);
-  }
   
 // products discounted restriction if enabled.
   function get_points_rules_discounted($order) {

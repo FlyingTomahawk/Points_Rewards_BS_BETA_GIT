@@ -97,13 +97,7 @@
     </div>
     <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE  > 0)  {
-            echo sprintf(TEXT_FAQ_5_A, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE)), tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE'));
-          } else {
-            echo sprintf(TEXT_FAQ_5_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE  > 0)? sprintf(TEXT_FAQ_5_A, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE))) : TEXT_FAQ_5_B; ?>
       </div>
     </div>
   </div>
@@ -117,13 +111,7 @@
     </div>
     <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
       <div class="panel-body">
-        <?php 
-          if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT))  {
-            echo sprintf(TEXT_FAQ_6_A, $currencies->format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT), tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT'));
-          } else {
-            echo sprintf(TEXT_FAQ_6_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT'));
-          }
-	      ?>
+        <?php echo (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT))? sprintf(TEXT_FAQ_6_A, $currencies->format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT)) : TEXT_FAQ_6_B; ?>
       </div>
     </div>
   </div>
@@ -137,7 +125,7 @@
     </div>
     <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
       <div class="panel-body">
-        <?php echo sprintf(TEXT_FAQ_7, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE), tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE'));?>
+        <?php echo sprintf(TEXT_FAQ_7, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE));?>
       </div>
     </div>
   </div>
@@ -151,13 +139,7 @@
     </div>
     <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING == 'False')  {
-            echo sprintf(TEXT_FAQ_8_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING'));
-          } else {
-            echo sprintf(TEXT_FAQ_8_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING == 'False')? TEXT_FAQ_8_A : TEXT_FAQ_8_B; ?>
       </div>
     </div>
   </div>
@@ -171,13 +153,7 @@
     </div>
     <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX == 'False')  {
-            echo sprintf(TEXT_FAQ_9_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX'));
-          } else {
-            echo sprintf(TEXT_FAQ_9_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX == 'False')? TEXT_FAQ_9_A : TEXT_FAQ_9_B; ?>
       </div>
     </div>
   </div>
@@ -192,13 +168,7 @@
     </div>
     <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'False')  {
-            echo sprintf(TEXT_FAQ_10_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS'));
-          } else {
-            echo sprintf(TEXT_FAQ_10_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'False')? TEXT_FAQ_10_A : TEXT_FAQ_10_B; ?>
       </div>
     </div>
   </div>
@@ -212,13 +182,7 @@
     </div>
     <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED == 'False')  {
-            echo sprintf(TEXT_FAQ_11_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED'));
-          } else {
-            echo sprintf(TEXT_FAQ_11_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REDEEMED == 'False')? TEXT_FAQ_11_A : TEXT_FAQ_11_B; ?>
       </div>
     </div>
   </div>
@@ -232,13 +196,7 @@
     </div>
     <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM > 0 )  {
-            echo sprintf(TEXT_FAQ_12_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM'));
-          } else {
-            echo sprintf(TEXT_FAQ_12_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM > 0 )? TEXT_FAQ_12_A : TEXT_FAQ_12_B; ?>
       </div>
     </div>
   </div>
@@ -252,13 +210,7 @@
     </div>
     <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS > 0 )  {
-            echo sprintf(TEXT_FAQ_13_A, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS'));
-          } else {
-            echo sprintf(TEXT_FAQ_13_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS > 0 )? sprintf(TEXT_FAQ_13_A, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) : TEXT_FAQ_13_B; ?>
       </div>
     </div>
   </div>
@@ -274,30 +226,24 @@
       <div class="panel-body">
         <?php 
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) { 
-            $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
             $prods = null;
-            for ($i = 0; $i < count($p_ids); $i++) {
-              $prods_query = tep_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "'and products.products_id = '" . $p_ids[$i] . "'");
-              if ($list = tep_db_fetch_array($prods_query)) {
-                $prods .= '<li>' . $list['products_name'] .'</li>';
-              }
+            $prods_query = tep_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "'and products.products_id  in (" . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID . ")");
+            while ($list = tep_db_fetch_array($prods_query)) {
+              $prods .= '<li>' . $list['products_name'] .'</li>';
             }
-	
-            echo sprintf(TEXT_FAQ_14_A, $prods, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID'));
+            echo sprintf(TEXT_FAQ_14_A, $prods);
           }
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH)) {
-            $cat_path = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
             $cats = null;
-            for ($i = 0; $i < count($cat_path); $i++) {
-              $cat_path_query = tep_db_query("select * from categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id='" . $cat_path[$i] . "'");
-              if ($list = tep_db_fetch_array($cat_path_query)) {
-                $cats .= '<li>' . $list['categories_name'] .'</li>';
-              }
+            $cat_path_query = tep_db_query("select * from categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id in (" . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH . ")");
+            while ($list = tep_db_fetch_array($cat_path_query)) {
+              $cats .= '<li>' . $list['categories_name'] .'</li>';
             }
-            echo sprintf(TEXT_FAQ_14_B, $cats, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
+            echo sprintf(TEXT_FAQ_14_B, $cats);
           } else {
-            echo sprintf(TEXT_FAQ_14_C, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH'));
+            echo TEXT_FAQ_14_C;
           }
+          echo TEXT_FAQ_14_D;
 	      ?>
       </div>
     </div>
@@ -312,13 +258,7 @@
     </div>
     <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
       <div class="panel-body">
-        <?php 
-          if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED == 'True')  {
-            echo sprintf(TEXT_FAQ_15_A, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED'));
-          } else {
-            echo sprintf(TEXT_FAQ_15_B, tep_get_last_date('MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED'));
-          }
-	      ?>
+        <?php echo (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEMPTION_DISCOUNTED == 'True')? TEXT_FAQ_15_A : TEXT_FAQ_15_B; ?>
       </div>
     </div>
   </div>
