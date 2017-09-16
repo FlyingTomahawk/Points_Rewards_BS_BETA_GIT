@@ -39,6 +39,8 @@ To do list and tasks asigend:
   - point module for core product info DONE 12/09/2017 @raiwa
   
 - clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
+  - remove "last modfied" DONE 16/09/2017 @raiwa
+  - fix restricted products and categories listing DONE 16/09/2017 @raiwa
 
 - alternative fix for bug 2 asigned DONE (needs hardcore check) @raiwa 15/09/2017
   - create payment module "points"
@@ -56,6 +58,11 @@ To do list and tasks asigend:
   - 5 fixed 13/09/2017 @raiwa
   - 6 fixed 14/09/2017 @LeeFoster
   - 7 fixed 15/09/2017 @raiwa
+  - 8 fixed 15/09/2017 @raiwa
+  - 9 fixed 15/09/2017 @raiwa
+  
+- revise other languages
+- add other language translations ?
 
 - add installation script to header tag module (hooks register and calls) 
 
