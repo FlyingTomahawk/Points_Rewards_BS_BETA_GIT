@@ -10,7 +10,7 @@ To do list and tasks asigend:
 
 - create header tag module: (will begin with this 11/09/2017 @raiwa)
 
-    - add installation scripts for database DONE 11/09/2017 @raiwa
+    <s>- add installation scripts for database DONE 11/09/2017 @raiwa
     - add configuration entries DONE 11/09/2017 @raiwa
     - change all configuration constants to ht constants DONE 11/09/2017 @raiwa
     - Replace all "true/false" to core spelling "True/False" DONE 11/09/2017 @raiwa
@@ -18,8 +18,8 @@ To do list and tasks asigend:
       - logoff.php DONE 11/09/2017 @raiwa
       - product_reviews_write.php first part DONE 11/09/2017 @raiwa
       - checkout_confirmation.php DONE 12/09/2017 @raiwa
-      - checkout_payment.php javascript 13/09/2017 @raiwa
-    - add language definitions to header tag language file where possible
+      - checkout_payment.php DONE javascript 13/09/2017 @raiwa</s>
+    - add language definitions to header tag/hook language file where possible
 
 - create hook:
 
