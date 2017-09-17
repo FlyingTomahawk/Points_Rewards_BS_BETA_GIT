@@ -77,9 +77,11 @@
   </div>
 </div>
 
+<!-- BOF POINTS REWARDS BS //-->
 <div class="row">
   <?php echo $oscTemplate->getContent('product_info_points'); ?>
 </div>
+<!-- EOF POINTS REWARDS BS //-->
 
 <?php
   if ($messageStack->size('product_action') > 0) {
