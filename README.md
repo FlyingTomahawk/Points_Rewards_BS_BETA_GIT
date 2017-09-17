@@ -32,29 +32,33 @@ To do list and tasks asigend:
     - checkout_process.php DONE 16/09/2017 @raiwa</s>
 
 - create modified content modules to replace core modules DONE 15/09/2017
-  - info box asigned DONE 15/09/2017 @Tsimi
+  <s>- info box asigned DONE 15/09/2017 @Tsimi
   - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned DONE 12/09/2017 @Tsimi 
   - shopping cart navbar module asigned DONE 13/09/2017 @Tsimi
   
 - create product info content module
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
-  - point module for core product info DONE 12/09/2017 @raiwa
+  - point module for core product info DONE 12/09/2017 @raiwa</s>
   
-- clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
+- create product reviews content modules
+  - point module for product_reviews.php asigned 17/09/2017 @LeeFoster
+  - point module for product_reviews_write.php  asigned 17/09/2017 @LeeFoster
+  
+<s>- clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
   - remove "last modfied" DONE 16/09/2017 @raiwa
-  - fix restricted products and categories listing DONE 16/09/2017 @raiwa
+  - fix restricted products and categories listing DONE 16/09/2017 @raiwa</s>
 
 - alternative fix for bug 2 asigned DONE (needs hardcore check) @raiwa 15/09/2017
-  - create payment module "points"
+  <s>- create payment module "points"
   - modify info box on checkout payment for payment module selection
   - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into hook.
-  - remove all related and obsolete changes in checkout_payment.php, checkout_confirmation_php and payment class
+  - remove all related and obsolete changes in checkout_payment.php, checkout_confirmation_php and payment class</s>
 
 - revise all html tags for BS integration
 
 - revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
-  - 1 fixed 12/09/2017 @LeeFoster and @Tsimi
+  <s>- 1 fixed 12/09/2017 @LeeFoster and @Tsimi
   - 2 fixed 13/09/2017 @LeeFoster
   - 3 fixed 12/09/2017 @LeeFoster and @Tsimi
   - 4 fixed 14/09/2017 @LeeFoster
@@ -62,11 +66,18 @@ To do list and tasks asigend:
   - 6 fixed 14/09/2017 @LeeFoster
   - 7 fixed 15/09/2017 @raiwa
   - 8 fixed 15/09/2017 @raiwa
-  - 9 fixed 15/09/2017 @raiwa
+  - 9 fixed 15/09/2017 @raiwa</s>
   
 - revise other languages
-- add other language translations ?
+  - english @LeeFoster ?
+  - german asigned @Tsimi 17/09/2017
+  - spanish asigned @raiwa 17/09/2017
+  
+- add other language translations
+  - english @LeeFoster ?
+  - german asigned @Tsimi 17/09/2017
+  - spanish asigned @raiwa 17/09/2017
 
-- add installation script to header tag module (hooks register and calls) 
+- add installation script to header tag module (hooks register and calls) asigned @raiwa
 
-- write new installation user guide. (PDF/WORD) native english speaker?
+- write new installation user guide. (PDF/WORD) native english speaker? @Tsimi/@LeeFoster?
