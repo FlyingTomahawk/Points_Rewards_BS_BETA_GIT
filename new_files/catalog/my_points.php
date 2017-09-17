@@ -105,6 +105,7 @@
 			$pending_points['points_comment'] = TEXT_DEFAULT_REDEEMED;
 		}
 		
+		$referred_name = null;
 		if ($pending_points['points_type'] == 'RF') {
 			$referred_name_query = tep_db_query("select customers_name from orders where orders_id = '" . (int)$pending_points['orders_id'] . "' limit 1");
 			$referred_name = tep_db_fetch_array($referred_name_query);
