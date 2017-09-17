@@ -24,18 +24,12 @@
 </div>
 
 <div class="contentContainer">
-<!-- // BOF POINTS REWARDS BS //-->
-<?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-?>
-	<div class="contentText">
-        	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link(FILENAME_MY_POINTS_HELP,'faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-      	</div>
-<?php
-  }
-?>
-<!-- // EOF POINTS REWARDS BS //-->
+
+<!-- BOF POINTS REWARDS BS //-->
+<div class="row">
+  <?php echo $oscTemplate->getContent('reviews_points'); ?>
+</div>
+<!-- EOF POINTS REWARDS BS //-->
 
 <?php
   $reviews_query_raw = "select r.reviews_id, SUBSTRING_INDEX(rd.reviews_text, ' ', 20) as reviews_text, r.reviews_rating, r.date_added, p.products_id, pd.products_name, p.products_image, r.customers_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and rd.languages_id = '" . (int)$languages_id . "' and reviews_status = 1 order by r.reviews_rating DESC";
