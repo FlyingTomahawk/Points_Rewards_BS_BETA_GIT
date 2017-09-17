@@ -407,14 +407,7 @@ SAVE AND CLOSE!
 CATALOG STEP = 15.   open catalog/includes/classes/payment.php
 This will add the check box error to the java payment error.
 
-FIND:
-
-               '  if (error == 1) {' . "\n" .
-			   
-REPLACE WITH:
-
-// POINTS REWARDS BS
-               '  if (error == 1 && submitter != 1) {' . "\n" .
+NOT REQUIRED ANY MORE. REPLACED BY POINTS PAYMENT MODULE.
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
