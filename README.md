@@ -32,6 +32,7 @@ To do list and tasks asigend:
     - checkout_process.php DONE 16/09/2017 @raiwa</s>
 
 - create modified content modules to replace core modules DONE 15/09/2017
+
   <s>- info box asigned DONE 15/09/2017 @Tsimi
   - info footer module DONE @LeeFoster 12/09/2017
   - shopping cart box asigned DONE 12/09/2017 @Tsimi 
