@@ -9,10 +9,17 @@
   Released under the GNU General Public License
 */
 
+// used in several places
+define('POINTS_HOOK_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
+
 // used in create account
 define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_WELCOME_POINTS', '<li><strong>Reward Point Program</strong> - As part of our Welcome to new customers, we have credited your %s with a total of %s Shopping Points worth %s .' . "\n" . 'Please refer to the %s as conditions may apply.');
 define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_ACCOUNT', 'Shopping Points Accout');
 define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_FAQ', 'Reward Point Program FAQ');
+
+// used in create account success
+define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
+define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
 
 // used in checkout_payment
 define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
