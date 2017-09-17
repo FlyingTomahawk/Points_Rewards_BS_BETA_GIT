@@ -6,11 +6,11 @@ To do list and tasks asigend:
 
 - fixes for undefined errors (already partly done, working on this 10/09/2017 @raiwa)
 
-- fixes for known bugs like the one posted by @LeeFoster (asigned to @Tsimi 11/09/2017)
+<s>- fixes for known bugs like the one posted by @LeeFoster (asigned to @Tsimi 11/09/2017) DONE
 
-- create header tag module: (will begin with this 11/09/2017 @raiwa)
+- create header tag module: (will begin with this 11/09/2017 @raiwa) DONE
 
-    <s>- add installation scripts for database DONE 11/09/2017 @raiwa
+    - add installation scripts for database DONE 11/09/2017 @raiwa
     - add configuration entries DONE 11/09/2017 @raiwa
     - change all configuration constants to ht constants DONE 11/09/2017 @raiwa
     - Replace all "true/false" to core spelling "True/False" DONE 11/09/2017 @raiwa
@@ -26,10 +26,10 @@ To do list and tasks asigend:
     add functions for the pages where it makes sense and remove code changes from core files
     add language definitions to hook language file and remove from core language files
     
-    - create_account.php DONE 13/09/2017 @raiwa
+    <s>- create_account.php DONE 13/09/2017 @raiwa
     - checkout_payment.php DONE 16/09/2017 @raiwa
     - checkout_confirmation.php DONE 16/09/2017 @raiwa
-    - checkout_process.php DONE 16/09/2017 @raiwa
+    - checkout_process.php DONE 16/09/2017 @raiwa</s>
 
 - create modified content modules to replace core modules DONE 15/09/2017
   - info box asigned DONE 15/09/2017 @Tsimi
