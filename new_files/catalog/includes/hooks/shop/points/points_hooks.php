@@ -1,7 +1,7 @@
 <?php
 /*
   $Id: points_hooks.php
-  $Loc: catalog/includes/languages/english/hooks/shop/points/
+  $Loc: catalog/includes/hooks/shop/points/
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -9,29 +9,138 @@
   Released under the GNU General Public License
 */
 
-// used in several places
-define('POINTS_HOOK_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
+class hook_shop_points_points_hooks {
 
-// used in create account
-define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_WELCOME_POINTS', '<li><strong>Reward Point Program</strong> - As part of our Welcome to new customers, we have credited your %s with a total of %s Shopping Points worth %s .' . "\n" . 'Please refer to the %s as conditions may apply.');
-define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_ACCOUNT', 'Shopping Points Accout');
-define('POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_FAQ', 'Reward Point Program FAQ');
+  function listen_PointsCreateAccountMailMod() {
+    global $gender, $lastname, $firstname, $customer_id, $currencies, $email_text, $language;
+    
+    require('includes/languages/' . $language . '/hooks/shop/points/points_hooks.php');
+    
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
+      tep_add_welcome_points($customer_id);
+	      
+	    $points_account = '<a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><b><u>' . POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_ACCOUNT . '</u></b></a>.';
+	    $points_faq = '<a href="' . tep_href_link('my_points_help.php', '', 'NONSSL') . '"><b><u>' . POINTS_HOOK_CREATE_ACCOUNT_EMAIL_POINTS_FAQ . '</u></b></a>.';
+	    $email_text .= sprintf(POINTS_HOOK_CREATE_ACCOUNT_EMAIL_WELCOME_POINTS , $points_account, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT)), $points_faq) ."\n\n";
+    }
+  }
+  
+  function listen_PointsCheckoutPayment() {
+    global $cart, $language;
+        
+    require('includes/languages/' . $language . '/hooks/shop/points/points_hooks.php');
 
-// used in create account success
-define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
-define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
+      $cart_show_total= $cart->show_total();
+      echo points_selection($cart_show_total);
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+        echo referral_input();
+      }
+    }
+  }
 
-// used in checkout_payment
-define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
-define('TABLE_HEADING_REFERRAL', 'Referral System');
-define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
-define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_PAYING',  'Please select points payment to pay your entire order with your points. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
-define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
+  function listen_PointsCheckoutConfirm() {
+    global $language, $session, $customer_id, $order, $payment, $$payment, $messageStack, $customer_shopping_points_spending, $customer_referral;
+        
+    require('includes/languages/' . $language . '/hooks/shop/points/points_hooks.php');
 
-// used in checkout_confirmation.php
-  define('POINTS_HOOKS_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');
-  define('POINTS_HOOK_ERROR_NOT_VALID', 'The referral email does not appear to be valid - please make any necessary corrections.');
-  define('POINTS_HOOK_ERROR_NOT_FOUND', 'The referral email address you entered was not found.');
-  define('POINTS_HOOK_ERROR_SELF', 'Sorry you can not refer yourself.');
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
+      if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
+        $customer_shopping_points_spending = false;
+        // This if sentence should include check for amount of points on account compared to the transferred point from checkout_payment.php
+        // Possible Hack Fix included
+        if (tep_calc_shopping_pvalue($_POST['customer_shopping_points_spending']) < $order->info['total'] && !is_object($$payment) || (tep_get_shopping_points($customer_id) < $_POST['customer_shopping_points_spending'])) {
+          $customer_shopping_points_spending = false;
+          tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(POINTS_HOOKS_ERROR_POINTS_NOT), 'SSL'));
+        } else {
+          $customer_shopping_points_spending = $_POST['customer_shopping_points_spending'];
+          if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+        }
+      }
+
+      //To ensure only the first order of a new customer is entitled to grant point to his/her referrer. Otherwise, a hacker might hard-code the email address of  a referrer and cheat for point on every single order the new customer made.
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
+        if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
+          $customer_referral = false;
+          $check_mail = trim($_POST['customer_referred']);
+          if (tep_validate_email($check_mail) == false) {
+            tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(POINTS_HOOK_ERROR_NOT_VALID), 'SSL'));
+          } else {
+            $valid_referral_query = tep_db_query("select customers_id from customers where customers_email_address = '" . $check_mail . "' limit 1");
+            $valid_referral = tep_db_fetch_array($valid_referral_query);
+            if (!tep_db_num_rows($valid_referral_query)) {
+              tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(POINTS_HOOK_ERROR_NOT_FOUND), 'SSL'));
+            }
+    
+            if ($check_mail == $order->customer['email_address']) {
+              tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(POINTS_HOOK_ERROR_SELF), 'SSL'));
+            } else {
+              $customer_referral = $valid_referral['customers_id'];
+              if (!tep_session_is_registered('customer_referral')) tep_session_register('customer_referral');
+            }
+          }
+        }
+      }
+    }
+
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
+      if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+      if (isset($_POST['customer_shopping_points_spending']) && tep_not_null($_POST['customer_shopping_points_spending'])) {
+        $customer_shopping_points_spending = tep_db_prepare_input($_POST['customer_shopping_points_spending']);
+      }
+      if (isset($_POST['customer_shopping_points_points']) && tep_not_null($_POST['customer_shopping_points_points']) && $payment == 'points') {
+        $customer_shopping_points_spending = tep_db_prepare_input($_POST['customer_shopping_points_points']);
+      }
+    }
+  }
+
+  function listen_PointsCheckoutProcessAddPoints() {
+    global $order, $customer_shopping_points_spending, $customer_id, $insert_id, $session, $customer_referral;
+        
+    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
+// customer pending points added 
+      if ($order->info['total'] > 0) {
+	      $points_toadd = get_points_toadd($order);
+	      $points_comment = 'TEXT_DEFAULT_COMMENT';
+	      $points_type = 'SP';
+	      if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
+		      tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer referral points added 
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
+	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
+	      if (!tep_db_num_rows($referral_twice_query)) {
+		      $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
+		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
+		      $points_type = 'RF';
+		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer shoppping points account balanced 
+      if ($customer_shopping_points_spending) {
+	      tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
+      }
+    }
+  }
+    
+  function listen_PointsCheckoutProcessUnregister() {
+    global $session;
+        
+    if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
+    if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+    if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
+  }
+
+  function listen_PointsCreateAccountSuccess() {
+    global $language, $request_type, $currencies;
+
+    require('includes/languages/' . $language . '/hooks/shop/points/points_hooks.php');
+
+	  if ( MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True' && MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0 ) {
+	    echo sprintf(POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT)));
+	    echo sprintf(POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','#heading13', $request_type) . '" title="' . POINTS_HOOK_INFORMATION_MY_POINTS_HELP . '">' . POINTS_HOOK_INFORMATION_MY_POINTS_HELP . '</a>');
+	  }
+  }
+
+} // end class
