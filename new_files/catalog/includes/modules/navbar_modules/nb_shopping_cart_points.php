@@ -42,7 +42,7 @@
     }
 
     function getOutput() {
-      global $oscTemplate, $cart, $currencies;
+      global $oscTemplate, $cart, $currencies, $customer_id;
       
       ob_start();
       require('includes/modules/navbar_modules/templates/shopping_cart_points.php');
