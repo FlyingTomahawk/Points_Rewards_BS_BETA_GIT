@@ -225,21 +225,24 @@ with a link to the points page and points FAQ page.
 
 FIND:
 
+  require('includes/application_top.php');
+  
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
+
+FIND:
+
 <div class="contentContainer">
   <div class="contentText">
     <?php echo TEXT_ACCOUNT_CREATED; ?>
   
 ADD AFTER IT:
 
-<!-- BOF POINTS REWARDS BS -->
-	  <hr>
-	<?php 
-	   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
-			echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT))); 
-			echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); 
-	    }
-	?>               
-<!-- EOF POINTS REWARDS BS -->	
+<!-- POINTS REWARDS BS -->
+	  <?php echo $OSCOM_Hooks->call('points', 'PointsCreateAccountSuccess');	?>               
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -373,17 +376,7 @@ SAVE AND CLOSE!
 CATALOG STEP = 13.    open catalog/includes/modules/boxes/templates/information.php
 This will add the link to My Points FAQ
 
-FIND:
-
-<li><a href="<?php echo tep_href_link('conditions.php'); ?>"><?php echo MODULE_BOXES_INFORMATION_BOX_CONDITIONS; ?></a></li>
-
-ADD AFTER IT:
-
-<!-- BOF POINTS REWARDS BS //-->
-	  <li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo BOX_INFORMATION_MY_POINTS_HELP; ?></a></li> 
-<!-- EOF POINTS REWARDS BS //-->
-
-SAVE AND CLOSE!
+MOVED INTO NEW BOXES MODULE
 
 ------------------------------------------------------------------------------------------
 
@@ -393,8 +386,6 @@ This will only show up when a customer points is bigger then 0
 
 MOVED INTO NEW BOXES MODULE
 						 
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 15.   open catalog/includes/classes/payment.php
@@ -402,7 +393,6 @@ This will add the check box error to the java payment error.
 
 NOT REQUIRED ANY MORE. REPLACED BY POINTS PAYMENT MODULE.
 
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
                                           
 CATALOG STEP = 16.   open catalog/includes/languages/english.php
@@ -410,20 +400,7 @@ This will define the language used for My Points FAQ link in information box
 and the language used for error checker used druing checkout procces
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-MOVED INTO HOOK language file
-MOVED INTO HT MODULE language file
-define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
-MOVED INTO HT MODULE language file
-MOVED INTO HT MODULE language file
-MOVED INTO HT MODULE language file
-MOVED INTO BOXES MODULE language file
-MOVED INTO BOXES MODULE language file
-MOVED INTO BOXES MODULE language file
-MOVED INTO REVIEWS MODULE language file
-// EOF POINTS REWARDS BS
+MOVED MODULES/HOOKS LANGUAGE FILES
 
  SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -432,14 +409,7 @@ CATALOG STEP = 17.   open catalog/includes/languages/english/account.php
 This will define the language used for My Points box links in customer account page.
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('MY_POINTS_TITLE', 'My Points and Redemptions');
-define('MY_POINTS_VIEW', 'View my Points Balance and Points received.');
-define('MY_POINTS_VIEW_HELP', 'Reward Point Program FAQ.');
-define('MY_POINTS_CURRENT_BALANCE', 'Shopping Points Balance : %s points. Valued at : %s ');
-// EOF POINTS REWARDS BS
+MOVED TO PAGE LANGUAGE FILE
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -464,16 +434,8 @@ CATALOG STEP = 20.  open catalog/includes/languages/english/create_account_succe
 This will define the language used for Welcome Points offerd by admin if enabled..
 (Please translate and repeat this step to any of your other languages)
 
-Note: This option disabled by default. If you sure you don't want to use this option ever you can skip this step.
+MOVED INTO HOOK LANGUAGE FILE
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('TEXT_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
-define('TEXT_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 21.   open catalog/includes/languages/english/product_info.php
