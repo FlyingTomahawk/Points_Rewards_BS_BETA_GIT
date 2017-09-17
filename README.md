@@ -78,6 +78,8 @@ To do list and tasks asigend:
   - english @LeeFoster ?
   - german asigned @Tsimi 17/09/2017
   - spanish asigned @raiwa 17/09/2017
+  
+- add version, developer and copyright info to header comments in all files. @Tsimi/@LeeFoster?
 
 - add installation script to header tag module (hooks register and calls) asigned @raiwa
 
