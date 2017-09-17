@@ -413,7 +413,7 @@ and the language used for error checker used druing checkout procces
 ADD THIS ADD THE END OF YOUR FILE
 
 // BOF POINTS REWARDS BS
-define('BOX_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
+MOVED INTO HOOK language file
 MOVED INTO HT MODULE language file
 define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
 MOVED INTO HT MODULE language file
@@ -422,7 +422,7 @@ MOVED INTO HT MODULE language file
 MOVED INTO BOXES MODULE language file
 MOVED INTO BOXES MODULE language file
 MOVED INTO BOXES MODULE language file
-define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
+MOVED INTO REVIEWS MODULE language file
 // EOF POINTS REWARDS BS
 
  SAVE AND CLOSE!
