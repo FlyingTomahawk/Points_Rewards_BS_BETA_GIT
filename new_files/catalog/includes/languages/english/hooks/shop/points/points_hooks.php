@@ -29,3 +29,9 @@ define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points a
 define('TEXT_REDEEM_SYSTEM_PAYING',  'Please select points payment to pay your entire order with your points. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
 define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
 define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
+
+// used in checkout_confirmation.php
+  define('POINTS_HOOKS_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');
+  define('POINTS_HOOK_ERROR_NOT_VALID', 'The referral email does not appear to be valid - please make any necessary corrections.');
+  define('POINTS_HOOK_ERROR_NOT_FOUND', 'The referral email address you entered was not found.');
+  define('POINTS_HOOK_ERROR_SELF', 'Sorry you can not refer yourself.');
