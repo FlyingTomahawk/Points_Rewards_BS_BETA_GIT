@@ -42,7 +42,7 @@ To do list and tasks asigend:
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
   - point module for core product info DONE 12/09/2017 @raiwa
   
-- create reviews content module DONE 17/09/2017 @raiwa</s>
+- create reviews content module DONE 17/09/2017 @raiwa
   - include it in product_reviews.php, product_reviews_write.php and reviews.php DONE 18/09/2017
 
 - clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
