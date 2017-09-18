@@ -40,15 +40,12 @@ To do list and tasks asigend:
   
 - create product info content module
   - point module for Modular product info by kymation DONE 12/09/2017 @LeeFoster
-  - point module for core product info DONE 12/09/2017 @raiwa</s>
+  - point module for core product info DONE 12/09/2017 @raiwa
   
-- create product reviews content modules
-  - point module for product_reviews.php asigned 17/09/2017 @LeeFoster
-  - point module for product_reviews_write.php  asigned 17/09/2017 @LeeFoster
-  
-<s>- create reviews content module DONE 17/09/2017 @raiwa</s>
+- create reviews content module DONE 17/09/2017 @raiwa</s>
+  - include it in product_reviews.php, product_reviews_write.php and reviews.php DONE 18/09/2017
 
-<s>- clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
+- clean up my_points_help.php language file asigend DONE 14/09/2017 @raiwa
   - remove "last modfied" DONE 16/09/2017 @raiwa
   - fix restricted products and categories listing DONE 16/09/2017 @raiwa</s>
 
