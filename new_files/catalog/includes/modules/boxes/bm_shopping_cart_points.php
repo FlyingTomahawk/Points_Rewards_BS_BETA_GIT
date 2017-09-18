@@ -32,7 +32,7 @@
     }
 
     function execute() {
-      global $cart, $new_products_id_in_cart, $currencies, $oscTemplate;
+      global $oscTemplate, $cart, $currencies, $new_products_id_in_cart, $customer_id;
 
       $cart_contents_string = '';
 
@@ -65,7 +65,7 @@
 		  if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True') {
 				  $has_points = tep_get_shopping_points($customer_id);
 				  if ($has_points > 0) {
-						  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. TEXT_POINTS_BALANCE . '</a></strong></div>' . TEXT_POINTS . '&nbsp;' . number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '<br />' .  TEXT_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
+						  $cart_contents_string .= '<li class="text-right"><div class="text-center"><strong><a href="' . tep_href_link('my_points.php', '', 'SSL') . '"><br />'. MODULE_BOXES_SHOPPING_CART_POINTS_POINTS_BALANCE . '</a></strong></div>' . MODULE_BOXES_SHOPPING_CART_POINTS_POINTS . '&nbsp;' . number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES) . '<br />' .  MODULE_BOXES_SHOPPING_CART_POINTS_VALUE . '&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($has_points)) . '</li>';
 				  }   
 		  }
 

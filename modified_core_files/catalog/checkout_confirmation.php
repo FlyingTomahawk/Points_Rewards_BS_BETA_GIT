@@ -12,6 +12,9 @@
 
   require('includes/application_top.php');
 
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
@@ -43,7 +46,6 @@
     $comments = tep_db_prepare_input($_POST['comments']);
   }
 
-
 // load the selected payment module
   require('includes/classes/payment.php');
   $payment_modules = new payment($payment);
@@ -53,15 +55,12 @@
 
   $payment_modules->update_status();
 
-#####  BOF POINTS REWARDS BS  #######
-  if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
-  if (isset($_POST['customer_shopping_points_spending']) && tep_not_null($_POST['customer_shopping_points_spending'])) {
-    $customer_shopping_points_spending = tep_db_prepare_input($_POST['customer_shopping_points_spending']);
-  }
-  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
+
+  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
-#####  EOF POINTS REWARDS BS  #######
   
   if (is_array($payment_modules->modules)) {
     $payment_modules->pre_confirmation_check();

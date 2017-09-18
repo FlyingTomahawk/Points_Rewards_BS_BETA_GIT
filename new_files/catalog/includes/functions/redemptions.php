@@ -79,18 +79,11 @@
 // products restriction by model.
   function get_redemption_rules($order) {
 	  
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)||tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)||tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH)) {
-		  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL))   
-          for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-	          if (!(substr($order->products[$i]['model'], 0, 10) == MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
-		          return false;
-	          }
-             return true;
-          }
+	  if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) || tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) ) {
           
           if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID))   
 		  for ($i=0; $i<sizeof($order->products); $i++) {
-			  $p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
+			  $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
 			  for ($ii = 0; $ii < count($p_ids); $ii++) {
 				  if ($order->products[$i]['id'] == $p_ids[$ii]) {
 					  return true;
@@ -100,8 +93,8 @@
 		  
 		  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH))   
 		  for ($i=0; $i<sizeof($order->products); $i++) {
-			  $cat_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
-			  $sub_cat_ids = split("[_]", tep_get_product_path($order->products[$i]['id']));
+			  $cat_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
+			  $sub_cat_ids = explode("[_]", tep_get_product_path($order->products[$i]['id']));
 			   for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
 				   for ($ii = 0; $ii < count($cat_ids); $ii++) {
 					   if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
@@ -232,15 +225,6 @@
 		  tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '" . $welcome_points . "' where customers_id = '" . (int)$customer_id . "' limit 1");
 	  }
   }
-
-// get the last update value for any key
-  function tep_get_last_date($key) {
-	  
-	  $key_date_query = tep_db_query("select last_modified from configuration where configuration_key = '". $key ."' limit 1");
-      $key_date = tep_db_fetch_array($key_date_query);
-
-      return tep_date_long($key_date['last_modified']);
-  }
   
 // products discounted restriction if enabled.
   function get_points_rules_discounted($order) {
@@ -286,21 +270,10 @@
           }
       }
       
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
-	      $model_points = 0;
-	      for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-              if ($order->products[$i]['model'] != MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL) {
-	              $model_price = $order->products[$i]['price'];
-                  $model_points = $model_points + (($model_price*$order->products[$i]['qty'])/MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE);
-                  $max_points = $max_points - (($model_price*$order->products[$i]['qty'])/MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_REDEEM_POINT_VALUE);
-              }
-          }
-      }
-      
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
+      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID)) {
 	      $pid_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
-		      $p_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
+		      $p_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID);
 		      for ($ii = 0; $ii < count($p_ids); $ii++) {
 			      if ($order->products[$i]['id'] == $p_ids[$ii]) {
 				      $pid_points = ($order->products[$i]['price']*$order->products[$i]['qty'])+($order->info['shipping_cost']+$order->info['tax']);
@@ -310,11 +283,11 @@
 	      }
       }
       
-      if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_MODEL)) {
+      if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH) && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PID) ) {
 	      $path_points = 0;
 	      for ($i=0; $i<sizeof($order->products); $i++) {
-		      $cat_ids = split("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
-		      $sub_cat_ids = split("[_]", tep_get_product_path($order->products[$i]['id']));
+		      $cat_ids = explode("[,]", MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_RESTRICTION_PATH);
+		      $sub_cat_ids = explode("[_]", tep_get_product_path($order->products[$i]['id']));
 		      for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
 			      for ($ii = 0; $ii < count($cat_ids); $ii++) {
 				      if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
@@ -332,36 +305,50 @@
       return $max_points;
   }
 
-  function points_selection($cart_show_total) {
-	  global $currencies, $order;
+  function check_points_redemtion ($cart_show_total) {
+	  global $order, $customer_shopping_points;
 	  
 	  if (($customer_shopping_points = tep_get_shopping_points()) && $customer_shopping_points > 0) {
 		  if (get_redemption_rules($order) && (get_points_rules_discounted($order) || get_cart_mixed($order))) {
 			  if ($customer_shopping_points >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_LIMIT_VALUE) {
 
 				 if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT == '') || ($cart_show_total >= MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MIN_AMOUNT) ) {
-					  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
-					  
 					  $max_points = calculate_max_points($customer_shopping_points);
+				   return $max_points;
+				 }
+			  }
+		  }
+	  }
+  }
+
+  function points_selection($cart_show_total) {
+	  global $currencies, $order, $points, $customer_shopping_points;
+	  
+	  if ( tep_not_null($max_points = check_points_redemtion ($cart_show_total)) ) {
+					  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+					  $customer_shopping_points_spending = $max_points;
+					  $note = null;
 					  if ($order->info['total'] > tep_calc_shopping_pvalue($max_points)) {
 						  $note = '<br /><small>' . TEXT_REDEEM_SYSTEM_NOTE .'</small>';
 					  }
 					  
-					  $customer_shopping_points_spending = $max_points;
 ?>
 		<h2><?php echo TABLE_HEADING_REDEEM_SYSTEM; ?></h2>
           <div class="alert alert-info"> 
                 <?php printf(TEXT_REDEEM_SYSTEM_START, $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points)), $currencies->format($order->info['total']). $note); ?><br />
-                <?php printf(TEXT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points))); ?>   
-		     <div class="pull-right"><?php echo tep_draw_checkbox_field('customer_shopping_points_spending', $customer_shopping_points_spending,'','onclick="submitFunction()"'); ?></div>
+                <?php
+                if ($points->enabled == true) {
+                  printf(TEXT_REDEEM_SYSTEM_PAYING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                } else {
+                  printf(TEXT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                  echo '<div class="pull-right">' . tep_draw_checkbox_field('customer_shopping_points_spending', $customer_shopping_points_spending,'','onclick="submitFunction()"') . '</div>';
+                }
+                ?>   
 		  </div>
 <div class="clearfix"></div>
 <?php 
 				  }
 			  }
-		  }
-	  }
-  }
   
   function referral_input() {
 	  

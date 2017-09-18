@@ -85,60 +85,47 @@ define('TEXT_FAQ_4', 'If you have a balance in your Shopping Points Account, you
 
 // FAQ5 - conditionnal depending on the point limit value set in admin
 define('TEXT_FAQ_5_A', 'Currently, a minimum balance of <b>%s</b> points <b>(%s)' . '</b> is required before you can redeem them.
-	                      <br>We strongly advise you to check this page often as we may make changes to this policy.
-	                      <p align="right"><small>Last updated: %s</small></p>');
+	                      <br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_5_B', 'Currently, no minimum balance is required to redeem your points.  Please note, you\'ll still have to select another payment method if there isn\'t enough in your Shopping Points account to cover the cost of your purchase.<br>
-	                      <br>We strongly advise you to check this page often as we may make changes to this policy.
-	                      <p align="right"><small>Last updated: %s</small></p>');
+	                      <br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ6 - conditionnal depending on the point min amount value set in admin
 define('TEXT_FAQ_6_A', 'Currently, a minimum of <b>%s</b> in total (per purchase) is required before any Points Redemptions can take place.
-	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                      <p align="right"><small>Last updated: %s</small></p>');
+	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_6_B', 'Currently, no Minimum Purchase Amount required to redeem your points.
-	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                      <p align="right"><small>Last updated: %s</small></p>');
+	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ7
 define('TEXT_FAQ_7', 'A maximum of <b>%s</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE)) . ')' . '</b> is allowed to redeem per order.
-                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-                      <p align="right"><small>Last updated: %s</small></p>');
+                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ8 - conditionnal depending on the use point for shipping value set in admin
-define('TEXT_FAQ_8_A', 'No. When calculating the amount of points earned, the shipping fees are excluded.
-	                    <p align="right"><small>Last updated %s</small></p>');
+define('TEXT_FAQ_8_A', 'No. When calculating the amount of points earned, the shipping fees are excluded.');
 define('TEXT_FAQ_8_B', 'Yes. When calculating the amount of points earned, the shipping fees are included.
-	                    <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                    <p align="right"><small>Last updated: %s</small></p>');
+	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ9 - conditionnal depending on the value set in admin for ginving point for tax value
 define('TEXT_FAQ_9_A', 'No. When calculating the amount of points earned, the taxes are excluded.
-	                    <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                    <p align="right"><small>Last updated: %s</small></p>');
+	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_9_B', 'Yes. When calculating the amount of points earned, the taxes are included.
-	                    <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                    <p align="right"><small>Last updated: %s</small></p>');
+	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ10 - conditionnal depending on value set in admin for giving point on specials
 define('TEXT_FAQ_10_A', 'No. When calculating the amount of points earned, all items which have been discounted are excluded.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_10_B', 'Yes. When calculating the amount of points earned, all items which have been discounted are included.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ11
 define('TEXT_FAQ_11_A', 'No. When calculating the amount of points earned. Any purchase made by redeeming points are excluded.
-	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                       <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_11_B', 'Yes. Please note, any purchase made by redeeming points will only be rewarded with additional points for the amount spent other then points.
-	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                       <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ12
 define('TEXT_FAQ_12_A', '<em>"Word-of-mouth" advertising is the most powerful form of advertising there is.</em>
@@ -146,58 +133,44 @@ define('TEXT_FAQ_12_A', '<em>"Word-of-mouth" advertising is the most powerful fo
 	                       <br>When referred friend place an order, during the checkout procces on the same page that you select a payment method there will be a box to enter a Referral code .
 	                       Your Referral code is your registered email address with us.
 	                       <br>When we receive your referred friends completed and approved order, we will reward your Points account with <b>' .  MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM . '</b> points .
-	                       <br>The more first time orders we receive from your referrals, the more reward points you will receive.
-	                       <p align="right"><small>Last updated: %s</small></p>');
+	                       <br>The more first time orders we receive from your referrals, the more reward points you will receive.');
 
-define('TEXT_FAQ_12_B', 'Currently this feature is disabled.
-	                       <p align="right"><small>Last updated: %s</small></p>');
+define('TEXT_FAQ_12_B', 'Currently this feature is disabled.');
 
 // FAQ13
 define('TEXT_FAQ_13_A', '<em>"Writing Review is ego boost knowing others read your opinions, and maybe even take your advice."</em>
-                       <br>Sharing Your Product Reviews will assist us to continually improve our offers and service to you as well as helps others to choose the right products.
-                       <br>We would like to thank you for helpful review that you gave us, therefore for every quality review, we will reward your Points account with <b>%s</b> worth of points .
-                       <br>Your Review must meet all of the following conditions:
-                       <ul>
-                          <li>Your Reviews must be original.</li>
-                          <li>Reviews must be focused and concise on the product under review.</li>
-                          <li>Reviews should not duplicate content already published.</li>
-                          <li>Be truthful and objective.</li>
-                          <li>Reviews should not include posts that have spam, commercial or advertising content or links.</li>
-                          <li>Reviews should not abuse, harass, or threaten another\'s personal safety .</li>
-                       </ul>
-                       ' . STORE_NAME .' reserves the right to refuse or remove any review that does not comply with above conditions.
-                       <br>' . STORE_NAME .' staff reserves the right to correct misspelled words, grammatical errors.
-                       <br>' . STORE_NAME .' is not responsible or liable in any way for ratings and reviews posted by its customers.
-                       <p align="right"><small>Last updated: %s</small></p>');
+                         <br>Sharing Your Product Reviews will assist us to continually improve our offers and service to you as well as helps others to choose the right products.
+                         <br>We would like to thank you for helpful review that you gave us, therefore for every quality review, we will reward your Points account with <b>%s</b> worth of points .
+                         <br>Your Review must meet all of the following conditions:
+                         <ul>
+                           <li>Your Reviews must be original.</li>
+                           <li>Reviews must be focused and concise on the product under review.</li>
+                           <li>Reviews should not duplicate content already published.</li>
+                           <li>Be truthful and objective.</li>
+                           <li>Reviews should not include posts that have spam, commercial or advertising content or links.</li>
+                           <li>Reviews should not abuse, harass, or threaten another\'s personal safety .</li>
+                         </ul>
+                         ' . STORE_NAME .' reserves the right to refuse or remove any review that does not comply with above conditions.
+                         <br>' . STORE_NAME .' staff reserves the right to correct misspelled words, grammatical errors.
+                         <br>' . STORE_NAME .' is not responsible or liable in any way for ratings and reviews posted by its customers.');
 
-define('TEXT_FAQ_13_B', 'Currently this feature is disabled.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+define('TEXT_FAQ_13_B', 'Currently this feature is disabled.');
 
 // FAQ14
-define('TEXT_FAQ_14_A', 'Currently, only items which have the model <b>[%s]</b> can be purchased using your points balance.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
-	
-define('TEXT_FAQ_14_B', 'Currently, only  the following items can be purchased using your points balance.<ul>%s</ul>
-  	                     <br>We strongly advise you to check this page often as we may make changes to this policy.
-  	                     <p align="right"><small>Last updated: %s</small></p>');
+define('TEXT_FAQ_14_A', 'Currently, only  the following items can be purchased using your points balance.<ul>%s</ul>');
 
-define('TEXT_FAQ_14_C', 'Currently, only items in the following categories and their corresponding sub-categories can be purchased using your points balance.<ul>%s</ul>
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+define('TEXT_FAQ_14_B', 'Currently, only items in the following categories and their corresponding sub-categories can be purchased using your points balance.<ul>%s</ul>');
 
-define('TEXT_FAQ_14_D', 'Currently, no restrictions apply to what items may be purchased using your points balance.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+define('TEXT_FAQ_14_C', 'Currently, no restrictions apply to what items may be purchased using your points balance.');
+
+define('TEXT_FAQ_14_D', '<br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ15
 define('TEXT_FAQ_15_A', 'Currently, no items which have been discounted can be purchased using your points balance.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 define('TEXT_FAQ_15_B', 'Currently, no restrictions apply to the kind of items which may be purchased using your points balance.
-	                     <br><br>We strongly advise you to check this page often as we may make changes to this policy.
-	                     <p align="right"><small>Last updated: %s</small></p>');
+	                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ16
 define('TEXT_FAQ_16', '

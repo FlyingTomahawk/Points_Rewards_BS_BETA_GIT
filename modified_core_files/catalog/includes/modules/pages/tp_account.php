@@ -44,7 +44,7 @@
 
     function build() {
       global $oscTemplate;
-      global $customer_id, $currencies; // POINTS REWARDS BS
+      global $language, $customer_id, $currencies, $request_type; // POINTS REWARDS BS
       
       foreach ( $oscTemplate->_data[$this->group] as $key => $row ) {
         $arr[$key] = $row['sort_order'];
@@ -76,17 +76,19 @@
 
 // BOF POINTS REWARDS BS //-->
     if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
+      
+    require('includes/languages/' . $language . '/modules/pages/tp_account.php');
 		
-	$output .= '<h2>' . MY_POINTS_TITLE . '</h2>
+	$output .= '<h2>' . TP_ACCOUNT_MY_POINTS_TITLE . '</h2>
            <div class="contentText">  
 			  <ul class="list-unstyled">';
 
   $has_points = tep_get_shopping_points($customer_id);
   if ($has_points > 0) {
-	  $output .= '<h4><span class="label label-info">' . sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
+	  $output .= '<h4><span class="label label-info">' . sprintf(TP_ACCOUNT_MY_POINTS_CURRENT_BALANCE, number_format($has_points, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
   }
-	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', 'SSL') . '">' . MY_POINTS_VIEW . '</a></li>    
-				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', 'SSL') . '">' . MY_POINTS_VIEW_HELP . '</a></li>
+	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW . '</a></li>    
+				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW_HELP . '</a></li>
 			  </ul>
            </div>'; 
   }

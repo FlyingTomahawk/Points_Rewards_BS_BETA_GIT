@@ -12,6 +12,9 @@
 
   require('includes/application_top.php');
 
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
@@ -85,14 +88,7 @@
 
   require('includes/template_top.php');
 ?>
-<script>
-/*  BOF POINTS REWARDS BS  */
-var submitter = null;
-function submitFunction() {
-   submitter = 1;
-   }
-/*  EOF POINTS REWARDS BS  */
-</script>
+
 <?php echo $payment_modules->javascript_validation(); ?>
 
 <div class="page-header">
@@ -244,19 +240,11 @@ function submitFunction() {
     </table>
 
   </div>
-<!-- BOF POINTS REWARDS BS -->
+  
 <?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-	  //echo points_selection();
-	  $cart_show_total= $cart->show_total();
-	  echo points_selection($cart_show_total);
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
-		  echo referral_input();
-	  }
-  }
+// POINTS REWARDS BS
+   echo $OSCOM_Hooks->call('points', 'PointsCheckoutPayment');
 ?>
-<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-<!-- EOF POINTS REWARDS BS -->
 
   <hr>
 

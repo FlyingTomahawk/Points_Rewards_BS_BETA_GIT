@@ -110,10 +110,29 @@ SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 2.   open catalog/checkout_confirmation.php
-This will add an errors checker to checkout_confirmation page.
+This will add hook register and call to checkout_confirmation page.
 
-MOVED INTO HT MODULE
+**This step has 2 parts
 
+FIND:
+
+  require('includes/application_top.php');
+
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
+FIND:
+
+  $payment_modules->update_status();
+
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
+
+SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 3.   open catalog/checkout_payment.php
@@ -124,19 +143,12 @@ allow points to be used as payment method.
 
 FIND:
 
-  require('includes/template_top.php');
-?>
+  require('includes/application_top.php');
 
 ADD AFTER IT:
 
-<script type="text/javascript">
-// BOF POINTS REWARDS BS
-var submitter = null;
-function submitFunction() {
-   submitter = 1;
-   }
-// EOF POINTS REWARDS BS
-</script>
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
 
 FIND:
 
@@ -151,19 +163,10 @@ FIND:
   
 ADD AFTER IT:
 
-<!-- BOF POINTS REWARDS BS -->
 <?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-	  //echo points_selection();
-	  $cart_show_total= $cart->show_total();
-	  echo points_selection($cart_show_total);
-	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM) && (tep_count_customer_orders() == 0)) {
-		  echo referral_input();
-	  }
-  }
+// POINTS REWARDS BS
+   echo $OSCOM_Hooks->call('points', 'PointsCheckoutPayment');
 ?>
-<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-<!-- EOF POINTS REWARDS BS -->
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -175,20 +178,18 @@ this will..
  
  ** This step has 3 parts.
 
+FIRST STEP REMOVED, NO NEED WITH NEW POINTSA PAYMENT MODULE 
+ 
 FIND:
 
-  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
-  }
+  include('includes/application_top.php');
   
-REPLACE WITH:
+ADD AFTER IT:
 
-########  BOF POINTS REWARDS BS #################*/
-  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-	  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
-  }
-########  EOF POINTS REWARDS BS #################*/
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
 
+   
 FIND:
 
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
@@ -196,45 +197,17 @@ FIND:
   
 ADD AFTER IT:
 
-####  BOF POINTS REWARDS BS  ####*/
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
-// customer pending points added 
-      if ($order->info['total'] > 0) {
-	      $points_toadd = get_points_toadd($order);
-	      $points_comment = 'TEXT_DEFAULT_COMMENT';
-	      $points_type = 'SP';
-	      if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
-		      tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
-	      }
-      }
-// customer referral points added 
-      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM))) {
-	      $referral_twice_query = tep_db_query("select unique_id from customers_points_pending where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
-	      if (!tep_db_num_rows($referral_twice_query)) {
-		      $points_toadd = MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM;
-		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
-		      $points_type = 'RF';
-		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
-	      }
-      }
-// customer shoppping points account balanced 
-      if ($customer_shopping_points_spending) {
-	      tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
-      }
-  }
-####  EOF POINTS REWARDS BS  ####*/
-   
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessAddPoints');
+
 FIND:
 
   tep_session_unregister('comments');
   
 ADD AFTER IT:
 
-####  BOF POINTS REWARDS BS  ####*/
-  if (tep_session_is_registered('customer_shopping_points')) tep_session_unregister('customer_shopping_points');
-  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
-  if (tep_session_is_registered('customer_referral')) tep_session_unregister('customer_referral');
-####  EOF POINTS REWARDS BS  ####*/
+// POINTS REWARDS BS
+  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessUnregister');
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -252,21 +225,24 @@ with a link to the points page and points FAQ page.
 
 FIND:
 
+  require('includes/application_top.php');
+  
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+
+
+FIND:
+
 <div class="contentContainer">
   <div class="contentText">
     <?php echo TEXT_ACCOUNT_CREATED; ?>
   
 ADD AFTER IT:
 
-<!-- BOF POINTS REWARDS BS -->
-	  <hr>
-	<?php 
-	   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT > 0)) {
-			echo sprintf(TEXT_WELCOME_POINTS_TITLE, null, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_NEW_SIGNUP_POINT_AMOUNT))); 
-			echo sprintf(TEXT_WELCOME_POINTS_LINK, '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); 
-	    }
-	?>               
-<!-- EOF POINTS REWARDS BS -->	
+<!-- POINTS REWARDS BS -->
+	  <?php echo $OSCOM_Hooks->call('points', 'PointsCreateAccountSuccess');	?>               
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -369,18 +345,11 @@ FIND:
 
 ADD AFTER IT:
 
-<!-- // BOF POINTS REWARDS BS //-->
-<?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-?>
-	<div class="contentText">
-        	<?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-        	<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link(FILENAME_MY_POINTS_HELP,'faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-      	</div>
-<?php
-  }
-?>
-<!-- // EOF POINTS REWARDS BS //-->
+<!-- BOF POINTS REWARDS BS //-->
+<div class="row">
+  <?php echo $oscTemplate->getContent('reviews_points'); ?>
+</div>
+<!-- EOF POINTS REWARDS BS //-->
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -407,17 +376,7 @@ SAVE AND CLOSE!
 CATALOG STEP = 13.    open catalog/includes/modules/boxes/templates/information.php
 This will add the link to My Points FAQ
 
-FIND:
-
-<li><a href="<?php echo tep_href_link('conditions.php'); ?>"><?php echo MODULE_BOXES_INFORMATION_BOX_CONDITIONS; ?></a></li>
-
-ADD AFTER IT:
-
-<!-- BOF POINTS REWARDS BS //-->
-	  <li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo BOX_INFORMATION_MY_POINTS_HELP; ?></a></li> 
-<!-- EOF POINTS REWARDS BS //-->
-
-SAVE AND CLOSE!
+MOVED INTO NEW BOXES MODULE
 
 ------------------------------------------------------------------------------------------
 
@@ -427,23 +386,13 @@ This will only show up when a customer points is bigger then 0
 
 MOVED INTO NEW BOXES MODULE
 						 
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 15.   open catalog/includes/classes/payment.php
 This will add the check box error to the java payment error.
 
-FIND:
+NOT REQUIRED ANY MORE. REPLACED BY POINTS PAYMENT MODULE.
 
-               '  if (error == 1) {' . "\n" .
-			   
-REPLACE WITH:
-
-// POINTS REWARDS BS
-               '  if (error == 1 && submitter != 1) {' . "\n" .
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
                                           
 CATALOG STEP = 16.   open catalog/includes/languages/english.php
@@ -451,20 +400,7 @@ This will define the language used for My Points FAQ link in information box
 and the language used for error checker used druing checkout procces
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('BOX_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
-MOVED INTO HT MODULE language file
-define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
-MOVED INTO HT MODULE language file
-MOVED INTO HT MODULE language file
-MOVED INTO HT MODULE language file
-MOVED INTO BOXES MODULE language file
-MOVED INTO BOXES MODULE language file
-MOVED INTO BOXES MODULE language file
-define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
-// EOF POINTS REWARDS BS
+MOVED MODULES/HOOKS LANGUAGE FILES
 
  SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -473,14 +409,7 @@ CATALOG STEP = 17.   open catalog/includes/languages/english/account.php
 This will define the language used for My Points box links in customer account page.
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('MY_POINTS_TITLE', 'My Points and Redemptions');
-define('MY_POINTS_VIEW', 'View my Points Balance and Points received.');
-define('MY_POINTS_VIEW_HELP', 'Reward Point Program FAQ.');
-define('MY_POINTS_CURRENT_BALANCE', 'Shopping Points Balance : %s points. Valued at : %s ');
-// EOF POINTS REWARDS BS
+MOVED TO PAGE LANGUAGE FILE
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -489,18 +418,8 @@ CATALOG STEP = 18.   open catalog/includes/languages/english/checkout_payment.ph
 This will define the language used for Redemptions box in checkout_payment page.
 (Please translate and repeat this step to any of your other languages)
 
-ADD THIS ADD THE END OF YOUR FILE
+MOVED INTO HOOK LANGUAGE FILE
 
-// BOF POINTS REWARDS BS
-define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
-define('TABLE_HEADING_REFERRAL', 'Referral System');
-define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
-define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
-define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 19.   open catalog/includes/languages/english/create_account.php
@@ -515,16 +434,8 @@ CATALOG STEP = 20.  open catalog/includes/languages/english/create_account_succe
 This will define the language used for Welcome Points offerd by admin if enabled..
 (Please translate and repeat this step to any of your other languages)
 
-Note: This option disabled by default. If you sure you don't want to use this option ever you can skip this step.
+MOVED INTO HOOK LANGUAGE FILE
 
-ADD THIS ADD THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('TEXT_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
-define('TEXT_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 21.   open catalog/includes/languages/english/product_info.php
