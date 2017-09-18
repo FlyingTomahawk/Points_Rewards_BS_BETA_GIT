@@ -228,7 +228,3 @@ define('PRODUCT_REMOVED', '%s has been removed from your Cart');
 
 // bootstrap helper
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '');
-
-// BOF POINTS REWARDS BS
-define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
-// EOF POINTS REWARDS BS
