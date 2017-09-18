@@ -1,7 +1,8 @@
 ####### POINTS AND REWARDS BS #########
   created by Ben Zukrel, Deep Silver Accessories
-  http://www.deep-silver.com
 
+  Updated for osC Bootstrap version by raiwa, LeeFoster and Tsimi.
+  
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
@@ -10,20 +11,12 @@
   Released under the GNU General Public License
 
 ##################################################
-Date: April.23.2017 v1.0 for osC BS GOLD and EDGE
-Upgraded to osC BS GOLD and EDGE by Tsimi. (not compatible with regular osC 2.3.4)!!!
 
 ******************* MAKE SURE TO BACKUP YOUR FILES BEFORE ***********************
-As I take no responsibility for anything going wrong.
-This module as been tested on a clean install of osC BS GOLD and EDGE.
-
-This module has been modified to work with the latest osC BS GOLD and EDGE.
+This addon has been modified to work with the latest osC BS GOLD and EDGE.
 If your osCommerce version is not osC BS GOLD or EDGE, don't even start.
 
 Please use it at your own risk.
-
-The changes should be made by experienced users only.
-Also, there might already be changes in place, and they probably have to be merged with this contribution.
 ------------------------------------------------------------------------------------------
 
 ####### STEP BY STEP INSTALLATION ################
@@ -31,7 +24,8 @@ Also, there might already be changes in place, and they probably have to be merg
 A. ADDING NEW FILES.
 B. EDITING OSC FILES.(catalog directory).
 C. EDITING OSC FILES.(admin directory). 
-D. INSTALL ORDER TOTAL MODULE 
+D. INSTALL MODULES
+E. INSTALL OPTIONAL MODULES
 
 
 A. ADDING NEW FILES.
@@ -42,10 +36,33 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/my_points.php
     catalog/my_points_help.php
     catalog/includes/functions/redemptions.php
+    catalog/includes/hooks/shop/points/points_hooks.php
     catalog/includes/languages/english/my_points.php
     catalog/includes/languages/english/my_points_help.php
-    catalog/includes/languages/english/modules/order_total/ot_redemptions.php
-    catalog/includes/modules/order_total/ot_redemptions.php
+    catalog/includes/languages/english/hooks/shop/points/points_hooks.php	
+	catalog/includes/languages/english/modules/boxes/bm_information_points.php
+	catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
+	catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
+	catalog/includes/languages/english/modules/content/reviews_points/cm_r_points.php
+	catalog/includes/languages/english/modules/header_tags/ht_points_rewards.php
+	catalog/includes/languages/english/modules/navbar_modules/nb_shopping_cart_points.php
+	catalog/includes/languages/english/modules/order_total/ot_redemptions.php
+	catalog/includes/languages/english/modules/pages/tp_account.php
+	catalog/includes/languages/english/modules/payment/points.php	
+    catalog/includes/modules/boxes/bm_information_points.php
+    catalog/includes/modules/boxes/bm_shopping_cart_points.php
+    catalog/includes/modules/boxes/templates/information_points.php
+    catalog/includes/modules/boxes/templates/shopping_cart_points.php
+	catalog/includes/modules/content/product_info_points/cm_pi_points.php
+	catalog/includes/modules/content/product_info_points/templates/points.php
+	catalog/includes/modules/content/reviews_points/cm_r_points.php
+	catalog/includes/modules/content/reviews_points/templates/points.php
+	catalog/includes/modules/header_tags/ht_points_rewards.php
+	catalog/includes/modules/navbar_modules/nb_shopping_cart_points.php
+	catalog/includes/modules/navbar_modules/templates/shopping_cart_points.php
+	catalog/includes/modules/order_total/ot_redemptions.php
+	catalog/includes/modules/payment/points.php
+	
 ====DONE====
 -- Add this to admin section --------------
 
@@ -58,6 +75,13 @@ copy the new files provided into the same location in your catalog and admin dir
     admin/includes/languages/english/customers_points.php
     admin/includes/languages/english/customers_points_pending.php
     admin/includes/languages/english/customers_points_referral.php
+	admin/includes/languages/english/images/buttons/button_add_points.gif
+	admin/includes/languages/english/images/buttons/button_adjust_points.gif
+	admin/includes/languages/english/images/buttons/button_cancel_points.gif
+	admin/includes/languages/english/images/buttons/button_confirm_points.gif
+	admin/includes/languages/english/images/buttons/button_delete_points.gif
+	admin/includes/languages/english/images/buttons/button_rollback_points.gif
+	
 ====DONE====
 	
 ******************************************************************************************
@@ -89,21 +113,23 @@ ADD AFTER IT:
 
 // BOF POINTS REWARDS BS //-->
     if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
+      
+    require('includes/languages/' . $language . '/modules/pages/tp_account.php');
 		
-	$output .= '<h2>' . MY_POINTS_TITLE . '</h2>
+	$output .= '<h2>' . TP_ACCOUNT_MY_POINTS_TITLE . '</h2>
            <div class="contentText">  
 			  <ul class="list-unstyled">';
 
   $has_points = tep_get_shopping_points($customer_id);
   if ($has_points > 0) {
-	  $output .= '<h4><span class="label label-info">' . sprintf(MY_POINTS_CURRENT_BALANCE, number_format($has_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES),$currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
+	  $output .= '<h4><span class="label label-info">' . sprintf(TP_ACCOUNT_MY_POINTS_CURRENT_BALANCE, number_format($has_points, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
   }
-	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', 'SSL') . '">' . MY_POINTS_VIEW . '</a></li>    
-				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', 'SSL') . '">' . MY_POINTS_VIEW_HELP . '</a></li>
+	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW . '</a></li>    
+				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW_HELP . '</a></li>
 			  </ul>
            </div>'; 
   }
-// EOF POINTS REWARDS BS //-->       
+// EOF POINTS REWARDS BS //-->      
 
 
 SAVE AND CLOSE!
@@ -178,8 +204,6 @@ this will..
  
  ** This step has 3 parts.
 
-FIRST STEP REMOVED, NO NEED WITH NEW POINTSA PAYMENT MODULE 
- 
 FIND:
 
   include('includes/application_top.php');
@@ -215,13 +239,36 @@ SAVE AND CLOSE!
 CATALOG STEP = 5.   open catalog/create_account.php
 This will add Welcome Points (and send email) defined by admin if enabled.
 
-MOVED INTO HOOK
+**This step has 2 parts
 
+FIND:
+
+require('includes/application_top.php');
+  
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+  $OSCOM_Hooks->register('points');
+  
+  
+FIND:
+
+$email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
+
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+      echo $OSCOM_Hooks->call('points', 'PointsCreateAccountMailMod');
+
+	  
+SAVE AND CLOSE!  	  
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 6.   open catalog/create_account_success.php
 This will add the text to notify the new signup users of the Welcome Points received,
 with a link to the points page and points FAQ page.
+
+**This step has 2 parts
 
 FIND:
 
@@ -238,22 +285,19 @@ FIND:
 <div class="contentContainer">
   <div class="contentText">
     <?php echo TEXT_ACCOUNT_CREATED; ?>
-  
+	
 ADD AFTER IT:
-
+	  
+	  <hr>
+	  
 <!-- POINTS REWARDS BS -->
 	  <?php echo $OSCOM_Hooks->call('points', 'PointsCreateAccountSuccess');	?>               
+               
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-  
-CATALOG STEP = 7.   open catalog/logoff.php
-
-MOVED INTO HEADER TAG
-
-------------------------------------------------------------------------------------------
-  
-CATALOG STEP = 8.   open catalog/product_info.php
+   
+CATALOG STEP = 7.   open catalog/product_info.php
 This will add the points credit information content module (if enabled).
 
 FIND:
@@ -274,10 +318,11 @@ ADD BEFORE IT:
 
 OR place it anywhere you wish the information to be shown
 
+
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 9.   open catalog/product_reviews.php
+CATALOG STEP = 8.   open catalog/product_reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -294,20 +339,20 @@ ADD AFTER IT:
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-		echo '<div>' . sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>') . '</div>';
-    }
+?>
+	<div>
+		<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+	</div>
+<?php
+  }
 ?>
 <!-- // EOF POINTS REWARDS BS //-->
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 10.   open catalog/product_reviews_write.php
+CATALOG STEP = 9.   open catalog/product_reviews_write.php
 this will add the points and notify customers of points given for review and add link to points system help file
-
-** this step has 2 parts.
-
-MOVED INTO HEADER TAG
 
 
 FIND:
@@ -323,16 +368,21 @@ ADD AFTER IT:
 
 <!-- // BOF POINTS REWARDS BS //-->
 <?php
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-		echo '<div>' . sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>') . '</div>';
-    }
+  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
+?>
+	<div>
+		<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
+	</div>
+<?php
+  }
 ?>
 <!-- // EOF POINTS REWARDS BS //-->
+
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 11.   open catalog/reviews.php
+CATALOG STEP = 10.   open catalog/reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -351,10 +401,11 @@ ADD AFTER IT:
 </div>
 <!-- EOF POINTS REWARDS BS //-->
 
+
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 12.   open catalog/includes/application_top.php
+CATALOG STEP = 11.   open catalog/includes/application_top.php
 
 FIND:
 
@@ -370,81 +421,11 @@ ADD AFTER IT:
 // POINTS REWARDS BS
   require('includes/functions/redemptions.php');
 
-SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
- 
-CATALOG STEP = 13.    open catalog/includes/modules/boxes/templates/information.php
-This will add the link to My Points FAQ
-
-MOVED INTO NEW BOXES MODULE
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 14.    open catalog/includes/modules/boxes/bm_shopping_cart.php(optional)
-This is in order to display points info.(customers must login).
-This will only show up when a customer points is bigger then 0
-
-MOVED INTO NEW BOXES MODULE
-						 
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 15.   open catalog/includes/classes/payment.php
-This will add the check box error to the java payment error.
-
-NOT REQUIRED ANY MORE. REPLACED BY POINTS PAYMENT MODULE.
-
-------------------------------------------------------------------------------------------
-                                          
-CATALOG STEP = 16.   open catalog/includes/languages/english.php
-This will define the language used for My Points FAQ link in information box
-and the language used for error checker used druing checkout procces
-(Please translate and repeat this step to any of your other languages)
-
-MOVED MODULES/HOOKS LANGUAGE FILES
-
- SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 17.   open catalog/includes/languages/english/account.php
-This will define the language used for My Points box links in customer account page.
-(Please translate and repeat this step to any of your other languages)
-
-MOVED TO PAGE LANGUAGE FILE
-
+  
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 18.   open catalog/includes/languages/english/checkout_payment.php
-This will define the language used for Redemptions box in checkout_payment page.
-(Please translate and repeat this step to any of your other languages)
-
-MOVED INTO HOOK LANGUAGE FILE
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 19.   open catalog/includes/languages/english/create_account.php
-This will define the language used for email Welcome Points offerd by admin if enabled..
-(Please translate and repeat this step to any of your other languages)
-	
-MOVED INTO HOOK LANGUAGE FILE
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 20.  open catalog/includes/languages/english/create_account_success.php
-This will define the language used for Welcome Points offerd by admin if enabled..
-(Please translate and repeat this step to any of your other languages)
-
-MOVED INTO HOOK LANGUAGE FILE
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 21.   open catalog/includes/languages/english/product_info.php
-
-MOVED TO CONTENT MODULE
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 22.   open catalog/includes/modules/payment/paypal_standard.php
+CATALOG STEP = 12.   open catalog/includes/modules/payment/paypal_standard.php
 (This is an optional step and only needed if you use the PayPal Standard payment method.)
 
 ** this step has 2 parts.
@@ -460,7 +441,7 @@ FIND (around line 240):
 
 ADD AFTER IT:
 
-/*#### BOF POINTS REWARDS BS ####*/
+// BOF POINTS REWARDS BS //-->
   if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
 // customer pending points added
       if ($order->info['total'] > 0) {
@@ -486,7 +467,7 @@ ADD AFTER IT:
           tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
       }
   }
-/*#### EOF POINTS REWARDS BS ####*/
+// EOF POINTS REWARDS BS //-->
 
 
 FIND:
@@ -527,7 +508,7 @@ FIND:
 		  
 ADD AFTER IT:
 
-######## BOF POINTS REWARDS BS ##################
+// BOF POINTS REWARDS BS //-->
           if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
                   if ((isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on'))||(isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on'))) {
                           $comments = ENTRY_CONFIRMED_POINTS  . $comments;
@@ -553,7 +534,7 @@ ADD AFTER IT:
                           }
                   }
           }
-######## EOF POINTS REWARDS BS ##################
+// EOF POINTS REWARDS BS //-->
 
 FIND:
 
@@ -563,7 +544,7 @@ FIND:
 	  
 ADD AFTER IT:
 			
-<!-- // BOF POINTS REWARDS BS //-->
+<!-- BOF POINTS REWARDS BS //-->
 <?php
     if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
         $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
@@ -572,7 +553,7 @@ ADD AFTER IT:
             }
     }
 ?>
-<!-- // EOF POINTS REWARDS BS //-->
+<!-- EOF POINTS REWARDS BS //-->
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -597,9 +578,6 @@ SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
                                          
 ADMIN STEP = 3.   open admin/includes/languages/english.php
-This will define the language used in admin/includes/boxes/customers.php for customers_points.php
- and customers_points_pending.php
-(Please translate and repeat this step to any of your other languages) 
 
 ADD THIS AT THE END OF YOUR FILE
 
@@ -607,39 +585,50 @@ ADD THIS AT THE END OF YOUR FILE
 define('BOX_CUSTOMERS_POINTS', 'Customers Points');
 define('BOX_CUSTOMERS_POINTS_PENDING', 'Pending Points');
 define('BOX_CUSTOMERS_POINTS_REFERRAL', 'Referral Points');
-define('TEXT_POINTS', 'Points:');
-// EOF POINTS REWARDS BS
-
-SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
-                                         
-ADMIN STEP = 4.   open admin/includes/languages/english/orders.php
-This will define the language used for confirming pending points addon
-(Please translate and repeat this step to any of your other languages) 
-
-ADD THIS AT THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
 define('ENTRY_NOTIFY_POINTS', 'Confirm Pending Points:');
 define('ENTRY_QUE_POINTS', 'and Que');
 define('ENTRY_QUE_DEL_POINTS', 'and Delete:');
 define('ENTRY_CONFIRMED_POINTS', 'Points Confirmed.  ');
 // EOF POINTS REWARDS BS
+
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 ##################  END OF STEP BY STEP INSTALLATION      ################################
 ------------------------------------------------------------------------------------------
 ******************************************************************************************
 
-D. INSTALL ORDER TOTAL MODULE
+D. INSTALL MODULE
 
-Access your admin area and install the order total module. (Modules -> Order Total)
+1.)
+Access your admin area and install the "Points Redemptions" order total module. (Modules -> Order Total)
 This option must appear after "Sub-Total" and before "Total". 
 When you first install "Points Redemptions" the sort order no is set at a default of 4, which is the same as "Total" .
 YOU MUST change your value for "Total" sort order to any number higher then 4 (e.g. 5).
 
-Still in the OSC admin, under "Configuration" you should see Points/Rewards
-Click on the link and make change to suite your site.
+2.)
+Access your admin area, install and setup the "Points and Rewards" header tags module. (Modules -> Header Tags)
+
+3.)
+Access your admin area and install the "Points" payment method module. (Modules -> Payment)
+
+E. INSTALL OPTIONAL MODULES
+
+1.)
+Access your admin area and install the "Shopping Cart with points" navbar module. (Modules -> Navbar Modules)
+This will show the current Points Status inside the dropdown shopping cart.
+
+2.)
+Access your admin area and install the "Product Points" products_info_points content module. (Modules -> Content)
+This will add the points credit information on the product info page.
+
+3.)
+Access your admin area and install the "Shopping Cart with Points" box module. (Modules -> Boxes)
+This will display points info inside the shopping cart box.(customers must login).
+This will only show up when a customer points is bigger then 0
+
+4.)
+Access your admin area and install the "Information Points" box module. (Modules -> Boxes)
+This will add an information box with a link to My Points FAQ
 
 ***************************************************************
 THAT'S IT!
