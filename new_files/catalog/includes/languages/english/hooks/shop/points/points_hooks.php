@@ -22,13 +22,13 @@ define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE', 'As part of ou
 define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
 
 // used in checkout_payment
-define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
-define('TABLE_HEADING_REFERRAL', 'Referral System');
-define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
-define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_PAYING',  'Please select points payment to pay your entire order with your points. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
-define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM', 'Shopping Points Redemptions ');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REFERRAL', 'Referral System');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_START', 'You have a credit balance of %s would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_SPENDING', 'Tick the checkbox to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_PAYING',  'Please select the <strong>Points</strong> payment method to pay your entire order with your points. (%s points %s)');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
+define('POINTS_HOOK_CHECKOUT_PAYMENT_REFERRAL_REFERRED', 'If you were referred to us by one of our customers please enter their email address here. ');
 
 // used in checkout_confirmation.php
   define('POINTS_HOOKS_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');

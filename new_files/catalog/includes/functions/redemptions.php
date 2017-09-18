@@ -329,18 +329,18 @@
 					  $customer_shopping_points_spending = $max_points;
 					  $note = null;
 					  if ($order->info['total'] > tep_calc_shopping_pvalue($max_points)) {
-						  $note = '<br /><small>' . TEXT_REDEEM_SYSTEM_NOTE .'</small>';
+						  $note = '<br /><small>' . POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_NOTE .'</small>';
 					  }
 					  
 ?>
-		<h2><?php echo TABLE_HEADING_REDEEM_SYSTEM; ?></h2>
+		<h2><?php echo POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM; ?></h2>
           <div class="alert alert-info"> 
-                <?php printf(TEXT_REDEEM_SYSTEM_START, $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points)), $currencies->format($order->info['total']). $note); ?><br />
+                <?php printf(POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_START, $currencies->format(tep_calc_shopping_pvalue($customer_shopping_points)), $currencies->format($order->info['total']). $note); ?><br />
                 <?php
                 if ($points->enabled == true) {
-                  printf(TEXT_REDEEM_SYSTEM_PAYING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                  printf(POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_PAYING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
                 } else {
-                  printf(TEXT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
+                  printf(POINTS_HOOK_CHECKOUT_PAYMENT_REDEEM_SYSTEM_SPENDING, number_format($max_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), '/&nbsp;' . $currencies->format(tep_calc_shopping_pvalue($max_points)));
                   echo '<div class="pull-right">' . tep_draw_checkbox_field('customer_shopping_points_spending', $customer_shopping_points_spending,'','onclick="submitFunction()"') . '</div>';
                 }
                 ?>   
@@ -354,9 +354,9 @@
 	  
 	  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM)) {
 ?>
-        <h2><?php echo TABLE_HEADING_REFERRAL; ?></h2>       
+        <h2><?php echo POINTS_HOOK_CHECKOUT_PAYMENT_REFERRAL; ?></h2>       
 		<div class="alert alert-info"> 
-			<?php echo TEXT_REFERRAL_REFERRED; ?>
+			<?php echo POINTS_HOOK_CHECKOUT_PAYMENT_REFERRAL_REFERRED; ?>
 			<?php echo tep_draw_input_field('customer_referred', ((isset($customer_referred))? $customer_referred : ''), 'style="width:250px;"'); ?>
 		</div>
 	<div class="clearfix"></div>
