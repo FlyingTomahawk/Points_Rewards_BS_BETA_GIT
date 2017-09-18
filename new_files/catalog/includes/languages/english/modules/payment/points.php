@@ -12,4 +12,5 @@
 
   define('MODULE_PAYMENT_POINTS_TEXT_TITLE', 'Points');
   define('MODULE_PAYMENT_POINTS_TEXT_DESCRIPTION', 'Points');
+  define('TEXT_POINTS', 'Points');
 ?>
