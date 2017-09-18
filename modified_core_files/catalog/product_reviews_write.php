@@ -111,17 +111,11 @@ function checkForm() {
     <h2 class="col-sm-8 text-right-not-xs"><?php echo $products_price; ?></h2>
   </div>
 </div>
-<!-- // BOF POINTS REWARDS BS //-->
-<?php
-  if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS))) {
-?>
-	<div>
-		<?php echo sprintf(REVIEW_HELP_LINK, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS)), '<a href="' . tep_href_link('my_points_help.php','faq_item=13', 'NONSSL') . '" title="' . BOX_INFORMATION_MY_POINTS_HELP . '">' . BOX_INFORMATION_MY_POINTS_HELP . '</a>'); ?>
-	</div>
-<?php
-  }
-?>
-<!-- // EOF POINTS REWARDS BS //-->
+<!-- BOF POINTS REWARDS BS //-->
+<div class="row">
+  <?php echo $oscTemplate->getContent('reviews_points'); ?>
+</div>
+<!-- EOF POINTS REWARDS BS //-->
 
 <?php
   if ($messageStack->size('review') > 0) {
