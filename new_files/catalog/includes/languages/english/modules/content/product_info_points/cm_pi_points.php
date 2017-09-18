@@ -13,4 +13,4 @@
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_TITLE', 'Product Points');
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_DESCRIPTION', 'Show the product points block on the product info page.');
 
-  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Buy this item and earn %s points valued at %s.');
+  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Buy this item and earn %s points valued at %s');
