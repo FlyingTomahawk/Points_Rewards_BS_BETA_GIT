@@ -230,10 +230,5 @@ define('PRODUCT_REMOVED', '%s has been removed from your Cart');
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '');
 
 // BOF POINTS REWARDS BS
-define('BOX_INFORMATION_MY_POINTS_HELP', 'Point Program FAQ');
-define('REDEEM_SYSTEM_ERROR_POINTS_OVER', 'REDEEM POINTS ERROR ! Points value can not be over the total value. Please Re enter points');
-define('TEXT_POINTS_BALANCE', 'Points Status');
-define('TEXT_POINTS', 'Points :');
-define('TEXT_VALUE', 'Value:');
 define('REVIEW_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
 // EOF POINTS REWARDS BS
