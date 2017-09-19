@@ -29,7 +29,8 @@ To do list and tasks asigend:
     <s>- create_account.php DONE 13/09/2017 @raiwa
     - checkout_payment.php DONE 16/09/2017 @raiwa
     - checkout_confirmation.php DONE 16/09/2017 @raiwa
-    - checkout_process.php DONE 16/09/2017 @raiwa</s>
+    - checkout_process.php DONE 16/09/2017 @raiwa
+    - admin/orders.php DONE 16/09/2017 @raiwa</s>
 
 - create modified content modules to replace core modules DONE 15/09/2017
 
@@ -66,7 +67,8 @@ To do list and tasks asigend:
   - 6 fixed 14/09/2017 @LeeFoster
   - 7 fixed 15/09/2017 @raiwa
   - 8 fixed 15/09/2017 @raiwa
-  - 9 fixed 15/09/2017 @raiwa</s>
+  - 9 fixed 15/09/2017 @raiwa
+  - 10 fixed 19/09/2017 @raiwa</s>
   
 - revise other languages
   - english @LeeFoster ?
