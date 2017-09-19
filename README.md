@@ -23,10 +23,10 @@ To do list and tasks asigend:
 
 - create hook:
 
-    add functions for the pages where it makes sense and remove code changes from core files
+    <s>add functions for the pages where it makes sense and remove code changes from core files
     add language definitions to hook language file and remove from core language files
     
-    <s>- create_account.php DONE 13/09/2017 @raiwa
+    - create_account.php DONE 13/09/2017 @raiwa
     - checkout_payment.php DONE 16/09/2017 @raiwa
     - checkout_confirmation.php DONE 16/09/2017 @raiwa
     - checkout_process.php DONE 16/09/2017 @raiwa
