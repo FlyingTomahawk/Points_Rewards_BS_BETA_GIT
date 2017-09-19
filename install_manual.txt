@@ -115,6 +115,8 @@ ADD AFTER IT:
     if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
       
     require('includes/languages/' . $language . '/modules/pages/tp_account.php');
+    
+    require_once('includes/functions/redemptions.php');
 		
 	$output .= '<h2>' . TP_ACCOUNT_MY_POINTS_TITLE . '</h2>
            <div class="contentText">  
@@ -162,8 +164,7 @@ SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 3.   open catalog/checkout_payment.php
-This will add the javascript alart checking the box for invalid character. As well as 
-allow points to be used as payment method.
+This will allow points to be used as payment method.
 
 **This step has 2 parts
 
@@ -396,20 +397,7 @@ SAVE AND CLOSE!
 
 CATALOG STEP = 11.   open catalog/includes/application_top.php
 
-FIND:
-
-(GOLD)
-// infobox
-  require(DIR_WS_CLASSES . 'split_page_results.php');
-(EDGE)
-// split-page-results
-  require('includes/classes/split_page_results.php');
-  
-ADD AFTER IT:
-
-// POINTS REWARDS BS
-  require('includes/functions/redemptions.php');
-
+MOVED TO HOOKS AND MODULES
   
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------

@@ -36,6 +36,8 @@
     function execute() {
       global $oscTemplate, $product_info, $currencies, $new_price;
       
+      require_once('includes/functions/redemptions.php');
+
       $content_width = (int)MODULE_CONTENT_PRODUCT_INFO_POINTS_CONTENT_WIDTH;
 
       if (isset($product_info) && tep_not_null($product_info) ) {
@@ -60,7 +62,7 @@
     }
 
     function isEnabled() {
-      if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') || (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_DISPLAY_POINTS_INFO != 'True')) {
+      if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') {
     		$this->enabled = false;
     	} else {
     		return $this->enabled;

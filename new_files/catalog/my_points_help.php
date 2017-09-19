@@ -14,6 +14,8 @@
 
   require('includes/application_top.php');
 
+  require_once('includes/functions/redemptions.php');
+
   require('includes/languages/' . $language . '/my_points_help.php');
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('my_points_help.php', '', 'NONSSL'));
@@ -68,7 +70,7 @@
     </div>
     <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
       <div class="panel-body">
-        <?php echo TEXT_FAQ_3;?>
+        <?php echo sprintf(TEXT_FAQ_3, $currencies->format(1), number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(100), $currencies->format(tep_calc_shopping_pvalue(100 * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE)));?>
       </div>
     </div>
   </div>
@@ -125,7 +127,7 @@
     </div>
     <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
       <div class="panel-body">
-        <?php echo sprintf(TEXT_FAQ_7, number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE));?>
+        <?php echo sprintf(TEXT_FAQ_7, $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE)), number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE));?>
       </div>
     </div>
   </div>

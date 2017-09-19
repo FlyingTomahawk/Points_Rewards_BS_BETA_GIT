@@ -36,6 +36,8 @@
     function execute() {
       global $oscTemplate, $product_info, $currencies, $request_type;
       
+      require_once('includes/functions/redemptions.php');
+
       $content_width = (int)MODULE_CONTENT_REVIEWS_POINTS_CONTENT_WIDTH;
 
       if ( tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_REVIEWS) ) {

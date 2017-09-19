@@ -78,6 +78,8 @@
     if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
       
     require('includes/languages/' . $language . '/modules/pages/tp_account.php');
+    
+    require_once('includes/functions/redemptions.php');
 		
 	$output .= '<h2>' . TP_ACCOUNT_MY_POINTS_TITLE . '</h2>
            <div class="contentText">  

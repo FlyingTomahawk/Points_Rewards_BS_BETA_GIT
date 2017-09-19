@@ -34,6 +34,8 @@
     function execute() {
       global $oscTemplate, $cart, $currencies, $new_products_id_in_cart, $customer_id;
 
+      require_once('includes/functions/redemptions.php');
+
       $cart_contents_string = '';
 
       if ($cart->count_contents() > 0) {

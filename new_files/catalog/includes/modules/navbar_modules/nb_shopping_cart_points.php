@@ -44,6 +44,8 @@
     function getOutput() {
       global $oscTemplate, $cart, $currencies, $customer_id;
       
+      require_once('includes/functions/redemptions.php');
+
       ob_start();
       require('includes/modules/navbar_modules/templates/shopping_cart_points.php');
       $data = ob_get_clean();

@@ -31,6 +31,8 @@
     function execute() {
       global $PHP_SELF, $oscTemplate, $customer_id, $product_info, $order, $customer_id, $payment, $$payment, $messageStack;
 
+      require_once('includes/functions/redemptions.php');
+
       switch (basename($PHP_SELF) ) {
         case 'checkout_confirmation.php':
           if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {

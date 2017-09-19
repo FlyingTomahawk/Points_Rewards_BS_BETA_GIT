@@ -67,12 +67,11 @@ define('TEXT_FAQ_2', 'When an order is placed, the total amount<small><font colo
                       <p align="right"<small><font color="FF6633">*</font> in most cases shipping fees and taxes excluded. See refered FAQ for more details.</small></p>');
 
 // FAQ3
-define('TEXT_FAQ_3', 'Currently, for every ' .  $currencies->format(1) . ' spent at ' . STORE_NAME . ' you\'ll earn ' . number_format(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES)  . ' Point(s).
+define('TEXT_FAQ_3', 'Currently, for every %s spent at ' . STORE_NAME . ' you\'ll earn %s Point(s).
                       <br>For example:<br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Product Cost:</b>&nbsp; ' .  $currencies->format(100) . '<br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Value of Points Earned:</b>&nbsp; ' .  $currencies->format(tep_calc_shopping_pvalue(100 * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE)) . '<br><br>
-                      Please note, we reserve the right to make changes to the above rate at any time without prior notice.  The rate shown here will always be current.
-                      <p align="right"><small>Last updated: %s</small><p>');
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Product Cost:</b>&nbsp; %s<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Value of Points Earned:</b>&nbsp; %s<br><br>
+                      Please note, we reserve the right to make changes to the above rate at any time without prior notice.  The rate shown here will always be current.');
 
 // FAQ4
 define('TEXT_FAQ_4', 'If you have a balance in your Shopping Points Account, you can use those points to pay for purchases made at ' . STORE_NAME . '.
@@ -98,7 +97,7 @@ define('TEXT_FAQ_6_B', 'Currently, no Minimum Purchase Amount required to redeem
 	                      <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ7
-define('TEXT_FAQ_7', 'A maximum of <b>%s</b> points <b>(' . $currencies->format(tep_calc_shopping_pvalue(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_MAX_VALUE)) . ')' . '</b> is allowed to redeem per order.
+define('TEXT_FAQ_7', 'A maximum of <b>%s</b> points <b>(%s)' . '</b> is allowed to redeem per order.
                       <br><br>We strongly advise you to check this page often as we may make changes to this policy.');
 
 // FAQ8 - conditionnal depending on the use point for shipping value set in admin

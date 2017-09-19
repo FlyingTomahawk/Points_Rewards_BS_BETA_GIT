@@ -10,6 +10,10 @@
 */
 
 class hook_shop_points_points_hooks {
+  
+  function __construct() {
+    require_once('includes/functions/redemptions.php');
+  }
 
   function listen_PointsCreateAccountMailMod() {
     global $gender, $lastname, $firstname, $customer_id, $currencies, $email_text, $language;
