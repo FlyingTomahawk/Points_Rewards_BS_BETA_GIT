@@ -525,13 +525,7 @@ SAVE AND CLOSE!
                                          
 ADMIN STEP = 3.   open admin/includes/languages/english.php
 
-ADD THIS AT THE END OF YOUR FILE
-
-// BOF POINTS REWARDS BS
-define('BOX_CUSTOMERS_POINTS', 'Customers Points');
-define('BOX_CUSTOMERS_POINTS_PENDING', 'Pending Points');
-define('BOX_CUSTOMERS_POINTS_REFERRAL', 'Referral Points');
-// EOF POINTS REWARDS BS
+MOVED INTO BOX MODULE
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
