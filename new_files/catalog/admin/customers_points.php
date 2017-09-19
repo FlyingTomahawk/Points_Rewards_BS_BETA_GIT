@@ -46,6 +46,7 @@
             $first_name = $_POST['customers_firstname'];
             $last_name = $_POST['customers_lastname'];
             $name = $first_name . ' ' . $last_name;
+            $customers_email_address = $_POST['customers_email_address'];
             
             $notify_comment = '';
             if (isset($_POST['comment']) && tep_not_null($comment)) {
@@ -130,6 +131,7 @@
             $first_name = $_POST['customers_firstname'];
             $last_name = $_POST['customers_lastname'];
             $name = $first_name . ' ' . $last_name;
+            $customers_email_address = $_POST['customers_email_address'];
 
             $notify_comment = '';
             if (isset($_POST['comment']) && tep_not_null($comment)) {

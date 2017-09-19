@@ -21,6 +21,7 @@
 
   $comment_cancel = null;
   $uID = null;
+  $uInfo = null;
   
   if (tep_not_null($action)) {
     switch ($action) {
@@ -49,7 +50,8 @@
           $first_name = $customer['customers_firstname'];
           $last_name = $customer['customers_lastname'];
           $name = $first_name . ' ' . $last_name;
-
+          $customers_email_address = $_POST['customers_email_address'];
+          
           if (ACCOUNT_GENDER == 'true') {
             if ($gender == 'm') {
                 $greet = sprintf(EMAIL_GREET_MR, $last_name);
@@ -99,7 +101,8 @@
           $first_name = $customer['customers_firstname'];
           $last_name = $customer['customers_lastname'];
           $name = $first_name . ' ' . $last_name;
-          
+          $customers_email_address = $_POST['customers_email_address'];
+
           $notify_comment = '';
           if (isset($_POST['comment_cancel']) && tep_not_null($comment_cancel)) {
             $notify_comment = sprintf(EMAIL_TEXT_COMMENT, $comment_cancel) . "\n";
@@ -370,6 +373,7 @@ function validate(field) {
     
     while ($pending_points = tep_db_fetch_array($pending_points_query)) {
  
+    $uInfo = new objectInfo($pending_points);
     if ((!isset($_GET['uID']) || (isset($_GET['uID']) && ($_GET['uID'] == $pending_points['unique_id']))) && !isset($uInfo)) {
         $uInfo = new objectInfo($pending_points);
       }
