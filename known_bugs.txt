@@ -57,3 +57,7 @@ replace removed "split" by "explode" in redemptions functions
 
 fixed buggy restricted products and categories listing in my_points_help.php
 only one/last products/categories were shown
+
+10.) FIXED!
+
+e-mails not sent in admin/customers_points.php and admin/customers_points_pending.php
