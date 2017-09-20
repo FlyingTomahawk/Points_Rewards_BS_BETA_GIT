@@ -13,7 +13,7 @@
   require('includes/application_top.php');
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_confirmation');
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
@@ -56,7 +56,7 @@
   $payment_modules->update_status();
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
+  echo $OSCOM_Hooks->call('checkout_confirmation', 'CheckoutConfirmPoints');
 
   if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));

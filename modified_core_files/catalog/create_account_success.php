@@ -13,7 +13,7 @@
   require('includes/application_top.php');
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('create_account_success');
 
   require('includes/languages/' . $language . '/create_account_success.php');
 
@@ -41,7 +41,7 @@
 	  <hr>
 	  
 <!-- POINTS REWARDS BS -->
-	  <?php echo $OSCOM_Hooks->call('points', 'PointsCreateAccountSuccess');	?>               
+	  <?php echo $OSCOM_Hooks->call('create_account_success', 'CreateAccountSuccess');	?>               
 
     </div>
   </div>

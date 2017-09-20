@@ -13,7 +13,7 @@
   require('includes/application_top.php');
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('create_account');
 
   // needs to be included earlier to set the success message in the messageStack
   require('includes/languages/' . $language . '/create_account.php');
@@ -251,7 +251,7 @@
 	    $email_text .= EMAIL_WELCOME . EMAIL_TEXT .EMAIL_CONTACT . EMAIL_WARNING;
 
 // POINTS REWARDS BS
-      echo $OSCOM_Hooks->call('points', 'PointsCreateAccountMailMod');
+      echo $OSCOM_Hooks->call('create_account', 'CreateAccountMailMod');
 
       tep_mail($name, $email_address, EMAIL_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 

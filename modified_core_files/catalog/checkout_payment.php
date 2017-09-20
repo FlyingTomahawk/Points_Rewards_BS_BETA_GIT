@@ -13,7 +13,7 @@
   require('includes/application_top.php');
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_payment');
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
@@ -243,7 +243,7 @@
   
 <?php
 // POINTS REWARDS BS
-   echo $OSCOM_Hooks->call('points', 'PointsCheckoutPayment');
+   echo $OSCOM_Hooks->call('checkout_payment', 'CheckoutPaymentPoints');
 ?>
 
   <hr>

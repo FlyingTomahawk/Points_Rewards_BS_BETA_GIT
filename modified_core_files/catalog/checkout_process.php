@@ -13,7 +13,7 @@
   include('includes/application_top.php');
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_process');
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
@@ -135,7 +135,7 @@
   }
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessAddPoints');
+  echo $OSCOM_Hooks->call('checkout_process', 'CheckoutProcessAddPoints');
 
   $customer_notification = (SEND_EMAILS == 'true') ? '1' : '0';
   $sql_data_array = array('orders_id' => $insert_id, 
@@ -301,7 +301,7 @@
   tep_session_unregister('comments');
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessUnregister');
+  echo $OSCOM_Hooks->call('checkout_process', 'CheckoutProcessUnregister');
 
   tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
 

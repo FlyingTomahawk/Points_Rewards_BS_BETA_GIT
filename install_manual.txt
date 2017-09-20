@@ -149,7 +149,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_confirmation');
 
 FIND:
 
@@ -158,7 +158,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutConfirm');
+  echo $OSCOM_Hooks->call('checkout_confirmation', 'CheckoutConfirmPoints');
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_payment');
 
 FIND:
 
@@ -192,7 +192,7 @@ ADD AFTER IT:
 
 <?php
 // POINTS REWARDS BS
-   echo $OSCOM_Hooks->call('points', 'PointsCheckoutPayment');
+   echo $OSCOM_Hooks->call('checkout_payment', 'CheckoutPaymentPoints');
 ?>
 
 SAVE AND CLOSE!
@@ -223,7 +223,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessAddPoints');
+  echo $OSCOM_Hooks->call('checkout_process', 'CheckoutProcessAddPoints');
 
 FIND:
 
@@ -232,7 +232,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  echo $OSCOM_Hooks->call('points', 'PointsCheckoutProcessUnregister');
+  echo $OSCOM_Hooks->call('checkout_process', 'CheckoutProcessUnregister');
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -249,7 +249,7 @@ require('includes/application_top.php');
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('create_account');
   
   
 FIND:
@@ -259,7 +259,7 @@ $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-      echo $OSCOM_Hooks->call('points', 'PointsCreateAccountMailMod');
+      echo $OSCOM_Hooks->call('create_account', 'CreateAccountMailMod');
 
 	  
 SAVE AND CLOSE!  	  
@@ -278,7 +278,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('create_account_success');
 
 
 FIND:
@@ -292,7 +292,7 @@ ADD AFTER IT:
 	  <hr>
 	  
 <!-- POINTS REWARDS BS -->
-	  <?php echo $OSCOM_Hooks->call('points', 'PointsCreateAccountSuccess');	?>               
+	  <?php echo $OSCOM_Hooks->call('create_account_success', 'CreateAccountSuccess');	?>               
                
 
 SAVE AND CLOSE!
