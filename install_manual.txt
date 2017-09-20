@@ -212,7 +212,7 @@ FIND:
 ADD AFTER IT:
 
 // POINTS REWARDS BS
-  $OSCOM_Hooks->register('points');
+  $OSCOM_Hooks->register('checkout_process');
 
    
 FIND:
@@ -285,12 +285,11 @@ FIND:
 
 <div class="contentContainer">
   <div class="contentText">
-    <?php echo TEXT_ACCOUNT_CREATED; ?>
+    <div class="alert alert-success">
+      <?php echo TEXT_ACCOUNT_CREATED; ?>
 	
 ADD AFTER IT:
-	  
-	  <hr>
-	  
+
 <!-- POINTS REWARDS BS -->
 	  <?php echo $OSCOM_Hooks->call('create_account_success', 'CreateAccountSuccess');	?>               
                
