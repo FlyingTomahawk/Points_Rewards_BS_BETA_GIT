@@ -32,7 +32,7 @@
 	  }
 
   if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
-		  $points_query = tep_db_query("select customers_shopping_points from customers where customers_id = '" . (int)$id . "' and customers_points_expires > CURDATE() OR customers_points_expires is null limit 1");
+		  $points_query = tep_db_query("select customers_shopping_points from customers where customers_id = '" . (int)$id . "' and (customers_points_expires > CURDATE() OR customers_points_expires is null) limit 1");
 	   } else {
 		  $points_query = tep_db_query("select customers_shopping_points from customers where customers_id = '" . (int)$id . "' limit 1");
 	  }
