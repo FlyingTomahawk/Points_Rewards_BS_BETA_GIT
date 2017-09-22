@@ -36,10 +36,20 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/my_points.php
     catalog/my_points_help.php
     catalog/includes/functions/redemptions.php
-    catalog/includes/hooks/shop/points/points_hooks.php
+    catalog/includes/hooks/admin/orders/points.php
+    catalog/includes/hooks/shop/checkout_confirmation/points.php
+    catalog/includes/hooks/shop/checkout_payment/points.php
+    catalog/includes/hooks/shop/checkout_process/points.php
+    catalog/includes/hooks/shop/create_account/points.php
+    catalog/includes/hooks/shop/create_account_success/points.php
     catalog/includes/languages/english/my_points.php
     catalog/includes/languages/english/my_points_help.php
-    catalog/includes/languages/english/hooks/shop/points/points_hooks.php	
+    catalog/includes/languages/english/hooks/admin/orders/points.php
+    catalog/includes/languages/english/hooks/shop/checkout_confirmation/points.php
+    catalog/includes/languages/english/hooks/shop/checkout_payment/points.php
+    catalog/includes/languages/english/hooks/shop/checkout_process/points.php
+    catalog/includes/languages/english/hooks/shop/create_account/points.php
+    catalog/includes/languages/english/hooks/shop/create_account_success/points.php
 	catalog/includes/languages/english/modules/boxes/bm_information_points.php
 	catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
 	catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
@@ -475,7 +485,7 @@ To be used when confirming order or updating order status.
 This option will only show up when there are pending points for that order
 and only if Auto Credit Pending Points is set to "false".
 
-**note that this step has 2 parts**
+**note that this step has 3 parts**
 
 FIND:
 
@@ -486,6 +496,15 @@ ADD AFTER IT:
 
 // POINTS REWARDS BS
           echo $OSCOM_Hooks->call('orders', 'PointsOrderUpdatePoints');
+
+FIND:
+
+        tep_remove_order($oID, $_POST['restock']);
+		  
+ADD AFTER IT:
+
+// POINTS REWARDS BS
+          echo $OSCOM_Hooks->call('orders', 'PointsOrderRemovePoints');
 
 FIND:
 
@@ -508,16 +527,7 @@ This is to make sure that pending points for any order you delete will also dele
 (please note that this will delete points in a pending status only, if you delete and order that
 its points already approved you will have to delete those points manually)
 
-FIND:
-
-    tep_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "'");
-
-ADD AFTER IT:
-
-// BOF POINTS REWARDS BS
-    tep_db_query("delete from customers_points_pending where orders_id = '" . (int)$order_id . "'");
-    $sql = "optimize table customers_points_pending";
-// EOF POINTS REWARDS BS
+MOVED INTO HOOK
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?php
 /*
-  $Id: points_hooks.php
-  $Loc: catalog/includes/hooks/admin/points/
+  $Id: points.php
+  $Loc: catalog/includes/hooks/admin/orders/
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -9,7 +9,7 @@
   Released under the GNU General Public License
 */
 
-class hook_admin_orders_points_hooks {
+class hook_admin_orders_points {
 
   function listen_PointsOrderUpdatePoints() {
     global $comments, $oID, $language;
@@ -43,6 +43,13 @@ class hook_admin_orders_points_hooks {
     }
   }
   
+  function listen_PointsOrderRemovePoints() {
+    global $oID;
+        
+    tep_db_query("delete from customers_points_pending where orders_id = '" . (int)$oID . "'");
+    $sql = "optimize table customers_points_pending";
+  }
+
   function listen_PointsOrderPointsFields() {
     global $oID, $language;
         

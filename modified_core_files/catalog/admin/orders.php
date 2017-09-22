@@ -77,6 +77,9 @@
 
         tep_remove_order($oID, $_POST['restock']);
 
+// POINTS REWARDS BS
+          echo $OSCOM_Hooks->call('orders', 'PointsOrderRemovePoints');
+
         tep_redirect(tep_href_link('orders.php', tep_get_all_get_params(array('oID', 'action'))));
         break;
     }
