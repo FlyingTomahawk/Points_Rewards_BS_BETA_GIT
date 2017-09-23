@@ -78,10 +78,10 @@ To do list and tasks asigend:
 - add other language translations
   - english @LeeFoster ?
   - german asigned @Tsimi 17/09/2017
-  - spanish asigned @raiwa 17/09/2017
+  - spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín)
   
 - add version, developer and copyright info to header comments in all files. @Tsimi/@LeeFoster?
 
-- add installation script to header tag module (hooks register and calls) asigned @raiwa
+- <s>add installation script to header tag module (hooks register and calls, content modules)</s> DONE 2017_09_13 @raiwa
 
 - write new installation user guide. (PDF/WORD) native english speaker? @Tsimi/@LeeFoster?
