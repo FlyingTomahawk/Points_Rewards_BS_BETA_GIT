@@ -22,11 +22,15 @@ Please use it at your own risk.
 ####### STEP BY STEP INSTALLATION ################
 
 A. ADDING NEW FILES.
-B. EDITING OSC FILES.(catalog directory).
-C. EDITING OSC FILES.(admin directory). 
-D. INSTALL MODULES
-E. INSTALL OPTIONAL MODULES
+B. INSTALL MODULES
+C. EDITING OSC FILES.(catalog directory).
+D. EDITING OSC FILES.(catalog directory).
+E. EDITING OSC FILES.(admin directory). 
+F. INSTALL OPTIONAL MODULES
 
+0. Legacy (for older 2.3.4 BS and 2.3. - 2.3.4 Standard versions whithout hooks)
+0.1 Upload New file:
+legacy/[catalog]/includes/classes/hooks.php
 
 A. ADDING NEW FILES.
 copy the new files provided into the same location in your catalog and admin directory.
@@ -95,8 +99,33 @@ copy the new files provided into the same location in your catalog and admin dir
 ====DONE====
 	
 ******************************************************************************************
+B. INSTALL REQUIRED MODULES
 
-B. EDITING OSC FILES.(catalog directory).
+1.)
+Access your admin area, install and setup the "Points and Rewards" header tags module. (Modules -> Header Tags)
+
+Installing the module will check if hook support is present in the store and apply all necessary modifications to the store files.
+If you see success messages for all modifications, your sloppy words cleaner is ready for use.
+
+If you see any warning that a file has not been modified, please follow the Instructions:
+C. EDITING OSC FILES.(catalog directory)
+and/or
+D. EDITING OSC FILES.(admin directory).
+
+2.)
+Access your admin area and install the "Points Redemptions" order total module. (Modules -> Order Total)
+This option must appear after "Sub-Total" and before "Total". 
+When you first install "Points Redemptions" the sort order no is set at a default of 4, which is the same as "Total" .
+YOU MUST change your value for "Total" sort order to any number higher then 4 (e.g. 5).
+
+3.)
+Access your admin area and install the "Points" payment method module. (Modules -> Payment)
+
+
+******************************************************************************************
+EDIT ONLY FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
+
+C. EDITING OSC FILES.(catalog directory).
 
 CATALOG STEP = 1.   open catalog/includes/modules/pages/tp_account.php
 
@@ -200,10 +229,9 @@ FIND:
   
 ADD AFTER IT:
 
-<?php
-// POINTS REWARDS BS
-   echo $OSCOM_Hooks->call('checkout_payment', 'CheckoutPaymentPoints');
-?>
+<!-- POINTS REWARDS BS -->
+    <?php echo $OSCOM_Hooks->call('checkout_payment', 'CheckoutPaymentPoints'); ?>
+
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
@@ -301,7 +329,7 @@ FIND:
 ADD AFTER IT:
 
 <!-- POINTS REWARDS BS -->
-	  <?php echo $OSCOM_Hooks->call('create_account_success', 'CreateAccountSuccess');	?>               
+	    <?php echo $OSCOM_Hooks->call('create_account_success', 'CreateAccountSuccess'); ?>
                
 
 SAVE AND CLOSE!
@@ -471,13 +499,9 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-***********************************************************************************************
+EDIT ONLY FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
 
-CONGRATULATIONS ! YOU ARE HALF WAY DONE! NOW LET'S DO THE ADMIN SECTION AND FINISH THE JOB!
-
-***********************************************************************************************
-
-C. EDITING OSC FILES.(admin directory).
+D. EDITING OSC FILES.(admin directory).
 
 ADMIN STEP = 1.   open admin/orders.php
 This will add a quick pending points conformation check box.
@@ -515,8 +539,8 @@ FIND:
 	  
 ADD AFTER IT:
 			
-<!-- // BOF POINTS REWARDS BS //-->
-        <?php echo $OSCOM_Hooks->call('orders', 'PointsOrderPointsFields'); ?>
+<!-- POINTS REWARDS BS -->
+	    <?php echo $OSCOM_Hooks->call('orders', 'PointsOrderPointsFields'); ?>
 
 
 SAVE AND CLOSE!
@@ -542,19 +566,6 @@ SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 ******************************************************************************************
 
-D. INSTALL MODULE
-
-1.)
-Access your admin area and install the "Points Redemptions" order total module. (Modules -> Order Total)
-This option must appear after "Sub-Total" and before "Total". 
-When you first install "Points Redemptions" the sort order no is set at a default of 4, which is the same as "Total" .
-YOU MUST change your value for "Total" sort order to any number higher then 4 (e.g. 5).
-
-2.)
-Access your admin area, install and setup the "Points and Rewards" header tags module. (Modules -> Header Tags)
-
-3.)
-Access your admin area and install the "Points" payment method module. (Modules -> Payment)
 
 E. INSTALL OPTIONAL MODULES
 

@@ -156,64 +156,82 @@
       //loop pages
       foreach (get_pages() as $page) {
 
-        // remove hook register and calls in all related pages
-        // define hook code for all pages
-        $points_remove_hook = null;
+        // remove points and rewards code in all related pages
+        // define points and rewards code for all pages
+        $points_remove_code = null;
         $points_remove_lines = null;
-        $points_remove_hook = array();
+        $points_remove_code = array();
         $points_remove_lines = array();
-        $points_remove_hook[] = array('// POINTS REWARDS BS');
+        $points_remove_code[] = array('// POINTS REWARDS BS');
         $points_remove_lines[] = 0;
         
         switch ($page) {
         case 'checkout_confirmation.php':        
-          $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'checkout_confirmation\');');
+          $points_remove_code[] = array('  $OSCOM_Hooks->register(\'checkout_confirmation\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('    echo $OSCOM_Hooks->call(\'checkout_confirmation\', \'CheckoutConfirmPoints\');');
+          $points_remove_code[] = array('    echo $OSCOM_Hooks->call(\'checkout_confirmation\', \'CheckoutConfirmPoints\');');
           $points_remove_lines[] = 1;
           break;                                           
         case 'checkout_payment.php':
-          $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'checkout_payment\');');
+          $points_remove_code[] = array('  $OSCOM_Hooks->register(\'checkout_payment\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('<!-- POINTS REWARDS BS -->');
+          $points_remove_code[] = array('<!-- POINTS REWARDS BS -->');
           $points_remove_lines[] = 0;
-          $points_remove_hook[] = array('    <?php echo $OSCOM_Hooks->call(\'checkout_payment\', \'CheckoutPaymentPoints\'); ?>');
+          $points_remove_code[] = array('    <?php echo $OSCOM_Hooks->call(\'checkout_payment\', \'CheckoutPaymentPoints\'); ?>');
           $points_remove_lines[] = 1;
           break;          
         case 'checkout_process.php':
-          $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'checkout_process\');');
+          $points_remove_code[] = array('  $OSCOM_Hooks->register(\'checkout_process\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessAddPoints\');');
+          $points_remove_code[] = array('  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessAddPoints\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessUnregister\');');
+          $points_remove_code[] = array('  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessUnregister\');');
           $points_remove_lines[] = 1;
           break;          
         case 'create_account.php':
-          $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'create_account\');');
+          $points_remove_code[] = array('  $OSCOM_Hooks->register(\'create_account\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('      echo $OSCOM_Hooks->call(\'create_account\', \'CreateAccountMailMod\');');
+          $points_remove_code[] = array('      echo $OSCOM_Hooks->call(\'create_account\', \'CreateAccountMailMod\');');
           $points_remove_lines[] = 1;
           break;          
         case 'create_account_success.php':
-          $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'create_account_success\');');
+          $points_remove_code[] = array('  $OSCOM_Hooks->register(\'create_account_success\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('<!-- POINTS REWARDS BS -->');
+          $points_remove_code[] = array('<!-- POINTS REWARDS BS -->');
           $points_remove_lines[] = 0;
-          $points_remove_hook[] = array('	    <?php echo $OSCOM_Hooks->call(\'create_account_success\', \'CreateAccountSuccess\'); ?>');
+          $points_remove_code[] = array('	    <?php echo $OSCOM_Hooks->call(\'create_account_success\', \'CreateAccountSuccess\'); ?>');
+          $points_remove_lines[] = 0;
+          break;
+        case 'product_info.php':
+          $points_remove_code[] = array('<!-- BOF POINTS REWARDS BS //-->');
+          $points_remove_lines[] = 1;
+          $points_remove_code[] = array('  <?php echo $oscTemplate->getContent(\'product_info_points\'); ?>');
+          $points_remove_lines[] = 1;
+          $points_remove_code[] = array('<!-- EOF POINTS REWARDS BS //-->');
+          $points_remove_lines[] = 0;
+          break;
+        case 'product_reviews.php':
+        case 'product_reviews_write.php':
+        case 'reviews.php':
+          $points_remove_code[] = array('<!-- BOF POINTS REWARDS BS //-->');
+          $points_remove_lines[] = 1;
+          $points_remove_code[] = array('  <?php echo $oscTemplate->getContent(\'reviews_points\'); ?>');
+          $points_remove_lines[] = 1;
+          $points_remove_code[] = array('<!-- EOF POINTS REWARDS BS //-->');
           $points_remove_lines[] = 0;
           break;
         case str_replace(DIR_WS_CATALOG, '', DIR_WS_ADMIN) . 'orders.php':
           if ( !file_exists(DIR_FS_CATALOG . 'includes/hooks/admin/orders/paypal.php') ) {
-            $points_remove_hook[] = array('  $OSCOM_Hooks->register(\'orders\');');
+            $points_remove_code[] = array('  $OSCOM_Hooks->register(\'orders\');');
             $points_remove_lines[] = 1;
           }
-          $points_remove_hook[] = array('          echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderUpdatePoints\');');
+          $points_remove_code[] = array('          echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderUpdatePoints\');');
           $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('        echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderRemovePoints\');');
-          $points_remove_lines[] = 1;
-          $points_remove_hook[] = array('<!-- POINTS REWARDS BS -->');
+          $points_remove_code[] = array('        echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderRemovePoints\');');
           $points_remove_lines[] = 0;
-          $points_remove_hook[] = array('	    <?php echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderPointsFields\'); ?>');
+          $points_remove_code[] = array('<!-- POINTS REWARDS BS -->');
+          $points_remove_lines[] = 0;
+          $points_remove_code[] = array('	    <?php echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderPointsFields\'); ?>');
           $points_remove_lines[] = 0;
           break;
         }
@@ -232,20 +250,20 @@
             $page_array = explode("\n", $data);
           }
 
-          if (is_array($points_remove_hook)) {
+          if (is_array($points_remove_code)) {
             $fp = fopen(DIR_FS_CATALOG . $page, 'w');
             fwrite($fp, implode("\n", $page_array));
             fclose($fp);
 
-            if ( in_array('// POINTS REWARDS BS', $page_array) ) {
+            if ( in_array('// POINTS REWARDS BS', $page_array) || in_array('<!-- BOF POINTS REWARDS BS //-->', $page_array) ) {
               for ($i=0, $n=(sizeof($page_array)); $i<$n; $i++) {
-                for ($j=0, $k=sizeof($points_remove_hook); $j<$k; $j++) {
-                  if ( isset($page_array[$i]) && (in_array($page_array[$i], $points_remove_hook[$j])) ) {
+                for ($j=0, $k=sizeof($points_remove_code); $j<$k; $j++) {
+                  if ( isset($page_array[$i]) && (in_array($page_array[$i], $points_remove_code[$j])) ) {
                     if ( $points_remove_lines[$j] == 1 ) {
                         unset($page_array[$i-1]); // remove blank line(s) above
                         unset($page_array[$i+1]); // remove blank line(s) below
                     }
-                    unset($page_array[$i]); // remove points hook code
+                    unset($page_array[$i]); // remove points code
                   } // end if in array code
                 } // end loop code array
               }  // end loop page array
@@ -255,12 +273,12 @@
             $fp = fopen(DIR_FS_CATALOG . $page, 'w');
             fwrite($fp, implode("\n", $page_array));
             fclose($fp);
-          } // end is_array $points_remove_hook
+          } // end is_array $points_remove
     
         } // end remove code if page file exists
 
         // check removed code
-        $this->check_remove_points_hooks($page, $points_remove_hook);
+        $this->check_remove_points_hooks($page, $points_remove_code);
         
       } // end loop through pages
     } //end remove
@@ -293,15 +311,15 @@
                    'MODULE_HEADER_TAGS_POINTS_REWARDS_SORT_ORDER');
     }
 
-    // function add points and rewards hooks register and call in account files  
+    // function add points and rewards code to core files  
     function install_points_hooks($page, $page_array) {
          
-      // define hook register and call ref code and added code lines
-      $points_code_hook = null;
-      $points_code_hook_ref = null;
+      // define points and rewards ref code and added code lines
+      $points_code = null;
+      $points_code_ref = null;
       $points_code_lines = null;
-      $points_code_hook_ref = array();
-      $points_code_hook = array();
+      $points_code_ref = array();
+      $points_code = array();
       $points_code_lines = array();
       $hook_register = false;
       
@@ -314,14 +332,14 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '// POINTS REWARDS BS',
                                       '  $OSCOM_Hooks->register(\'checkout_confirmation\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = '$payment_modules->update_status();';
-        $points_code_hook[] = array('',
+        $points_code_ref[] = '$payment_modules->update_status();';
+        $points_code[] = array('',
                                     '// POINTS REWARDS BS',
                                     '    echo $OSCOM_Hooks->call(\'checkout_confirmation\', \'CheckoutConfirmPoints\');');
         $points_code_lines[] = 1;
@@ -334,14 +352,14 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '// POINTS REWARDS BS',
                                       '  $OSCOM_Hooks->register(\'checkout_payment\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = '$radio_buttons++;';
-        $points_code_hook[] = array('<!-- POINTS REWARDS BS -->',
+        $points_code_ref[] = '$radio_buttons++;';
+        $points_code[] = array('<!-- POINTS REWARDS BS -->',
                                     '    <?php echo $OSCOM_Hooks->call(\'checkout_payment\', \'CheckoutPaymentPoints\'); ?>',
                                     '');
         $points_code_lines[] = 8;
@@ -354,19 +372,19 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '// POINTS REWARDS BS',
                                       '  $OSCOM_Hooks->register(\'checkout_process\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = 'tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);';
-        $points_code_hook[] = array('',
+        $points_code_ref[] = 'tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);';
+        $points_code[] = array('',
                                     '// POINTS REWARDS BS',
                                     '  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessAddPoints\');');
         $points_code_lines[] = 2;
-        $points_code_hook_ref[] = 'tep_session_unregister(\'comments\');';
-        $points_code_hook[] = array('',
+        $points_code_ref[] = 'tep_session_unregister(\'comments\');';
+        $points_code[] = array('',
                                     '// POINTS REWARDS BS',
                                     '  echo $OSCOM_Hooks->call(\'checkout_process\', \'CheckoutProcessUnregister\');');
         $points_code_lines[] = 1;
@@ -379,14 +397,14 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '// POINTS REWARDS BS',
                                       '  $OSCOM_Hooks->register(\'create_account\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = '$email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;';
-        $points_code_hook[] = array('// POINTS REWARDS BS',
+        $points_code_ref[] = '$email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;';
+        $points_code[] = array('// POINTS REWARDS BS',
                                     '      echo $OSCOM_Hooks->call(\'create_account\', \'CreateAccountMailMod\');',
                                     '');
         $points_code_lines[] = 1;
@@ -399,16 +417,47 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '// POINTS REWARDS BS',
                                       '  $OSCOM_Hooks->register(\'create_account_success\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = '<?php echo TEXT_ACCOUNT_CREATED; ?>';
-        $points_code_hook[] = array('<!-- POINTS REWARDS BS -->',
+        $points_code_ref[] = '<?php echo TEXT_ACCOUNT_CREATED; ?>';
+        $points_code[] = array('<!-- POINTS REWARDS BS -->',
                                     '	    <?php echo $OSCOM_Hooks->call(\'create_account_success\', \'CreateAccountSuccess\'); ?>');
         $points_code_lines[] = 1;
+        break;
+      case 'product_info.php':
+        $points_code_ref[] = '?php echo $products_price; ?>';
+        $points_code[] = array('',
+                                    '<!-- BOF POINTS REWARDS BS //-->',
+                                    '<div class="row">',
+                                    '  <?php echo $oscTemplate->getContent(\'product_info_points\'); ?>',
+                                    '</div>',
+                                    '<!-- EOF POINTS REWARDS BS //-->');
+        $points_code_lines[] = 3;
+        break;
+      case 'product_reviews.php':
+      case 'product_reviews_write.php':
+        $points_code_ref[] = '?php echo $products_price; ?>';
+        $points_code[] = array('',
+                                    '<!-- BOF POINTS REWARDS BS //-->',
+                                    '<div class="row">',
+                                    '  <?php echo $oscTemplate->getContent(\'reviews_points\'); ?>',
+                                    '</div>',
+                                    '<!-- EOF POINTS REWARDS BS //-->');
+        $points_code_lines[] = 3;
+        break;
+      case 'reviews.php':
+        $points_code_ref[] = '<?php echo HEADING_TITLE; ?>';
+        $points_code[] = array('',
+                                    '<!-- BOF POINTS REWARDS BS //-->',
+                                    '<div class="row">',
+                                    '  <?php echo $oscTemplate->getContent(\'reviews_points\'); ?>',
+                                    '</div>',
+                                    '<!-- EOF POINTS REWARDS BS //-->');
+        $points_code_lines[] = 4;
         break;
       case str_replace(DIR_WS_CATALOG, '', DIR_WS_ADMIN) . 'orders.php':
         foreach ($page_array as $page_array_element) {
@@ -418,35 +467,33 @@
           }
         }
         if ( $hook_register !== true ) {
-          $points_code_hook_ref[] = '(\'includes/application_top.php\');';
-          $points_code_hook[] = array('',
+          $points_code_ref[] = '(\'includes/application_top.php\');';
+          $points_code[] = array('',
                                       '  $OSCOM_Hooks->register(\'orders\');');
           $points_code_lines[] = 1;
         }
-        $points_code_hook_ref[] = '$customer_notified = \'1\';';
-        $points_code_hook[] = array('// POINTS REWARDS BS',
+        $points_code_ref[] = '$customer_notified = \'1\';';
+        $points_code[] = array('// POINTS REWARDS BS',
                                      '          echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderUpdatePoints\');',
                                      '');
         $points_code_lines[] = 3;
-        $points_code_hook_ref[] = 'tep_remove_order($oID, $_POST[\'restock\']);';
-        $points_code_hook[] = array('',
-                                    '// POINTS REWARDS BS',
-                                    '        echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderRemovePoints\');',
-                                    '');
+        $points_code_ref[] = 'tep_remove_order($oID, $_POST[\'restock\']);';
+        $points_code[] = array('// POINTS REWARDS BS',
+                                    '        echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderRemovePoints\');');
         $points_code_lines[] = 3;
-        $points_code_hook_ref[] = '<td><?php echo tep_draw_checkbox_field(\'notify_comments\', \'\', true); ?></td>';
-        $points_code_hook[] = array('<!-- POINTS REWARDS BS -->',
+        $points_code_ref[] = '<td><?php echo tep_draw_checkbox_field(\'notify_comments\', \'\', true); ?></td>';
+        $points_code[] = array('<!-- POINTS REWARDS BS -->',
                                     '	    <?php echo $OSCOM_Hooks->call(\'orders\', \'PointsOrderPointsFields\'); ?>');
         $points_code_lines[] = 2;
         break;
       }
       
        // add hook code to files
-      if ( !in_array('// POINTS REWARDS BS', $page_array) ) {
+      if ( !in_array('// POINTS REWARDS BS', $page_array)  && !in_array('<!-- BOF POINTS REWARDS BS //-->', $page_array) ) {
         for ($i=0, $n=sizeof($page_array); $i<$n; $i++) {
-          for ($j=0, $k=sizeof($points_code_hook_ref); $j<$k; $j++) {
-            if ( strpos($page_array[$i], $points_code_hook_ref[$j]) ) {
-              array_splice($page_array, $i+$points_code_lines[$j], 0, $points_code_hook[$j]);
+          for ($j=0, $k=sizeof($points_code_ref); $j<$k; $j++) {
+            if ( strpos($page_array[$i], $points_code_ref[$j]) ) {
+              array_splice($page_array, $i+$points_code_lines[$j], 0, $points_code[$j]);
             }
           }
         }
@@ -455,7 +502,7 @@
       return $page_array;
     } 
 
-    // function check points and rewards hooks register and call installation in account files  
+    // function check points and rewards hooks register and call installation in core files  
     function check_points_hooks($page) {
      
         $page_array = null;
@@ -473,7 +520,7 @@
             $page_array = explode("\n", $data);
           }
           
-          if ( !in_array('// POINTS REWARDS BS', $page_array) ) {
+          if ( !in_array('// POINTS REWARDS BS', $page_array) && !in_array('<!-- BOF POINTS REWARDS BS //-->', $page_array) ) {
             $error = true;
             $this->recover_backup($page);
           }
@@ -487,7 +534,7 @@
     } 
 
     // function check remove points and rewards hooks register and call installation in account files  
-    function check_remove_points_hooks($page, $points_remove_hook) {
+    function check_remove_points_hooks($page, $points_remove_code) {
      
         // check remove
         $page_array = null;
@@ -560,22 +607,22 @@ Deny from all
     function show_install_message($page, $error) {
       global $messageStack;
       if ($error == false) {
-        $messageStack->add_session('Points and Rewards hook codes have been successfully added to the file: "' . $page . '"', 'success');
+        $messageStack->add_session('Points and Rewards codes have been successfully added to the file: "' . $page . '"', 'success');
       } else {
         $bak_page = $page;
         if (strpos($bak_page, '/')) $bak_page = substr($bak_page, strrpos($bak_page, '/')+1); // for ext/.../paypal files
-        $messageStack->add_session('There was an error encountered when trying to add the points and rewards hook code to the file: "' . $page . '".<br>The original file has been recovered from the auto backup: "/points_backups/' . $bak_page . '.bak" Please check the file and apply the required modifications manually.', 'warning');
+        $messageStack->add_session('There was an error encountered when trying to add the points and rewards code to the file: "' . $page . '".<br>The original file has been recovered from the auto backup: "/points_backups/' . $bak_page . '.bak" Please check the file and apply the required modifications manually.', 'warning');
       }
     }
   
     function show_remove_message($page, $error) {
       global $messageStack;
       if ($error == false) {
-        $messageStack->add_session('Points and Rewards hook codes have been successfully removed from the file: "' . $page . '"', 'success');
+        $messageStack->add_session('Points and Rewards codes have been successfully removed from the file: "' . $page . '"', 'success');
       } else {
         $bak_page = $page;
         if (strpos($bak_page, '/')) $bak_page = substr($bak_page, strrpos($bak_page, '/')+1); // for ext/.../paypal files
-        $messageStack->add_session('There was an error encountered when trying to remove the points and rewards hook code from the file: "' . $page . '".<br>Please check the file and recover the backup file: "/points_backups/' . $bak_page . '.bak" or your own previous backup file if needed.', 'warning');
+        $messageStack->add_session('There was an error encountered when trying to remove the points and rewards code from the file: "' . $page . '".<br>Please check the file and recover the backup file: "/points_backups/' . $bak_page . '.bak" or your own previous backup file if needed.', 'warning');
       }
     }
    
@@ -598,8 +645,8 @@ Deny from all
         $page_array = array();
 
         // check if hook class is included and initiated in application_top.php
-        $points_code_hook_class_incl = '\'includes/classes/hooks.php\'';
-        $points_code_hook_class_new = '$OSCOM_Hooks = new hooks(\'shop\');';
+        $points_code_class_incl = '\'includes/classes/hooks.php\'';
+        $points_code_class_new = '$OSCOM_Hooks = new hooks(\'shop\');';
     
         // create page content array
         if (filesize(DIR_FS_CATALOG . $page) > 0) {
@@ -610,29 +657,29 @@ Deny from all
           $page_array = explode("\n", $data);
       
 
-          if ( isset($points_code_hook_class_incl) && isset($points_code_hook_class_new) ) {
+          if ( isset($points_code_class_incl) && isset($points_code_class_new) ) {
             $fp = fopen(DIR_FS_CATALOG . $page, 'w');
             fwrite($fp, implode("\n", $page_array));
             fclose($fp);
    
             $hook_class_error = true;
             for ($i=0, $n=sizeof($page_array); $i<$n; $i++) {
-              if ( (tep_not_null($page_array[$i]) && strpos($page_array[$i], $points_code_hook_class_incl) !== false) && 
-                   (tep_not_null($page_array[$i+1]) && strpos($page_array[$i+1], $points_code_hook_class_new) !== false) ) {
+              if ( (tep_not_null($page_array[$i]) && strpos($page_array[$i], $points_code_class_incl) !== false) && 
+                   (tep_not_null($page_array[$i+1]) && strpos($page_array[$i+1], $points_code_class_new) !== false) ) {
                 $hook_class_error = false;
               }
             }
                       
             if ($hook_class_error == true) {
-              $points_code_hook_class_ref_1 = 'require(\'includes/functions/html_output.php\');';
-              $points_code_hook_class_ref_2 = 'require(DIR_WS_FUNCTIONS . \'html_output.php\');';
+              $points_code_class_ref_1 = 'require(\'includes/functions/html_output.php\');';
+              $points_code_class_ref_2 = 'require(DIR_WS_FUNCTIONS . \'html_output.php\');';
               $sswcleaner_hook_class = array('// hooks',
                                            '  require(\'includes/classes/hooks.php\');',
                                            '  $OSCOM_Hooks = new hooks(\'shop\');',
                                            '');
               
               for ($i=0, $n=sizeof($page_array); $i<$n; $i++) {
-               if ( strpos($page_array[$i], $points_code_hook_class_ref_1) || strpos($page_array[$i], $points_code_hook_class_ref_2)) {
+               if ( strpos($page_array[$i], $points_code_class_ref_1) || strpos($page_array[$i], $points_code_class_ref_2)) {
                   array_splice($page_array, $i+2, 0, $sswcleaner_hook_class);
                 }
               }
@@ -668,7 +715,7 @@ Deny from all
                 }
               }
             } elseif ($hook_class_file_error == false) {
-              $messageStack->add_session('Hook support found, Great!"', 'success'); // hook support ok
+              $messageStack->add_session('Store Hook support found, Great!"', 'success'); // hook support ok
             }
 
           } // end add hook support to application_top.php            
@@ -684,8 +731,8 @@ Deny from all
         $page_array = array();
 
         // check if hook class is included and initiated in application_top.php
-        $points_code_hook_class_incl = '\'includes/classes/hooks.php\'';
-        $points_code_hook_class_new = '$OSCOM_Hooks = new hooks(\'admin\');';
+        $points_code_class_incl = '\'includes/classes/hooks.php\'';
+        $points_code_class_new = '$OSCOM_Hooks = new hooks(\'admin\');';
     
         // create page content array
         if (filesize(DIR_FS_CATALOG . $page) > 0) {
@@ -696,15 +743,15 @@ Deny from all
           $page_array = explode("\n", $data);
       
 
-          if ( isset($points_code_hook_class_incl) && isset($points_code_hook_class_new) ) {
+          if ( isset($points_code_class_incl) && isset($points_code_class_new) ) {
             $fp = fopen(DIR_FS_CATALOG . $page, 'w');
             fwrite($fp, implode("\n", $page_array));
             fclose($fp);
    
             $hook_class_error = true;
             for ($i=0, $n=sizeof($page_array); $i<$n; $i++) {
-              if ( (tep_not_null($page_array[$i]) && strpos($page_array[$i], $points_code_hook_class_incl) !== false) && 
-                   (tep_not_null($page_array[$i+1]) && strpos($page_array[$i+1], $points_code_hook_class_new) !== false) ) {
+              if ( (tep_not_null($page_array[$i]) && strpos($page_array[$i], $points_code_class_incl) !== false) && 
+                   (tep_not_null($page_array[$i+1]) && strpos($page_array[$i+1], $points_code_class_new) !== false) ) {
                 $hook_class_error = false;
               }
             }
@@ -746,7 +793,7 @@ Deny from all
                 }
               }
             } elseif ($hook_class_file_error == false) {
-              $messageStack->add_session('Hook support found, Great!"', 'success'); // hook support ok
+              $messageStack->add_session('Admin Hook support found, Great!"', 'success'); // hook support ok
             }
 
           } // end add hook support to application_top.php            
@@ -763,13 +810,12 @@ Deny from all
                          'checkout_process.php',
                          'create_account.php',
                          'create_account_success.php',
+                         'product_info.php',
+                         'product_reviews.php',
+                         'product_reviews_write.php',
+                         'reviews.php',
                          str_replace(DIR_WS_CATALOG, '', DIR_WS_ADMIN) . 'orders.php');
-    
-    
-//echo '<br><br>$page' . str_replace(DIR_WS_CATALOG, '', DIR_WS_ADMIN) . '<br><br>';    
-//die;
-
-    
+        
     // check if pages exist
     for ($i=0, $n=sizeof($pages_array); $i<$n; $i++) {
       if ( !file_exists(DIR_FS_CATALOG . $pages_array[$i]) ) unset($pages_array[$i]);
