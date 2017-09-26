@@ -54,7 +54,6 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/includes/languages/english/hooks/shop/checkout_process/points.php
     catalog/includes/languages/english/hooks/shop/create_account/points.php
     catalog/includes/languages/english/hooks/shop/create_account_success/points.php
-	catalog/includes/languages/english/modules/boxes/bm_information_points.php
 	catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
 	catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
 	catalog/includes/languages/english/modules/content/reviews_points/cm_r_points.php
@@ -123,11 +122,15 @@ Access your admin area and install the "Points" payment method module. (Modules 
 
 
 ******************************************************************************************
-EDIT ONLY FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
 
-C. EDITING OSC FILES.(catalog directory).
+C. modify OSC FILES.(catalog directory).
 
 CATALOG STEP = 1.   open catalog/includes/modules/pages/tp_account.php
+
+If your file is unmodified, you are save to upload and replace the following file:
+modified_core_files/catalog/includes/modules/pages/tp_account.php
+
+Otherwise apply the following modification:
 
 **This step has 2 parts
 
@@ -174,9 +177,90 @@ ADD AFTER IT:
 
 
 SAVE AND CLOSE!
+
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 2.   open catalog/checkout_confirmation.php
+CATALOG STEP = 2.   catalog/includes/modules/boxes/templates/information.php
+
+If your file is unmodified, you are save to upload and replace the following file:
+modified_core_files/catalog/includes/modules/boxes/templates/information.php
+
+Otherwise apply the following modification:
+
+
+**This step has 1 part
+
+FIND:
+
+      <li><a href="<?php echo tep_href_link('conditions.php'); ?>"><?php echo MODULE_BOXES_INFORMATION_BOX_CONDITIONS; ?></a></li>
+
+ADD AFTER IT:
+
+      <li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo MODULE_BOXES_INFORMATION_POINTS_BOX_MY_POINTS_HELP; ?></a></li> <!-- POINTS REWARDS BS //-->
+	  
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+CATALOG STEP = 3.   catalog/languages/english/includes/modules/boxes/bm_information.php
+
+If your file is unmodified, you are save to upload and replace the following file:
+modified_core_files/catalog/includes/modules/boxes/bm_information.php
+
+Otherwise apply the following modification:
+
+
+**This step has 1 part
+
+ADD:
+
+  define('MODULE_BOXES_INFORMATION_POINTS_BOX_MY_POINTS_HELP', 'Point Program FAQ'); // POINTS REWARDS BS
+  
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+CATALOG STEP = 4.   catalog/includes/modules/content/footer/templates/links.php
+
+If your file is unmodified, you are save to upload and replace the following file:
+modified_core_files/catalog/includes/modules/boxes/templates/links.php
+
+Otherwise apply the following modification:
+
+
+**This step has 1 part
+
+FIND:
+
+      <li><a href="<?php echo tep_href_link('conditions.php'); ?>"><?php echo MODULE_CONTENT_FOOTER_INFORMATION_CONDITIONS; ?></a></li>
+
+ADD AFTER IT:
+
+      <li><a href="<?php echo tep_href_link('my_points_help.php'); ?>"><?php echo MODULE_CONTENT_FOOTER_INFORMATION_MY_POINTS_HELP; ?></a></li> <!-- POINTS REWARDS BS //-->
+	  
+
+SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
+CATALOG STEP = 5.   catalog/languages/english/includes/modules/content/footer/cm_information_links.php
+
+If your file is unmodified, you are save to upload and replace the following file:
+modified_core_files/catalog/includes/modules/boxes/bm_information.php
+
+Otherwise apply the following modification:
+
+
+**This step has 1 part
+
+ADD:
+
+  define('MODULE_CONTENT_FOOTER_INFORMATION_MY_POINTS_HELP', 'Reward Points');
+  
+
+SAVE AND CLOSE!
+
+------------------------------------------------------------------------------------------
+EDIT TYHE FOLLOWING FILES ONLY FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
+------------------------------------------------------------------------------------------
+
+CATALOG STEP = 6.   open catalog/checkout_confirmation.php
 This will add hook register and call to checkout_confirmation page.
 
 **This step has 2 parts
@@ -202,7 +286,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 3.   open catalog/checkout_payment.php
+CATALOG STEP = 7.   open catalog/checkout_payment.php
 This will allow points to be used as payment method.
 
 **This step has 2 parts
@@ -236,7 +320,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 4.   open catalog/checkout_process.php
+CATALOG STEP = 8.   open catalog/checkout_process.php
 this will..
  1.Add pending points for a new success order with or without shipping cost.
  2.Balance customer shopping points account if points used.
@@ -275,7 +359,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 5.   open catalog/create_account.php
+CATALOG STEP = 9.   open catalog/create_account.php
 This will add Welcome Points (and send email) defined by admin if enabled.
 
 **This step has 2 parts
@@ -303,7 +387,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!  	  
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 6.   open catalog/create_account_success.php
+CATALOG STEP = 10.   open catalog/create_account_success.php
 This will add the text to notify the new signup users of the Welcome Points received,
 with a link to the points page and points FAQ page.
 
@@ -335,7 +419,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
    
-CATALOG STEP = 7.   open catalog/product_info.php
+CATALOG STEP = 11.   open catalog/product_info.php
 This will add the points credit information content module (if enabled).
 
 FIND:
@@ -360,7 +444,7 @@ OR place it anywhere you wish the information to be shown
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 8.   open catalog/product_reviews.php
+CATALOG STEP = 12.   open catalog/product_reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -384,7 +468,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 9.   open catalog/product_reviews_write.php
+CATALOG STEP = 13.   open catalog/product_reviews_write.php
 this will add the points and notify customers of points given for review and add link to points system help file
 
 
@@ -409,7 +493,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 10.   open catalog/reviews.php
+CATALOG STEP = 15.   open catalog/reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -432,14 +516,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 11.   open catalog/includes/application_top.php
-
-MOVED TO HOOKS AND MODULES
-  
-SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 12.   open catalog/includes/modules/payment/paypal_standard.php
+CATALOG STEP = 16.   open catalog/includes/modules/payment/paypal_standard.php
 (This is an optional step and only needed if you use the PayPal Standard payment method.)
 
 ** this step has 2 parts.
@@ -544,23 +621,7 @@ ADD AFTER IT:
 
 
 SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
                                          
-ADMIN STEP = 2.   open admin/includes/functions/general.php
-This is to make sure that pending points for any order you delete will also deleted,
-(please note that this will delete points in a pending status only, if you delete and order that
-its points already approved you will have to delete those points manually)
-
-MOVED INTO HOOK
-
-SAVE AND CLOSE!
-------------------------------------------------------------------------------------------
-                                         
-ADMIN STEP = 3.   open admin/includes/languages/english.php
-
-MOVED INTO BOX MODULE
-
-SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 ##################  END OF STEP BY STEP INSTALLATION      ################################
 ------------------------------------------------------------------------------------------
