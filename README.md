@@ -80,7 +80,7 @@ To do list and tasks asigend:
   - german asigned @Tsimi 17/09/2017
   - spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín)
   
-- add installation checks to all modules asigned @raiwa 2017_09_26
+- <s>add installation checks to all modules DONE @raiwa 2017_10_01</s>
   
 - add version, developer and copyright info to header comments in all files. @Tsimi/@LeeFoster?
 
