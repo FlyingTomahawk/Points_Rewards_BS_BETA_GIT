@@ -15,6 +15,12 @@
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_TITLE', 'Points Redeemptions');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_HEADER', 'Points Redeemptions');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_DESCRIPTION', 'Points Redeemptions');
+
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_WARNING', '<strong>Points and Rewards Header Tag Module</strong> is not installed. It is required.');
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_INSTALL_NOW', '<u>Install Now Points and Rewards Header Tag Module</u>');
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_PM_WARNING', '<strong>Points Payment Module</strong> is not installed. It is required.');
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_PM_INSTALL_NOW', '<u>Install Now Points Payment Module</u>');
+
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_TEXT', 'Points Redeemed');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_POINTS', 'Points :');
 

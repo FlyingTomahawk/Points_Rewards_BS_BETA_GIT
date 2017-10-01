@@ -19,8 +19,16 @@
       $this->code = 'ot_redemptions';
       $this->title = MODULE_ORDER_TOTAL_REDEMPTIONS_TITLE;
       $this->description = MODULE_ORDER_TOTAL_REDEMPTIONS_DESCRIPTION;
+      if (!defined('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM') || MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_ORDER_TOTAL_REDEMPTIONS_HT_WARNING . '<br>
+                                <a href="modules.php?set=header_tags&module=ht_points_rewards&action=install">' . MODULE_ORDER_TOTAL_REDEMPTIONS_HT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_PAYMENT_POINTS_STATUS') || MODULE_PAYMENT_POINTS_STATUS != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_ORDER_TOTAL_REDEMPTIONS_PM_WARNING . '<br>
+                                <a href="modules.php?set=payment&module=points&action=install">' . MODULE_ORDER_TOTAL_REDEMPTIONS_PM_INSTALL_NOW . '</a></div>';
+      }
       if($this->check())
-        $this->enabled = ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True') ? true : false);
+        $this->enabled = ( !defined('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM') || (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True') ? true : false);
       else
         $this->enabled = false;
       $this->sort_order = MODULE_ORDER_TOTAL_REDEMPTIONS_SORT_ORDER;

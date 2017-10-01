@@ -21,6 +21,14 @@
     function __construct() {
       $this->title = MODULE_HEADER_TAGS_POINTS_REWARDS_TITLE;
       $this->description = MODULE_HEADER_TAGS_POINTS_REWARDS_DESCRIPTION;
+      if (!defined('MODULE_ORDER_TOTAL_REDEMPTIONS_SORT_ORDER')) {
+        $this->description .=   '<div class="secWarning">' . MODULE_HEADER_TAGS_POINTS_REWARDS_OT_WARNING . '<br>
+                                <a href="modules.php?set=order_total&module=ot_redemptions&action=install">' . MODULE_HEADER_TAGS_POINTS_REWARDS_OT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_PAYMENT_POINTS_STATUS') || MODULE_PAYMENT_POINTS_STATUS != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_HEADER_TAGS_POINTS_REWARDS_PM_WARNING . '<br>
+                                <a href="modules.php?set=payment&module=points&action=install">' . MODULE_HEADER_TAGS_POINTS_REWARDS_PM_INSTALL_NOW . '</a></div>';
+      }
 
       if ( defined('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM') ) {
         $this->sort_order = MODULE_HEADER_TAGS_POINTS_REWARDS_SORT_ORDER;

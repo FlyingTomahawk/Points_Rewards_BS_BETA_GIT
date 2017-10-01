@@ -13,9 +13,9 @@
   define('MODULE_HEADER_TAGS_POINTS_REWARDS_TITLE', 'Points and Rewards Module');
   define('MODULE_HEADER_TAGS_POINTS_REWARDS_DESCRIPTION', 'Use Points and Rewards Module');
 
-// used in checkout_confirmation.php
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_POINTS_NOT', 'Points value are not enough to cover the cost of your purchase. Please select another payment method');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_NOT_VALID', 'The referral email does not appear to be valid - please make any necessary corrections.');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_NOT_FOUND', 'The referral email address you entered was not found.');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_SELF', 'Sorry you can not refer yourself.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_OT_WARNING', '<strong>Points and Rewards Order Total Module</strong> is not installed. It is required.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_OT_INSTALL_NOW', '<u>Install Now Points and Rewards Order Total Module</u>');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_PM_WARNING', '<strong>Points Payment Module</strong> is not installed. It is required.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_PM_INSTALL_NOW', '<u>Install Now Points Payment Module</u>');
+
 ?>

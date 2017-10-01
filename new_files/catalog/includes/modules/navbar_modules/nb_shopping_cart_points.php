@@ -22,6 +22,18 @@
     function __construct() {
       $this->title = MODULE_NAVBAR_SHOPPING_CART_POINTS_TITLE;
       $this->description = MODULE_NAVBAR_SHOPPING_CART_POINTS_DESCRIPTION;
+      if (!defined('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM') || MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_WARNING . '<br>
+                                <a href="modules.php?set=header_tags&module=ht_points_rewards&action=install">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_ORDER_TOTAL_REDEMPTIONS_SORT_ORDER')) {
+        $this->description .=   '<div class="secWarning">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_OT_WARNING . '<br>
+                                <a href="modules.php?set=order_total&module=ot_redemptions&action=install">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_OT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_PAYMENT_POINTS_STATUS') || MODULE_PAYMENT_POINTS_STATUS != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_PM_WARNING . '<br>
+                                <a href="modules.php?set=payment&module=points&action=install">' . MODULE_NAVBAR_SHOPPING_CART_POINTS_PM_INSTALL_NOW . '</a></div>';
+      }
 
       if ( defined('MODULE_NAVBAR_SHOPPING_CART_POINTS_STATUS') ) {
         $this->sort_order = MODULE_NAVBAR_SHOPPING_CART_POINTS_SORT_ORDER;
