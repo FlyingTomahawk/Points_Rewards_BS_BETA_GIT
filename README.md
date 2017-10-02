@@ -18,8 +18,8 @@ To do list and tasks asigend:
       - logoff.php DONE 11/09/2017 @raiwa
       - product_reviews_write.php first part DONE 11/09/2017 @raiwa
       - checkout_confirmation.php DONE 12/09/2017 @raiwa
-      - checkout_payment.php DONE javascript 13/09/2017 @raiwa</s>
-    - add language definitions to header tag/hook language file where possible
+      - checkout_payment.php DONE javascript 13/09/2017 @raiwa
+    - add language definitions to header tag/hook language file where possible</s>
 
 - create hook:
 
@@ -78,7 +78,7 @@ To do list and tasks asigend:
 - add other language translations
   - english @LeeFoster ?
   - german asigned @Tsimi 17/09/2017
-  - spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín)
+  - <s>spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín) DONE 2017_10_02</s> will be revised
   
 - <s>add installation checks to all modules DONE @raiwa 2017_10_01</s>
   
