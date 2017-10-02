@@ -4,9 +4,9 @@ To do list and tasks asigend:
 
  Steps proposal:
 
-- fixes for undefined errors (already partly done, working on this 10/09/2017 @raiwa)
+<s>- fixes for undefined errors (DONE, working on this 10/09/2017 @raiwa)
 
-<s>- fixes for known bugs like the one posted by @LeeFoster (asigned to @Tsimi 11/09/2017) DONE
+- fixes for known bugs like the one posted by @LeeFoster (asigned to @Tsimi 11/09/2017) DONE
 
 - create header tag module: (will begin with this 11/09/2017 @raiwa) DONE
 
