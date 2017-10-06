@@ -46,7 +46,7 @@
     }
 
     function execute() {
-      global $oscTemplate, $product_info, $currencies, $new_price;
+      global $oscTemplate, $product_info, $currencies, $new_price, $request_type;
       
       require_once('includes/functions/redemptions.php');
 
@@ -62,7 +62,7 @@
         $products_points = tep_calc_products_price_points($products_price_points);
         $products_points_value = tep_calc_price_pvalue($products_points);
         if ((MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS == 'True') || $new_price == false) {
-          $points_output = sprintf(MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS , number_format($products_points, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($products_points_value));
+          $points_output = sprintf(MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS , number_format($products_points, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format($products_points_value), '<a href="' . tep_href_link('my_points_help.php', '#heading3', $request_type) . '" title="' . MODULE_CONTENT_PRODUCT_INFO_POINTS_MY_POINTS_HELP . '">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_MY_POINTS_HELP . '</a>');
         
           ob_start();
           include('includes/modules/content/' . $this->group . '/templates/points.php');

@@ -13,6 +13,6 @@
 ?>
 <!-- Start cm_pi_points module -->
 <div id="cm_pi_points" class="col-sm-<?php echo $content_width; ?>">
-	<?php echo '<h4><span class="label label-info">' . $points_output . '</span></h4>'; ?>
+	<?php echo '<div class="alert alert-info" role="alert">' . $points_output . '</div>'; ?>
 </div>
 <!-- End cm_pi_points module -->

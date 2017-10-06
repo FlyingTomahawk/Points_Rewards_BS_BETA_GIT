@@ -20,4 +20,5 @@
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_WARNING', '<strong>Points Payment Module</strong> is not installed. It is required.');
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_INSTALL_NOW', '<u>Install Now Points Payment Module</u>');
 
-  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Buy this item and earn %s points valued at %s');
+  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Buy this item and earn %s points valued at %s. Please check the %s for more information.');
+  define('MODULE_CONTENT_PRODUCT_INFO_POINTS_MY_POINTS_HELP', 'Point Program FAQ');

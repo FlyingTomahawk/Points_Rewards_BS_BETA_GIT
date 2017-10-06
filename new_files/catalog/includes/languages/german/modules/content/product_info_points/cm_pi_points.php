@@ -13,4 +13,5 @@
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_TITLE', 'Produkt Bonuspunkte');
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_DESCRIPTION', 'Zeige den Bonuspunkte text auf der Produktinformations Seite.');
 
-  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Kaufen Sie dieses Produkt und verdienen Sie %s Bonuspunkte im Wert von %s');
+  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Kaufen Sie dieses Produkt und verdienen Sie %s Bonuspunkte im Wert von %s. Für weiter Informationen lesen Sie bitte unsere %s.');
+  define('MODULE_CONTENT_PRODUCT_INFO_POINTS_MY_POINTS_HELP', 'Bonuspunkte Fragen & Antworten');
