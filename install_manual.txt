@@ -143,7 +143,7 @@ REPLACE WITH:
 
     function build() {
       global $oscTemplate;
-      global $customer_id, $currencies; // POINTS REWARDS BS
+      global $language, $customer_id, $currencies, $request_type; // POINTS REWARDS BS
 	  
 FIND:
 
@@ -257,7 +257,7 @@ ADD:
 SAVE AND CLOSE!
 
 ------------------------------------------------------------------------------------------
-EDIT TYHE FOLLOWING FILES ONLY FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
+EDIT THE FOLLOWING FILES ONLY FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
 ------------------------------------------------------------------------------------------
 
 CATALOG STEP = 6.   open catalog/checkout_confirmation.php

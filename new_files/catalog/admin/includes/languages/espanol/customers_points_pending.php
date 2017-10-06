@@ -67,11 +67,11 @@ define('TEXT_QUEUE_POINTS_TABLE', 'Poner en cola la tabla de puntos de clientes'
 define('TEXT_NOTIFY_CUSTOMER', 'Notificar al Cliente');
 define('TEXT_SET_EXPIRE', 'Fijar nueva fecha de expiración');
 
-define('BUTTON_TEXT_ADJUST_POINTS', 'Ajustar la cantidad actual de puntos pendientes');
-define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Cancelar Puntos de Cliente');
-define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Confirmar Puntos al Cliente');
-define('BUTTON_TEXT_REMOVE_RECORD', 'Eliminar este registro de la base de datos');
-define('BUTTON_TEXT_ROLL_POINTS', 'Revertir puntos al estado de Pendiente');
+define('BUTTON_TEXT_ADJUST_POINTS', 'Ajustar Puntos');
+define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Cancelar Puntos');
+define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Confirmar Puntos');
+define('BUTTON_TEXT_REMOVE_RECORD', 'Eliminar este registro');
+define('BUTTON_TEXT_ROLL_POINTS', 'Revertir Puntos');
 define('ICON_PREVIEW_EDIT', 'Ver detalles de pedido o editar estado');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
