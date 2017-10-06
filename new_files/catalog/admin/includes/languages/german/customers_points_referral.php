@@ -72,11 +72,11 @@ define('TEXT_QUEUE_POINTS_TABLE', 'Punkteauflistiung aktualisieren?');
 define('TEXT_NOTIFY_CUSTOMER', 'Kunden benachrichtigen');
 define('TEXT_SET_EXPIRE', 'Neues Verfalldatum setzen');
 
-define('BUTTON_TEXT_ADJUST_POINTS', 'Aktuelle, offene Punkte anpassen');
-define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Kunden-Punkte stornieren');
-define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Punkte dem Kunden bestätigen');
-define('BUTTON_TEXT_REMOVE_RECORD', 'Diesen Eintrag aus der Datenbank löschen');
-define('BUTTON_TEXT_ROLL_POINTS', 'Punkte in den Status "Offen" zurücksetzen');
+define('BUTTON_TEXT_ADJUST_POINTS', 'Punkte anpassen');
+define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Punkte stornieren');
+define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Punkte bestätigen');
+define('BUTTON_TEXT_REMOVE_RECORD', 'Eintrag löschen');
+define('BUTTON_TEXT_ROLL_POINTS', 'Punkte zurücksetzen');
 define('ICON_PREVIEW_EDIT', 'Bestelldetails einsehen oder Status ändern');
 define('ICON_REVIEWS_EDIT', 'Bewertung einsehen oder ändern');
 

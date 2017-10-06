@@ -68,7 +68,7 @@ define('TEXT_SET_EXPIRE', 'Set new expire date');
 
 define('BUTTON_TEXT_ADD_POINTS', 'Add Points');
 define('BUTTON_TEXT_DELETE_POINTS', 'Remove Points');
-define('BUTTON_TEXT_ADJUST_POINTS', 'Adjust the current points amount');
+define('BUTTON_TEXT_ADJUST_POINTS', 'Adjust Points');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Points Account Update .');

@@ -66,7 +66,7 @@ define('TEXT_SET_EXPIRE', 'Neues Verfalldatum setzen');
 
 define('BUTTON_TEXT_ADD_POINTS', 'Punkte hinzufügen');
 define('BUTTON_TEXT_DELETE_POINTS', 'Punkte löschen');
-define('BUTTON_TEXT_ADJUST_POINTS', 'Punktestand anpassen');
+define('BUTTON_TEXT_ADJUST_POINTS', 'Punkte anpassen');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Bonuspunkte Aktualisierung');

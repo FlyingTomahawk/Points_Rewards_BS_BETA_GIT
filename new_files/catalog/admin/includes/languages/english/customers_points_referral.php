@@ -74,11 +74,11 @@ define('TEXT_QUEUE_POINTS_TABLE', 'Queue customers points table');
 define('TEXT_NOTIFY_CUSTOMER', 'Notify Customer');
 define('TEXT_SET_EXPIRE', 'Set new expire date');
 
-define('BUTTON_TEXT_ADJUST_POINTS', 'Adjust the current pending points amount');
-define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Cancel Customer Points');
-define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Confirm Points to Customer');
-define('BUTTON_TEXT_REMOVE_RECORD', 'Delete this record from databse');
-define('BUTTON_TEXT_ROLL_POINTS', 'Roll Back points to pending status');
+define('BUTTON_TEXT_ADJUST_POINTS', 'Adjust Points');
+define('BUTTON_TEXT_CANCEL_PENDING_POINTS', 'Cancel Points');
+define('BUTTON_TEXT_CONFIRM_PENDING_POINTS', 'Confirm Points');
+define('BUTTON_TEXT_REMOVE_RECORD', 'Delete Record');
+define('BUTTON_TEXT_ROLL_POINTS', 'Roll Back Points');
 define('ICON_PREVIEW_EDIT', 'View order details or edit status');
 define('ICON_REVIEWS_EDIT', 'View or edit Review contains');
 
