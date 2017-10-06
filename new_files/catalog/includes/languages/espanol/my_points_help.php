@@ -15,9 +15,9 @@
 
 // Initialisation of some required parameters for the FAQ answers
  if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
-   $answer_expire = 'Reward answer will expire ' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES . ' months from the date issuance.';
+   $answer_expire = 'Sus puntos expirarán pasados ' . MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES . ' meses desde su emisión.';
  } else {
-   $answer_expire = 'Reward answer do not expire and can be accumulated until you decide to use them.';
+   $answer_expire = 'Sus puntos no expiran y se pueden acumular hasta que decida usarlos.';
  }
 
 if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE > 1) {
@@ -55,8 +55,7 @@ define('POINTS_FAQ_17', '17. Cuando hay Problemas...');
 // FAQ1
 define('TEXT_FAQ_1', 'Queremos darle algo a cambio como agradecimiento por su apoyo y para ofrecerle incentivos futuros. Por este motivo hemos lanzado nuestro Programa de Puntos.
                       <br><br>Nuestro Programa de Premios en Puntos es tan sencillo como suena.  Al realizar sus compras en ' . STORE_NAME . ' obtendrá Puntos por Compra en función del importe empleado.
-                      <br>Una vez obtenidos, los puede usar para pagar futuras compras en ' . STORE_NAME . '.
-                      <br><br>El Programa de Puntos comenzó el %s. Todas las compras realizadas con posterioridad a esa fecha obtendrán sus puntos.');
+                      <br>Una vez obtenidos, los puede usar para pagar futuras compras en ' . STORE_NAME);
 
 // FAQ2
 define('TEXT_FAQ_2', 'Cuando se realiza un pedido, se usará el importe total<small><font color="FF6633">*</font></small> del pedido para calcular su equivalencia en puntos obtenidos.
@@ -76,10 +75,9 @@ define('TEXT_FAQ_3', 'Actualmente, por cada %s en compras en ' . STORE_NAME . ' 
 
 // FAQ4
 define('TEXT_FAQ_4', 'Si tiene saldo en su Cuenta de Puntos, puede usar dichos puntos para realizar pagos por compras en ' . STORE_NAME . '.
-                      <br>Durnte el proceso de su pedido, en la misma página en la que escoge el medio de pago, encontrará un recuadro en el que podrá introducir la cantidad de puntos que desea canjear.  Además de introducir la cantidad de puntos que quiera emplear, también puede marcar la casilla para emplear todos sus puntos disponibles.
-                      En caso de que su saldo de puntos no sea suficiente, también tendrá que seleccionar una forma de pago para cubrir el importe restante de su pedido 
-                      para cubrir el coste total de su compra. 
-                      <br>Al continuar con el proceso de su pedido, en la página de confirmación verá que el valor de los puntos canjeados se habrán restado de su compra.  Una vez que confirme su pedido, su Cuenta de Puntos se actualizará y se restarán de su saldo lo spuntos usados.
+                      <br>Durante el proceso de su pedido, en la misma página en la que escoge el medio de pago, encontrará una casilla que podrá marcar para emplear todos sus puntos disponibles.
+                      Tenga en cuenta que si tiene suficientes puntos para pagar la totalidad de su compra con puntos de bonificación, tendrá que elegir el método de pago \"Puntos\".
+                      <br>Al continuar con el proceso de su pedido, en la página de confirmación verá que el valor de los puntos canjeados se habrán restado de su compra.  Una vez que confirme su pedido, su Cuenta de Puntos se actualizará y se restarán de su saldo los puntos usados.
                       <br>Nota: cualquier compra realizada con puntos sólo obterndrá nuevos puntos por la cantidad pagada sin y contar la deducción de los puntos.');
 
 
@@ -94,11 +92,11 @@ define('TEXT_FAQ_5_B', 'Actualmente no se requiere un saldo mínimo para canjear
 define('TEXT_FAQ_6_A', 'Actualmente se requiere un importe total mínimo por pedido <b>%s</b> para poder usar sus puntos.
 	                      <br><br>Recomendamos encarecidamente que visite esta página con frecuencia, ya que podemos realizar cambios al respecto.');
 
-define('TEXT_FAQ_6_B', 'Actualmente no se requiere un importe mínimo por pedido para poder usar sus puntos..
+define('TEXT_FAQ_6_B', 'Actualmente no se requiere un importe mínimo por pedido para poder usar sus puntos.
 	                      <br><br>Recomendamos encarecidamente que visite esta página con frecuencia, ya que podemos realizar cambios al respecto.');
 
 // FAQ7
-define('TEXT_FAQ_7', 'El máximo de puntos permitdo por compra para ser canjeados es de <b>%s</b> puntos <b>(%s)' . '</b>.
+define('TEXT_FAQ_7', 'El máximo de puntos permitido por compra para ser canjeados es de <b>%s</b> puntos <b>(%s)' . '</b>.
 	                      <br><br>Recomendamos encarecidamente que visite esta página con frecuencia, ya que podemos realizar cambios al respecto.');
 
 // FAQ8 - conditionnal depending on the use point for shipping value set in admin

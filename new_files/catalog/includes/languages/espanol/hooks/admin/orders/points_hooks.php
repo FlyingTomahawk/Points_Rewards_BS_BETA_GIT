@@ -13,5 +13,5 @@
 define('POINTS_HOOK_ORDERS_ENTRY_NOTIFY_POINTS', 'Confirmar Puntos Pendientes:');
 define('POINTS_HOOK_ORDERS_QUE_POINTS', 'y Poner en Cola');
 define('POINTS_HOOK_ORDERS_QUE_DEL_POINTS', 'y Eliminar:');
-define('POINTS_HOOK_ORDERS_CONFIRMED_POINTS', 'Puntos Confirmados.  ');
+define('POINTS_HOOK_ORDERS_CONFIRMED_POINTS', 'Puntos Confirmados.');
 
