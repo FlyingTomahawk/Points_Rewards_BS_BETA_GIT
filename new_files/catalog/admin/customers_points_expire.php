@@ -13,7 +13,6 @@
 */
 
   include_once('includes/application_top.php');
-  include_once('includes/application_top.php');
   
 if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)){
   tep_db_query("update customers set customers_shopping_points = null, customers_points_expires = null where customers_points_expires < CURDATE()");
