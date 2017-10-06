@@ -427,7 +427,7 @@ function validate(field) {
       $contents[] = array('text' => tep_draw_checkbox_field('queue_add') . ' ' . TEXT_QUEUE_POINTS_TABLE);
       $contents[] = array('text' => tep_draw_hidden_field('customers_firstname', $cInfo->customers_firstname) . tep_draw_hidden_field('customers_lastname', $cInfo->customers_lastname) . tep_draw_hidden_field('customers_gender', $cInfo->customers_gender) . tep_draw_hidden_field('customers_email_address', $cInfo->customers_email_address) . tep_draw_hidden_field('customers_shopping_points', $cInfo->customers_shopping_points) . tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_add_points.gif', BUTTON_TEXT_ADD_POINTS) . ' <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_ADD_POINTS,'plus') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id)));
       break;
     case 'adjust':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_ADJUST_POINTS . '</b>');
@@ -441,7 +441,7 @@ function validate(field) {
       }
       $contents[] = array('text' => tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));
            
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . ' <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('oID', 'action'))) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points.php', tep_get_all_get_params(array('oID', 'action')))));
       break;
     case 'deletepoints':
       $heading[] = array('text' => '<b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
@@ -458,16 +458,24 @@ function validate(field) {
       }
       $contents[] = array('text' => tep_draw_hidden_field('customers_firstname', $cInfo->customers_firstname) . tep_draw_hidden_field('customers_lastname', $cInfo->customers_lastname) . tep_draw_hidden_field('customers_gender', $cInfo->customers_gender) . tep_draw_hidden_field('customers_email_address', $cInfo->customers_email_address) . tep_draw_hidden_field('customers_shopping_points', $cInfo->customers_shopping_points) . tep_draw_hidden_field('customers_points_expires', $cInfo->customers_points_expires));      
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete_points.gif', BUTTON_TEXT_DELETE_POINTS) . ' <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(IMAGE_DELETE, 'trash', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id)));
       break;
     default:
       if (isset($cInfo) && is_object($cInfo)) {
         $heading[] = array('text' => '<b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
 
     if ($cInfo->customers_shopping_points > 0) {
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=addpoints') . '">' . tep_image_button('button_add_points.gif', BUTTON_TEXT_ADD_POINTS) . '</a> <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deletepoints') . '">' . tep_image_button('button_delete_points.gif', BUTTON_TEXT_DELETE_POINTS) . '</a> <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=adjust') . '">' . tep_image_button('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . '</a> <a href="' . tep_href_link('orders.php', 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => tep_draw_button(BUTTON_TEXT_ADD_POINTS, 'plus', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=addpoints')) . 
+														   tep_draw_button(BUTTON_TEXT_DELETE_POINTS, 'minus', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deletepoints')) . 
+		                                                   tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=adjust')) . 
+		                                                   tep_draw_button(IMAGE_ORDERS, 'document', tep_href_link('orders.php', 'cID=' . $cInfo->customers_id)) . 
+		                                                   tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $cInfo->customers_email_address)));
      } else {
-        $contents[] = array('text' => '<a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=addpoints') . '">' . tep_image_button('button_add_points.gif', BUTTON_TEXT_ADD_POINTS) . '</a> <a href="' . tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=adjust') . '">' . tep_image_button('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . '</a> <a href="' . tep_href_link('customers.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link('orders.php', 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => tep_draw_button(BUTTON_TEXT_ADD_POINTS, 'plus', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=addpoints')) .
+														   tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s', tep_href_link('customers_points.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=adjust')) .
+														   tep_draw_button(IMAGE_EDIT, 'pencil', tep_href_link('customers.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit')) .
+														   tep_draw_button(IMAGE_ORDERS, 'document', tep_href_link('orders.php', 'cID=' . $cInfo->customers_id)) .
+									                       tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $cInfo->customers_email_address)));
        }
        if (isset($cInfo->ordersum)) {
          $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_ORDERS . ' ' . $currencies->format($cInfo->ordersum));

@@ -441,7 +441,7 @@ function validate(field) {
       $contents[] = array('text' => tep_draw_checkbox_field('queue_confirm', '', true) . ' ' . TEXT_QUEUE_POINTS_TABLE);
       $contents[] = array('text' => tep_draw_hidden_field('orders_id', $uInfo->orders_id) . tep_draw_hidden_field('customers_id', $uInfo->customers_id) . tep_draw_hidden_field('customers_email_address', $uInfo->customers_email_address) . tep_draw_hidden_field('date_purchased', $uInfo->date_purchased) . tep_draw_hidden_field('orders_status_name', $uInfo->orders_status_name) . tep_draw_hidden_field('points_pending', $uInfo->points_pending));
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_confirm_points.gif', BUTTON_TEXT_CONFIRM_PENDING_POINTS) . ' <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_CONFIRM_PENDING_POINTS, 'check') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id)));
       break;
     case 'cancel':
       $heading[] = array('text' => '<b>' . TEXT_CANCEL_POINTS . '</b>');
@@ -453,8 +453,8 @@ function validate(field) {
       $contents[] = array('text' => tep_draw_checkbox_field('notify_cancel', '', true) . ' ' . TEXT_NOTIFY_CUSTOMER);
       $contents[] = array('text' => tep_draw_checkbox_field('queue_cancel', '', true) . ' ' . TEXT_QUEUE_POINTS_TABLE);
       $contents[] = array('text' => tep_draw_hidden_field('orders_id', $uInfo->orders_id) . tep_draw_hidden_field('customers_id', $uInfo->customers_id) . tep_draw_hidden_field('customers_email_address', $uInfo->customers_email_address) . tep_draw_hidden_field('date_purchased', $uInfo->date_purchased) . tep_draw_hidden_field('orders_status_name', $uInfo->orders_status_name) . tep_draw_hidden_field('points_pending', $uInfo->points_pending));
-      
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_cancel_points.gif', BUTTON_TEXT_CANCEL_PENDING_POINTS) . ' <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+     
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_CANCEL_PENDING_POINTS, 'cancel') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id)));
       break;
     case 'adjust':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_ADJUST_POINTS . '</b>');
@@ -464,7 +464,7 @@ function validate(field) {
       $value_field = TEXT_ADJUST_INTRO . '<br><br>' . TEXT_POINTS_TO_ADJUST . '<br>'. tep_draw_input_field('points_to_aj', '' , 'onkeyup="validate(this)"');
       $contents[] = array('text' => $value_field);
            
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . ' <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id)));
       break;
     case 'rollback':
       $heading[] = array('text' => '<b>' . TEXT_ROLL_POINTS . '</b>');
@@ -478,7 +478,7 @@ function validate(field) {
       $contents[] = array('text' => tep_draw_checkbox_field('notify_roll', '', true) . ' ' . TEXT_NOTIFY_CUSTOMER);
       $contents[] = array('text' => tep_draw_hidden_field('orders_id', $uInfo->orders_id) . tep_draw_hidden_field('customers_id', $uInfo->customers_id) . tep_draw_hidden_field('customers_email_address', $uInfo->customers_email_address) . tep_draw_hidden_field('date_purchased', $uInfo->date_purchased) . tep_draw_hidden_field('orders_status_name', $uInfo->orders_status_name) . tep_draw_hidden_field('points_pending', $uInfo->points_pending));
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_rollback_points.gif', BUTTON_TEXT_ROLL_POINTS) . ' <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_ROLL_POINTS, 'arrowreturnthick-1-w') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id)));
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_RECORD . '</b>');
@@ -486,7 +486,7 @@ function validate(field) {
       $contents = array('form' => tep_draw_form('points_delete', 'customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete_points'));
       $contents[] = array('text' => TEXT_DELETE_INTRO );
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', BUTTON_TEXT_REMOVE_RECORD) . ' <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_draw_button(BUTTON_TEXT_REMOVE_RECORD, 'trash') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id)));
       break;
 
     default:
@@ -494,16 +494,28 @@ function validate(field) {
 		$heading[] = array('text' => TEXT_INFO_HEADING_PENDING_NO .'<b>' . $uInfo->orders_id . '</b>');
 
 		if ($uInfo->points_status == 1) {
-		  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=confirm') . '">' . tep_image_button('button_confirm_points.gif', BUTTON_TEXT_CONFIRM_PENDING_POINTS) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=cancel') . '">' . tep_image_button('button_cancel_points.gif', BUTTON_TEXT_CANCEL_PENDING_POINTS) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=adjust') . '">' . tep_image_button('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', BUTTON_TEXT_REMOVE_RECORD) . '</a>');
+		  $contents[] = array('align' => 'center', 'text' => tep_draw_button(BUTTON_TEXT_CONFIRM_PENDING_POINTS, 'check', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=confirm')) .
+															 tep_draw_button(BUTTON_TEXT_CANCEL_PENDING_POINTS, 'cancel', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=cancel')) .
+															 tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=adjust')) .
+															 tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address)) .
+															 tep_draw_button(BUTTON_TEXT_REMOVE_RECORD, 'trash',tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete')));
 		}
 		if ($uInfo->points_status == 2) {
-		  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('action')) . 'uID=' . $uInfo->unique_id . '&action=rollback') . '">' . tep_image_button('button_rollback_points.gif', BUTTON_TEXT_ROLL_POINTS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', BUTTON_TEXT_REMOVE_RECORD) . '</a>');
+		  $contents[] = array('align' => 'center', 'text' => tep_draw_button(BUTTON_TEXT_ROLL_POINTS, 'arrowreturnthick-1-w', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('action')) . 'uID=' . $uInfo->unique_id . '&action=rollback')) .
+															 tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address)) .
+															 tep_draw_button(BUTTON_TEXT_REMOVE_RECORD, 'trash', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete')));
 		}
 		if ($uInfo->points_status == 3) {
-		  $contents[] = array('text' => '<a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=confirm') . '">' . tep_image_button('button_confirm_points.gif', BUTTON_TEXT_CONFIRM_PENDING_POINTS) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=adjust') . '">' . tep_image_button('button_adjust_points.gif', BUTTON_TEXT_ADJUST_POINTS) . '</a> <a href="' . tep_href_link('orders.php' . '?oID=' . $uInfo->orders_id . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', BUTTON_TEXT_REMOVE_RECORD) . '</a>');
+		  $contents[] = array('align' => 'center', 'text' => tep_draw_button(BUTTON_TEXT_CONFIRM_PENDING_POINTS, 'check', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=confirm')) .
+															 tep_draw_button(BUTTON_TEXT_ADJUST_POINTS, 'triangle-2-n-s', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=adjust')) .
+															 tep_draw_button(IMAGE_DETAILS, 'pencil', tep_href_link('orders.php' . '?oID=' . $uInfo->orders_id . '&action=edit')) .
+															 tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address)) .
+															 tep_draw_button(BUTTON_TEXT_REMOVE_RECORD, 'trash', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete')));
 		}
 		if ($uInfo->points_status == 4) {
-		  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link('orders.php' . '?oID=' . $uInfo->orders_id . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a> <a href="' . tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', BUTTON_TEXT_REMOVE_RECORD) . '</a>');
+		  $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_DETAILS, 'pencil', tep_href_link('orders.php' . '?oID=' . $uInfo->orders_id . '&action=edit')) .
+															 tep_draw_button(IMAGE_EMAIL, 'mail-closed', tep_href_link('mail.php', 'selected_box=tools&customer=' . $uInfo->customers_email_address)) .
+															 tep_draw_button(BUTTON_TEXT_REMOVE_RECORD, 'trash', tep_href_link('customers_points_pending.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=delete')));
 		}
 		
 		if ($uInfo->points_comment == 'TEXT_DEFAULT_COMMENT') {
