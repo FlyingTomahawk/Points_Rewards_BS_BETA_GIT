@@ -54,8 +54,7 @@ define('POINTS_FAQ_17', '17. When Problems Occur');
 // FAQ1
 define('TEXT_FAQ_1', 'To thank you all for your support and to offer future incentives to you we wanted to give something back, this is why we have launched this great Reward Point Program.
                       <br><br>Our Reward Point Program is as simple as it sounds.  While shopping at ' . STORE_NAME . ' you will earn Shopping Points for the money you spend.
-                      <br>Once earned, you\'ll be able to use those points to pay for future purchases at  ' . STORE_NAME . '.
-                      <br><br>The Reward Point Program began on %s. All purchases made after that date will earn points.');
+                      <br>Once earned, you\'ll be able to use those points to pay for future purchases at  ' . STORE_NAME);
 
 // FAQ2
 define('TEXT_FAQ_2', 'When an order is placed, the total amount<small><font color="FF6633">*</font></small> of the order will be used to calculate the amount of points earned.
@@ -76,8 +75,7 @@ define('TEXT_FAQ_3', 'Currently, for every %s spent at ' . STORE_NAME . ' you\'l
 // FAQ4
 define('TEXT_FAQ_4', 'If you have a balance in your Shopping Points Account, you can use those points to pay for purchases made at ' . STORE_NAME . '.
                       <br>During the checkout proccess, on the same page that you select a payment method, there will be a box to enter the amount of points you wish to redeem.  Enter the amount of points you would like to spend or tick the box to use all available points.
-                      Please note, you will still have to select another payment method if there 
-                      is not enough in your Shopping Points Account to cover the cost of your purchase. 
+                      Please note that if you have enough points to pay your entire purchase with points, you will need to choose the payment method \ "Points \".
                       <br>Continue the checkout procedure and at the confirmation page you\'ll notice that the value of the points redeemed will have been credited towards your order.  Once you confirm your order, your Shopping Points account will be updated and the points used deducted from your balance.
                       <br>Note that any purchase made by redeeming points will only be rewarded with additional points for the amount spent other then points.');
 

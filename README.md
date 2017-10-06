@@ -77,8 +77,8 @@ To do list and tasks asigend:
   
 - add other language translations
   - english @LeeFoster ?
-  - german asigned @Tsimi 17/09/2017
-  - <s>spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín) DONE 2017_10_02</s> will be revised
+  - <s>german asigned @Tsimi 17/09/2017 DONE 2017_10_05
+  - spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín) DONE 2017_10_02 revised 2017_10_06 </s>
   
 - <s>add installation checks to all modules DONE @raiwa 2017_10_01</s>
   

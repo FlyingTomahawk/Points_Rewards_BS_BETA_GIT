@@ -41,11 +41,11 @@ define('POINTS_FAQ_7', '7. Maximal Bonuspunkte pro Bestellung');
 define('POINTS_FAQ_8', '8. Kriege Ich Bonuspunkte für Versandkosten?');
 define('POINTS_FAQ_9', '9. Kriege Ich Bonuspunkte für Mehrwertsteuer?');
 define('POINTS_FAQ_10', '10. Kriege Ich Bonuspunkte für bereits reduzierte Produkte?');
-define('POINTS_FAQ_11', '11. Kriege Ich Bonuspunkte für Bestellungen die mit Punkte bezahlt wurden?');
+define('POINTS_FAQ_11', '11. Kriege Ich Bonuspunkte für Bestellungen die mit Punkten bezahlt wurden?');
 define('POINTS_FAQ_12', '12. Verdienen Sie Empfehlungspunkte');
 define('POINTS_FAQ_13', '13. Verdienen Sie Bonuspunkte indem Sie eine Produktbewertung schreiben');
-define('POINTS_FAQ_14', '14. Produkte Einschränkungen');
-define('POINTS_FAQ_15', '15. Sonderangebote Einschränkungen');
+define('POINTS_FAQ_14', '14. Produkt-Einschränkungen');
+define('POINTS_FAQ_15', '15. Sonderangebots-Einschränkungen');
 define('POINTS_FAQ_16', '16. Nutzungsbedingungen');
 define('POINTS_FAQ_17', '17. Falls Probleme auftauchen');
 
@@ -53,16 +53,16 @@ define('POINTS_FAQ_17', '17. Falls Probleme auftauchen');
 
 // FAQ1
 define('TEXT_FAQ_1', 'Als Dank für Ihre bisherige Treue und als kleinen Ansporn für zukünftige Einkaufe haben wir für Sie das Bonuspunkte System ins leben gerufen.
-                      <br><br>Unser Bonuspunkte System ist ganz simpel.  Während des Einkaufs bei ' . STORE_NAME . ' können Sie für das ausgegebene Geld Bonuspunkte verdienen.
+                      <br><br>Unser Bonuspunkte System ist ganz einfach.  Während des Einkaufs bei ' . STORE_NAME . ' können Sie für das ausgegebene Geld Bonuspunkte verdienen.
                       <br>Diese Bonuspunkte können dann wiederum beim nächsten Einkauf bei ' . STORE_NAME . ' eingelöst werden.');
 
 // FAQ2
-define('TEXT_FAQ_2', 'Nachdem eine Bestellung getätigt wurde, wird das Total<small><font color="FF6633">*</font></small> der Bestellung verwendet um die verdienten Bonuspunkte zu berechnen.
+define('TEXT_FAQ_2', 'Nachdem eine Bestellung getätigt wurde, wird der Gesamtwert<small><font color="FF6633">*</font></small> der Bestellung verwendet um die verdienten Bonuspunkte zu berechnen.
 					  Diese Bonuspunkte werden in Ihrem Kundenkonto als offene Punkte angezeigt.
                       <br>Alle offenen Bonuspunkte werden in Ihrem <a href="' . tep_href_link('my_points.php') . '"> <u>Kundenkonto</u></a> aufgelisted bis diese von ' . STORE_NAME . ' bestätigt werden.
 			          <br><br>Sobald die Punkte bestätigt wurden, werden diese Ihrem Konto gutgeschrieben und stehen Ihnen dann jederzeit zur Verfügung.
                       <br>Um den aktuellen Status der Punkte einzusehen müssen Sie angemeldet sein. 
-                      <br><br>Wenn Sie zur Kasse gehen werden Sie die Möglichkeit haben Ihre Punkte einzulösen.
+                      <br><br>Wenn Sie zur Kasse gehen haben Sie die Möglichkeit Ihre Punkte einzulösen.
                       <p align="right"<small><font color="FF6633">*</font> in den meisten Fällen exklusive Versand und MwSt.</small></p>');
 
 // FAQ3
@@ -70,14 +70,14 @@ define('TEXT_FAQ_3', 'Derzeit wird für ' .  $currencies->format(1) . ' die Sie 
                       <br>Zum Beispiel:<br>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Produktkosten:</b>&nbsp; ' .  $currencies->format(100) . '<br>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Wert der verdienten Punkte:</b>&nbsp; ' .  $currencies->format(tep_calc_shopping_pvalue(100 * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE)) . '<br><br>
-                      Bitte beachten Sie dass wir jeder Zeit ohne Vorankündigung den Wechselkurs anpassen können. Hier sehen Sie immer den aktuellen Wert.');
+                      Bitte beachten Sie dass wir jederzeit ohne Vorankündigung den Wechselkurs anpassen können. Hier sehen Sie immer den aktuellen Wert.');
 
 // FAQ4
-define('TEXT_FAQ_4', 'Falls Bonuspunkte in Ihrem Konto vorhanden sind können Sie diese bei Ihren Einkaufen bei ' . STORE_NAME . ' einlösen.
+define('TEXT_FAQ_4', 'Falls Bonuspunkte in Ihrem Konto vorhanden sind können Sie diese bei Ihren Einkäufen bei ' . STORE_NAME . ' einlösen.
                       <br>Wärend des Checkouts, auf der gleichen Seite wo die Zahlungsweise ausgewählt werden kann, wird eine sogenannte Checkbox oder Kontrollkästchen angezeigt. Markieren Sie das Kontrollkästchen um die vorhandenen Bonuspunkte zu verwenden.
-                      Bitte beachten Sie, falls Sie nicht genug Bonuspunkte haben um die ganze Bestellung zu bezahlen müssen Sie eine Zahlungsweise auswählen.
-                      <br>Wenn Sie mit dem Checkout fortfahren werden Sie auf der Bestätigungsseite sehen dass die Punkte dem Total subtrahiert sind.  Sobald Sie Ihre Bestellung bestätigen, wird Ihr Bonuspunktestand aktualisiert und die Punkte werden von Ihrem Konto abgezogen.
-                      <br>Beachten Sie dass Sie nur neue Bonuspunkte erhalten für den Betrag der nicht mit Punkten bazahlt wurde.');
+                      Bitte beachten Sie, falls sie genügend Punkte haben um Ihren gesamten Einkauf mit Bonuspunkten zu bezahlen, die Zahlungsweise \"Punkte\" auswählen müssen.
+                      <br>Wenn Sie mit dem Checkout fortfahren werden Sie auf der Bestätigungsseite sehen dass die Punkte vom Gesamtwert abgezogen sind. Sobald Sie Ihre Bestellung bestätigen, wird Ihr Bonuspunktestand aktualisiert und die Punkte werden von Ihrem Konto abgezogen.
+                      <br>Beachten Sie dass Sie nur neue Bonuspunkte erhalten für den Betrag der nicht mit Punkten bezahlt wurde.');
 
 
 // FAQ5 - conditionnal depending on the point limit value set in admin
@@ -126,8 +126,8 @@ define('TEXT_FAQ_11_B', 'Ja. Bitte beachten Sie dass es nur Punkte für den Betr
 
 // FAQ12
 define('TEXT_FAQ_12_A', '<em>"Mund zu Mund" Werbung ist die stärkste und effektivste Werbung.</em>
-	                       <br>Die Idee hinter den sogennanten Empfehlungspunkten ist, beide Parteien profitieren.
-	                       <br>Wenn ein empfohlener Freund oder Verwandte eine Bestellung tätigt kann er wärend dem Checkoutprozess bei den Zahlungsarten in der Box Ihre E-Mailadresse als Referenz eingeben.
+	                       <br>Die Idee hinter den sogennanten Empfehlungspunkten ist, beide Parteien profitieren zu lassen.
+	                       <br>Wenn ein empfohlener Freund oder Verwandter eine Bestellung tätigt kann er wärend dem Checkoutprozess bei den Zahlungsarten in einer Box Ihre E-Mailadresse als Referenz eingeben.
 	                       <br>When die Bestellung des empfohlenen Freundes bestätigt und abgschlossen ist, werden wir Ihrem Kundenkonto <b>' .  MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM . '</b> Punkte gutschreiben.');
 
 define('TEXT_FAQ_12_B', 'Diese Funktion ist zur Zeit deaktiviert.');
@@ -171,12 +171,12 @@ define('TEXT_FAQ_16', '
 <ul>
   <li>Bonuspunkte sind nur für registrierte ' . STORE_NAME . ' Kunden verfügbar.</li>
   <li>Bonuspunkte können nur online bei ' . STORE_NAME . ' eingelöst werden.</li>
-  <li>Bonuspunkte sind nicht rückzahlbar und können nicht zwischen den Kunden übertragen werden.</li>
+  <li>Bonuspunkte sind nicht rückzahlbar und können nicht zwischen Kunden übertragen werden.</li>
   <li>Bonuspunkte sind unter keinen Umständen übertragbar oder gegen Bargeld umtauschbar.</li>
-  <li>Bonuspunkte werden für stornierte Bestellung nicht zurückerstattet.</li>
+  <li>Bonuspunkte werden für stornierte Bestellungen nicht zurückerstattet.</li>
   <li>Bei Einkäufen mit Bonuspunkten müssen Sie trotzdem eine Zahlungsart auswählen falls Sie nicht genug Punkte besitzen um den Gesamtbetrag Ihres Einkaufs zu begleichen.</li>
 </ul>
-Bitte beachten Sie dass wir jeder Zeit ohne Vorankündigung die Richtlinen anpassen können.');
+Bitte beachten Sie dass wir jederzeit ohne Vorankündigung die Richtlinien ändern können.');
 
 // FAQ17
 define('TEXT_FAQ_17', 'Falls Sie weitere Fragen zu unserem Bonuspunkte System haben nehmen Sie bitte mit uns <a href="' . tep_href_link('contact_us.php') . '"> <u>Kontakt</u></a> auf.');
