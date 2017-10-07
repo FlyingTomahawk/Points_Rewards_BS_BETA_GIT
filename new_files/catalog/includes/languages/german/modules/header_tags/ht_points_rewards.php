@@ -13,9 +13,9 @@
   define('MODULE_HEADER_TAGS_POINTS_REWARDS_TITLE', 'Bonuspunkte Modul');
   define('MODULE_HEADER_TAGS_POINTS_REWARDS_DESCRIPTION', 'Verwenden Sie das Bonuspunkte Modul');
 
-// used in checkout_confirmation.php
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_POINTS_NOT', 'Sie haben nicht genug Punkte um die gesamte Bestellung zu bezahlen. Bitte wählen Sie eine andere Zahlungsart.');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_NOT_VALID', 'Die E-Mailadresse scheint nicht gültig zu sein - bitte korrigieren Sie Ihren Eintrag.');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_NOT_FOUND', 'Die eingegebene E-Mailadresse wurde nicht gefunden.');
-  define('MODULE_HEADER_TAGS_POINTS_REWARDS_ERROR_SELF', 'Guter Versuch, aber Sie können sich nicht selber empfehlen.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_OT_WARNING', 'Das benötigte <strong>Bonuspunkte Order Total Modul</strong> ist nicht installiert.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_OT_INSTALL_NOW', '<u>Installieren Sie jetzt das Bonuspunkte Order Total Modul</u>');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_PM_WARNING', 'Das benötigte <strong>Punkte Zahlungsart Modul</strong> ist nicht installiert.');
+  define('MODULE_HEADER_TAGS_POINTS_REWARDS_PM_INSTALL_NOW', '<u>Installieren Sie jetzt das Punkte Zahlungsart Modul</u>');
+
 ?>
