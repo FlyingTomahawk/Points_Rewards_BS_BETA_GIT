@@ -21,5 +21,5 @@
   define('MODULE_CONTENT_REVIEWS_POINTS_PM_INSTALL_NOW', '<u>Install Now Points Payment Module</u>');
 
   define('MODULE_CONTENT_REVIEWS_POINTS_TEXT', 'Buy this item and earn %s points valued at %s.');
-  define('MODULE_CONTENT_REVIEWS_POINTS_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points.<br />Please check the %s for more information.');
+  define('MODULE_CONTENT_REVIEWS_POINTS_HELP_LINK', ' Write a Review and earn <b>%s</b> worth of points. Please check the %s for more information.');
   define('MODULE_CONTENT_REVIEWS_POINTS_MY_POINTS_HELP', 'Point Program FAQ');

@@ -20,4 +20,5 @@
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_WARNING', '<strong>Módulo de pago por Puntos</strong> no está instalado. Es requerido.');
   define('MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_INSTALL_NOW', '<u>Instalar ahora el módulo de pago por Puntos</u>');
 
-  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Adquiera este artículo y consiga %s puntos valorados en %s.');
+  define('MODULE_CONTENT_PRODUCT_INFO_TEXT_POINTS', 'Adquiera este artículo y consiga %s puntos valorados en %s. Por favor, para más información, compruebe %s.');
+  define('MODULE_CONTENT_PRODUCT_INFO_POINTS_MY_POINTS_HELP', 'Preguntas Frecuentes sobre el Programa de Puntos');

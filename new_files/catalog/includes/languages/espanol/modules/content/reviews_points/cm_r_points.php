@@ -21,5 +21,5 @@
   define('MODULE_CONTENT_REVIEWS_POINTS_PM_INSTALL_NOW', '<u>Instalar ahora el módulo de pago por Puntos</u>');
 
   define('MODULE_CONTENT_REVIEWS_POINTS_TEXT', 'Adquiera este artículo y consiga %s puntos valorados en %s.');
-  define('MODULE_CONTENT_REVIEWS_POINTS_HELP_LINK', ' Escriba un Comentario y consiga puntos por un valor de <b>%s</b>.<br />Por favor, para más información, compruebe %s.');
+  define('MODULE_CONTENT_REVIEWS_POINTS_HELP_LINK', ' Escriba un Comentario y consiga puntos por un valor de <b>%s</b>. Por favor, para más información, compruebe %s.');
   define('MODULE_CONTENT_REVIEWS_POINTS_MY_POINTS_HELP', 'Preguntas Frecuentes sobre el Programa de Puntos');
