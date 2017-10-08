@@ -24,6 +24,6 @@
 */
 
 // used in create account success
-define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_MY_POINTS_HELP', 'Point Program FAQ');
-define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE', 'As part of our Welcome to new customers, we have credited your account <u>%s</u> with a total of %s Shopping Points, worth %s .');
-define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK', 'Please refer to the <u>%s</u> as conditions may apply.');
+define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_MY_POINTS_HELP', 'Bonuspunkte Fragen & Antworten');
+define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_TITLE', 'Als kleines Willkommensgeschenk für neue Kunden haben wir Ihrem Konto <u>%s</u> ein Total von %s Bonuspunkte, im Wert von %s gutgeschrieben.');
+define('POINTS_HOOK_CREATE_ACCOUNT_SUCCESS_WELCOME_POINTS_LINK', 'Für weiter Informationen lesen Sie bitte unsere <u>%s</u> .');

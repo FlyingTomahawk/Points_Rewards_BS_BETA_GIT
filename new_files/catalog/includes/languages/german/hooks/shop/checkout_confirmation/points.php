@@ -24,7 +24,7 @@
 */
 
 // used in checkout_confirmation.php
-  define('POINTS_HOOKS_ERROR_POINTS_NOT', 'El valor de los puntos no es suficiente para cubrir el coste de su compra. Por favor, selecciones otro método de pago.');
-  define('POINTS_HOOK_ERROR_NOT_VALID', 'El email para la referencia no parece ser válido. Por favor, haga los cambios necesarios.');
-  define('POINTS_HOOK_ERROR_NOT_FOUND', 'No se ha encontrado la dirección email de la referencia.');
-  define('POINTS_HOOK_ERROR_SELF', 'Lo lamentamos, pero no puede enviarse una referencia a sí mismo.');
+  define('POINTS_HOOKS_ERROR_POINTS_NOT', 'Sie haben nicht genug Punkte um die gesamte Bestellung zu bezahlen. Bitte wählen Sie eine andere Zahlungsart.');
+  define('POINTS_HOOK_ERROR_NOT_VALID', 'Die E-Mailadresse scheint nicht gültig zu sein - bitte korrigieren Sie Ihren Eintrag.');
+  define('POINTS_HOOK_ERROR_NOT_FOUND', 'Die eingegebene E-Mailadresse wurde nicht gefunden.');
+  define('POINTS_HOOK_ERROR_SELF', 'Guter Versuch, aber Sie können sich nicht selber empfehlen.');
