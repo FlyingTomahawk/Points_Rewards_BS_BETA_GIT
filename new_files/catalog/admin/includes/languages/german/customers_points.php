@@ -90,5 +90,13 @@ define('NOTICE_EMAIL_SENT_TO', 'Hinweis: E-Mail gesendet an: %s');
 define('WARNING_DATABASE_NOT_UPDATED', 'Warnung: Leere Felder, Nichts zu ändern. Die Datenbank wurde nicht aktualisiert.');
 define('POINTS_ENTER_JS_ERROR', 'Ungültiger Eintrag! \n Nur Zahlen werden akzeptiert!');
 
-define('TEXT_LINK_CREDIT', 'Klicken Sie hier um das <a href="customers_points_credit.php"><u>Auto Kredit</u></a> oder <a href="customers_points_expire.php"><u>Auto Verfall</u></a> Skript manuell zu starten.');
+define('TEXT_LINK_CREDIT', 'Klicken Sie hier um das <a target="_blank" href="customers_points_credit.php"><u>Auto Kredit</u></a> oder <a target="_blank" href="customers_points_expire.php"><u>Auto Verfall</u></a> Skript manuell zu starten.');
+
+define('INSTALL_CHECK_HT_WARNING', 'Das benötigte <strong>Bonuspunkte Header Tags Modul</strong> ist nicht installiert.');
+define('INSTALL_CHECK_HT_INSTALL_NOW', '<u>Installieren Sie jetzt das Bonuspunkte Header Tags Modul</u>');
+define('INSTALL_CHECK_OT_WARNING', 'Das benötigte <strong>Bonuspunkte Order Total Modul</strong> ist nicht installiert.');
+define('INSTALL_CHECK_OT_INSTALL_NOW', '<u>Installieren Sie jetzt das Bonuspunkte Order Total Modul</u>');
+define('INSTALL_CHECK_PM_WARNING', 'Das benötigte <strong>Punkte Zahlungsart Modul</strong> ist nicht installiert.');
+define('INSTALL_CHECK_PM_INSTALL_NOW', '<u>Installieren Sie jetzt das Punkte Zahlungsart Modul</u>');
+
 ?>

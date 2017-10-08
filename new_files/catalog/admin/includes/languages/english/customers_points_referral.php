@@ -110,5 +110,12 @@ define('NOTICE_RECORED_REMOVED', 'Notice: The points record row no. %s has been 
 define('WARNING_DATABASE_NOT_UPDATED', 'Warning: Empty fields, Nothing to change. The Database was not updated.');
 define('POINTS_ENTER_JS_ERROR', 'Invalid entry! \n Only numbers are accepted!');
 
-define('TEXT_LINK_CREDIT', 'Click here to run the <a href="customers_points_credit.php"><u>Auto Credit</u></a> or <a href="customers_points_expire.php"><u>Auto Expire</u></a> script manually.');
+define('TEXT_LINK_CREDIT', 'Click here to run the <a target="_blank" href="customers_points_credit.php"><u>Auto Credit</u></a> or <a target="_blank" href="customers_points_expire.php"><u>Auto Expire</u></a> script manually.');
+
+define('INSTALL_CHECK_HT_WARNING', '<strong>Points and Rewards Header Tag Module</strong> is not installed. It is required.');
+define('INSTALL_CHECK_HT_INSTALL_NOW', '<u>Install Now Points and Rewards Header Tag Module</u>');
+define('INSTALL_CHECK_OT_WARNING', '<strong>Points and Rewards Order Total Module</strong> is not installed. It is required.');
+define('INSTALL_CHECK_OT_INSTALL_NOW', '<u>Install Now Points and Rewards Order Total Module</u>');
+define('INSTALL_CHECK_PM_WARNING', '<strong>Points Payment Module</strong> is not installed. It is required.');
+define('INSTALL_CHECK_PM_INSTALL_NOW', '<u>Install Now Points Payment Module</u>');
 ?>
