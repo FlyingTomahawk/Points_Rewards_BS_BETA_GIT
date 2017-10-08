@@ -1,8 +1,18 @@
 <?php
 /*
+  $Id$
+   originally coded by Ben Zukrel 
+   Improved and converted for osC Bootstrap by
+   @Tsimi
+   and
+   @raiwa Rainer Schmied / info@oscaddons.com  / www.oscaddons.com
 
-  http://www.deep-silver.com
-
+   Additional credits to @LeeFoster for bug reports and fixes
+   German translation by @Tsimi
+   German revision by @raiwa
+   Spanish translation by @TITO4
+   Spanish revision by @PiLLaO 
+  
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
@@ -10,6 +20,7 @@
 
   Released under the GNU General Public License
 */
+
 define('MOD_VER', '1.0');
 
 define('HEADING_TITLE', 'Referral- Review Pending Points');

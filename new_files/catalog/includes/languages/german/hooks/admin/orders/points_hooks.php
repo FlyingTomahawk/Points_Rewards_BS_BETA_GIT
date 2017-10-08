@@ -1,6 +1,8 @@
 <?php
 /*
-  $Id$
+  $Id: points_hooks.php
+  $Loc: catalog/includes/languages/english/hooks/admin/points/
+
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
@@ -21,6 +23,9 @@
   Released under the GNU General Public License
 */
 
-define('MODULES_ADMIN_MENUCUSTOMERS_POINTS', 'Kunden-Bonuspunkte');
-define('MODULES_ADMIN_MENUCUSTOMERS_POINTS_PENDING', 'Offene Punkte');
-define('MODULES_ADMIN_MENUCUSTOMERS_POINTS_REFERRAL', 'Empfehlungspunkte');
+// used in orders.php
+define('POINTS_HOOK_ORDERS_ENTRY_NOTIFY_POINTS', 'Offene Punkte bestätigen:');
+define('POINTS_HOOK_ORDERS_QUE_POINTS', 'und Que');
+define('POINTS_HOOK_ORDERS_QUE_DEL_POINTS', 'und löschen:');
+define('POINTS_HOOK_ORDERS_CONFIRMED_POINTS', 'Punkte bestätigt.  ');
+

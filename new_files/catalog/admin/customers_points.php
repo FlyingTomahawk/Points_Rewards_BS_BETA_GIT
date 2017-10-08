@@ -1,9 +1,18 @@
 <?php
 /*
   $Id$
-  created by Ben Zukrel, Deep Silver Accessories
-  http://www.deep-silver.com
+   originally coded by Ben Zukrel 
+   Improved and converted for osC Bootstrap by
+   @Tsimi
+   and
+   @raiwa Rainer Schmied / info@oscaddons.com  / www.oscaddons.com
 
+   Additional credits to @LeeFoster for bug reports and fixes
+   German translation by @Tsimi
+   German revision by @raiwa
+   Spanish translation by @TITO4
+   Spanish revision by @PiLLaO 
+  
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
