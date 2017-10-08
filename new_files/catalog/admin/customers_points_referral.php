@@ -412,15 +412,14 @@ function validate(field) {
       if ($pending_points['points_type'] == 'RF') {
         $order_query = tep_db_query("select o.customers_name, o.payment_method, s.orders_status_name, ot.text as order_total from orders o, orders_total ot, orders_status s where o.orders_id=ot.orders_id and o.orders_id = '" . (int)$pending_points['orders_id'] . "' and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' limit 1");
         $order = tep_db_fetch_array($order_query);
-        $uInfo_array = array_merge($pending_points, $order); 
+        if (sizeof($order) > 0) $uInfo_array = array_merge($pending_points, $order); 
         $link = '<a href="' . tep_href_link('orders.php' . '?oID=' . $pending_points['orders_id'] . '&action=edit') . '">' . tep_image('images/icons/preview.gif', ICON_PREVIEW_EDIT) . '</a>&nbsp;';
       }
 
       if ($pending_points['points_type'] == 'RV') {
         $reviews_query = tep_db_query("select r.reviews_id, p.products_name from reviews r left join products_description p on p.products_id = r.products_id and p.language_id = '" . (int)$languages_id . "' where r.products_id = '" . $pending_points['orders_id'] . "' and r.customers_id = '" . (int)$pending_points['customer_id'] . "' limit 1");
-        $reviews = tep_db_fetch_array($reviews_query);
-        
-        $uInfo_array = (tep_not_null($reviews)? array_merge($pending_points, $reviews) : $pending_points);
+        $reviews = tep_db_fetch_array($reviews_query);        
+        if (sizeof($reviews) > 0) $uInfo_array = array_merge($pending_points, $reviews); 
         $link = '<a href="' . tep_href_link('reviews.php', 'page=' . $_GET['page'] . '&rID=' . $reviews['reviews_id'] . '&action=edit') . '">' . tep_image('images/icons/preview.gif', ICON_REVIEWS_EDIT) . '</a>&nbsp;';
       }
 
@@ -428,7 +427,7 @@ function validate(field) {
         $uInfo = new objectInfo($uInfo_array);
       }
 
-      if (isset($uInfo) && is_object($uInfo) && ($pending_points['unique_id'] == $uInfo->unique_id)) {
+      if (isset($uInfo) && is_object($uInfo) && (defined($pending_points['unique_id']) && $pending_points['unique_id'] == $uInfo->unique_id)) {
         echo '<tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link('customers_points_referral.php', tep_get_all_get_params(array('uID', 'action')) . 'uID=' . $uInfo->unique_id . '&action=edit') . '\'">' . "\n";
       } else {
         echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link('customers_points_referral.php', tep_get_all_get_params(array('uID')) . 'uID=' . $pending_points['unique_id']) . '\'">' . "\n";
@@ -598,7 +597,7 @@ function validate(field) {
           $contents[] = array('text' => TEXT_INFO_ORDER_STATUS . ' ' . $uInfo->orders_status_name);
           $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_BALANCE . ' ' . number_format($uInfo->customers_shopping_points,MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES). ' ' . HEADING_POINTS);
         }
-		if (isset($uInfo) && tep_not_null($uInfo) && $uInfo->points_type == 'RV') {
+		if (isset($uInfo) && $uInfo->points_type == 'RV') {
 		  $review_link = '<a href="' . tep_href_link('reviews.php', 'page=' . $_GET['page'] . '&rID=' . $uInfo->reviews_id . '&action=edit') . '">' . tep_image('images/icons/preview.gif', ICON_REVIEWS_EDIT) . '</a>&nbsp;';
 		  
 		  $contents[] = array('text' => '<br><b>' . TEXT_INFO_POINTS_COMMENT . '</b><br>' . $uInfo->points_comment);
