@@ -1,7 +1,17 @@
 ####### POINTS AND REWARDS BS #########
-  created by Ben Zukrel, Deep Silver Accessories
+/*
+  $Id$
+   originally coded by Ben Zukrel 
+   Improved and converted for osC Bootstrap by
+   @Tsimi
+   and
+   @raiwa Rainer Schmied / info@oscaddons.com  / www.oscaddons.com
 
-  Updated for osC Bootstrap version by raiwa, LeeFoster and Tsimi.
+   Additional credits to @LeeFoster for bug reports and fixes
+   German translation by @Tsimi
+   German revision by @raiwa
+   Spanish translation by @TITO4
+   Spanish revision by @PiLLaO 
   
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -9,7 +19,7 @@
   Copyright (c) 2017 osCommerce
 
   Released under the GNU General Public License
-
+*/
 ##################################################
 
 ******************* MAKE SURE TO BACKUP YOUR FILES BEFORE ***********************
@@ -55,6 +65,7 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/includes/languages/english/hooks/shop/create_account/points.php
     catalog/includes/languages/english/hooks/shop/create_account_success/points.php
 	catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
+	catalog/includes/languages/english/modules/content/account/cm_account_points.php
 	catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
 	catalog/includes/languages/english/modules/content/reviews_points/cm_r_points.php
 	catalog/includes/languages/english/modules/header_tags/ht_points_rewards.php
@@ -66,6 +77,7 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/includes/modules/boxes/bm_shopping_cart_points.php
     catalog/includes/modules/boxes/templates/information_points.php
     catalog/includes/modules/boxes/templates/shopping_cart_points.php
+	catalog/includes/modules/content/account/cm_account_points.php
 	catalog/includes/modules/content/product_info_points/cm_pi_points.php
 	catalog/includes/modules/content/product_info_points/templates/points.php
 	catalog/includes/modules/content/reviews_points/cm_r_points.php
@@ -125,62 +137,7 @@ Access your admin area and install the "Points" payment method module. (Modules 
 
 C. modify OSC FILES.(catalog directory).
 
-CATALOG STEP = 1.   open catalog/includes/modules/pages/tp_account.php
-
-If your file is unmodified, you are save to upload and replace the following file:
-modified_core_files/catalog/includes/modules/pages/tp_account.php
-
-Otherwise apply the following modification:
-
-**This step has 2 parts
-
-FIND:
-
-    function build() {
-      global $oscTemplate;
-
-REPLACE WITH:
-
-    function build() {
-      global $oscTemplate;
-      global $language, $customer_id, $currencies, $request_type; // POINTS REWARDS BS
-	  
-FIND:
-
-        $output .= '  </ul>' .
-                   '</div>';
-      }
-	  
-ADD AFTER IT:
-
-// BOF POINTS REWARDS BS //-->
-    if (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') {
-      
-    require('includes/languages/' . $language . '/modules/pages/tp_account.php');
-    
-    require_once('includes/functions/redemptions.php');
-		
-	$output .= '<h2>' . TP_ACCOUNT_MY_POINTS_TITLE . '</h2>
-           <div class="contentText">  
-			  <ul class="list-unstyled">';
-
-  $has_points = tep_get_shopping_points($customer_id);
-  if ($has_points > 0) {
-	  $output .= '<h4><span class="label label-info">' . sprintf(TP_ACCOUNT_MY_POINTS_CURRENT_BALANCE, number_format($has_points, MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES), $currencies->format(tep_calc_shopping_pvalue($has_points))) . '</span></h4>';
-  }
-	$output .= '<li><i class="fa fa-plus"></i> <a href="' . tep_href_link('my_points.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW . '</a></li>    
-				<li><i class="fa fa-info-circle"></i> <a href="' . tep_href_link('my_points_help.php', '', $request_type) . '">' . TP_ACCOUNT_MY_POINTS_VIEW_HELP . '</a></li>
-			  </ul>
-           </div>'; 
-  }
-// EOF POINTS REWARDS BS //-->      
-
-
-SAVE AND CLOSE!
-
-------------------------------------------------------------------------------------------
-
-CATALOG STEP = 2.   catalog/includes/modules/boxes/templates/information.php
+CATALOG STEP = 1.   catalog/includes/modules/boxes/templates/information.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/templates/information.php
@@ -201,7 +158,7 @@ ADD AFTER IT:
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-CATALOG STEP = 3.   catalog/languages/english/includes/modules/boxes/bm_information.php
+CATALOG STEP = 2.   catalog/languages/english/includes/modules/boxes/bm_information.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/bm_information.php
@@ -218,7 +175,7 @@ ADD:
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-CATALOG STEP = 4.   catalog/includes/modules/content/footer/templates/links.php
+CATALOG STEP = 3.   catalog/includes/modules/content/footer/templates/links.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/templates/links.php
@@ -239,7 +196,7 @@ ADD AFTER IT:
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-CATALOG STEP = 5.   catalog/languages/english/includes/modules/content/footer/cm_information_links.php
+CATALOG STEP = 4.   catalog/languages/english/includes/modules/content/footer/cm_information_links.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/bm_information.php
@@ -260,7 +217,7 @@ SAVE AND CLOSE!
 EDIT THE FOLLOWING FILES ONLY FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 6.   open catalog/checkout_confirmation.php
+CATALOG STEP = 5.   open catalog/checkout_confirmation.php
 This will add hook register and call to checkout_confirmation page.
 
 **This step has 2 parts
@@ -286,7 +243,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 7.   open catalog/checkout_payment.php
+CATALOG STEP = 6.   open catalog/checkout_payment.php
 This will allow points to be used as payment method.
 
 **This step has 2 parts
@@ -320,7 +277,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 8.   open catalog/checkout_process.php
+CATALOG STEP = 7.   open catalog/checkout_process.php
 this will..
  1.Add pending points for a new success order with or without shipping cost.
  2.Balance customer shopping points account if points used.
@@ -359,7 +316,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 9.   open catalog/create_account.php
+CATALOG STEP = 8.   open catalog/create_account.php
 This will add Welcome Points (and send email) defined by admin if enabled.
 
 **This step has 2 parts
@@ -387,7 +344,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!  	  
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 10.   open catalog/create_account_success.php
+CATALOG STEP = 9.   open catalog/create_account_success.php
 This will add the text to notify the new signup users of the Welcome Points received,
 with a link to the points page and points FAQ page.
 
@@ -419,7 +376,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
    
-CATALOG STEP = 11.   open catalog/product_info.php
+CATALOG STEP = 10.   open catalog/product_info.php
 This will add the points credit information content module (if enabled).
 
 FIND:
@@ -444,7 +401,7 @@ OR place it anywhere you wish the information to be shown
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 12.   open catalog/product_reviews.php
+CATALOG STEP = 11.   open catalog/product_reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -468,7 +425,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 13.   open catalog/product_reviews_write.php
+CATALOG STEP = 12.   open catalog/product_reviews_write.php
 this will add the points and notify customers of points given for review and add link to points system help file
 
 
@@ -493,7 +450,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 15.   open catalog/reviews.php
+CATALOG STEP = 13.   open catalog/reviews.php
 this will notify customers of points given for review and add link to points system help file
 
 FIND:
@@ -516,7 +473,7 @@ ADD AFTER IT:
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
 
-CATALOG STEP = 16.   open catalog/includes/modules/payment/paypal_standard.php
+CATALOG STEP = 14.   open catalog/includes/modules/payment/paypal_standard.php
 (This is an optional step and only needed if you use the PayPal Standard payment method.)
 If your file is unmodified (PayPal App v5.018), you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/payment/paypal_standard.php
@@ -647,8 +604,8 @@ This will display points info inside the shopping cart box.(customers must login
 This will only show up when a customer points is bigger then 0
 
 4.)
-Access your admin area and install the "Information Points" box module. (Modules -> Boxes)
-This will add an information box with a link to My Points FAQ
+Access your admin area and install the "My Points and Redemptions" module. (Modules -> Content)
+This will show the My Points and Redemptions block on the My Account page.
 
 ***************************************************************
 THAT'S IT!
