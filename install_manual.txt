@@ -32,13 +32,12 @@ Please use it at your own risk.
 ####### STEP BY STEP INSTALLATION ################
 
 A. ADDING NEW FILES.
-B. INSTALL MODULES
+B. INSTALL REQUIRED MODULES
 C. EDITING OSC FILES.(catalog directory).
-D. EDITING OSC FILES.(catalog directory).
-E. EDITING OSC FILES.(admin directory). 
-F. INSTALL OPTIONAL MODULES
+D. EDITING OSC FILES.(admin directory). 
+E. INSTALL OPTIONAL MODULES
 
-0. Legacy (for older 2.3.4 BS and 2.3. - 2.3.4 Standard versions whithout hooks)
+0. Legacy (for older 2.3.4 BS)
 0.1 Upload New file:
 legacy/[catalog]/includes/classes/hooks.php
 
@@ -64,29 +63,34 @@ copy the new files provided into the same location in your catalog and admin dir
     catalog/includes/languages/english/hooks/shop/checkout_process/points.php
     catalog/includes/languages/english/hooks/shop/create_account/points.php
     catalog/includes/languages/english/hooks/shop/create_account_success/points.php
-	catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
-	catalog/includes/languages/english/modules/content/account/cm_account_points.php
-	catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
-	catalog/includes/languages/english/modules/content/reviews_points/cm_r_points.php
-	catalog/includes/languages/english/modules/header_tags/ht_points_rewards.php
-	catalog/includes/languages/english/modules/navbar_modules/nb_shopping_cart_points.php
-	catalog/includes/languages/english/modules/order_total/ot_redemptions.php
-	catalog/includes/languages/english/modules/pages/tp_account.php
-	catalog/includes/languages/english/modules/payment/points.php	
+    catalog/includes/languages/english/modules/boxes/bm_shopping_cart_points.php
+    catalog/includes/languages/english/modules/content/account/cm_account_points.php
+    catalog/includes/languages/english/modules/content/product_info_points/cm_pi_points.php
+    catalog/includes/languages/english/modules/content/reviews_points/cm_r_points.php
+    catalog/includes/languages/english/modules/header_tags/ht_points_rewards.php
+    catalog/includes/languages/english/modules/navbar_modules/nb_shopping_cart_points.php
+    catalog/includes/languages/english/modules/order_total/ot_redemptions.php
+    catalog/includes/languages/english/modules/pages/tp_account.php
+    catalog/includes/languages/english/modules/payment/points.php	
     catalog/includes/modules/boxes/bm_information_points.php
     catalog/includes/modules/boxes/bm_shopping_cart_points.php
     catalog/includes/modules/boxes/templates/information_points.php
     catalog/includes/modules/boxes/templates/shopping_cart_points.php
-	catalog/includes/modules/content/account/cm_account_points.php
-	catalog/includes/modules/content/product_info_points/cm_pi_points.php
-	catalog/includes/modules/content/product_info_points/templates/points.php
-	catalog/includes/modules/content/reviews_points/cm_r_points.php
-	catalog/includes/modules/content/reviews_points/templates/points.php
-	catalog/includes/modules/header_tags/ht_points_rewards.php
-	catalog/includes/modules/navbar_modules/nb_shopping_cart_points.php
-	catalog/includes/modules/navbar_modules/templates/shopping_cart_points.php
-	catalog/includes/modules/order_total/ot_redemptions.php
-	catalog/includes/modules/payment/points.php
+    catalog/includes/modules/content/account/cm_account_points.php
+    catalog/includes/modules/content/product_info_points/cm_pi_points.php
+    catalog/includes/modules/content/product_info_points/templates/points.php
+    catalog/includes/modules/content/reviews_points/cm_r_points.php
+    catalog/includes/modules/content/reviews_points/templates/points.php
+    catalog/includes/modules/header_tags/ht_points_rewards.php
+    catalog/includes/modules/navbar_modules/nb_shopping_cart_points.php
+    catalog/includes/modules/navbar_modules/templates/shopping_cart_points.php
+    catalog/includes/modules/order_total/ot_redemptions.php
+    catalog/includes/modules/payment/points.php
+    
+NOTE: If you are using "Modular Product Page by kymation, use these files:
+      Modular product page by kymation/catalog/includes/languages/english/modules/content/product_info/cm_pi_points.php
+      Modular product page by kymation/catalog/includes/modules/content/product_info/cm_pi_points.php
+      Modular product page by kymation/catalog/includes/modules/content/product_info/templates/cm_pi_points.php
 	
 ====DONE====
 -- Add this to admin section --------------
@@ -96,16 +100,16 @@ copy the new files provided into the same location in your catalog and admin dir
     admin/customers_points_expire.php (cron script)
     admin/customers_points_pending.php
     admin/customers_points_referral.php
-	admin/includes/boxes/points_rewards.php
+    admin/includes/boxes/points_rewards.php
     admin/includes/languages/english/customers_points.php
     admin/includes/languages/english/customers_points_pending.php
     admin/includes/languages/english/customers_points_referral.php
-	admin/includes/languages/english/images/buttons/button_add_points.gif
-	admin/includes/languages/english/images/buttons/button_adjust_points.gif
-	admin/includes/languages/english/images/buttons/button_cancel_points.gif
-	admin/includes/languages/english/images/buttons/button_confirm_points.gif
-	admin/includes/languages/english/images/buttons/button_delete_points.gif
-	admin/includes/languages/english/images/buttons/button_rollback_points.gif
+    admin/includes/languages/english/images/buttons/button_add_points.gif
+    admin/includes/languages/english/images/buttons/button_adjust_points.gif
+    admin/includes/languages/english/images/buttons/button_cancel_points.gif
+    admin/includes/languages/english/images/buttons/button_confirm_points.gif
+    admin/includes/languages/english/images/buttons/button_delete_points.gif
+    admin/includes/languages/english/images/buttons/button_rollback_points.gif
 	
 ====DONE====
 	
@@ -116,7 +120,7 @@ B. INSTALL REQUIRED MODULES
 Access your admin area, install and setup the "Points and Rewards" header tags module. (Modules -> Header Tags)
 
 Installing the module will check if hook support is present in the store and apply all necessary modifications to the store files.
-If you see success messages for all modifications, your sloppy words cleaner is ready for use.
+If you see success messages for all modifications, your points and rewards is ready for use.
 
 If you see any warning that a file has not been modified, please follow the Instructions:
 C. EDITING OSC FILES.(catalog directory)

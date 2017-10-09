@@ -2,10 +2,22 @@
 /*
   $Id cm_pi_points.php, v1.0.2 20160330 Kymation$
 
+   originally coded by Ben Zukrel 
+   Improved and converted for osC Bootstrap by
+   @Tsimi
+   and
+   @raiwa Rainer Schmied / info@oscaddons.com  / www.oscaddons.com
+
+   Additional credits to @LeeFoster for bug reports and fixes
+   German translation by @Tsimi
+   German revision by @raiwa
+   Spanish translation by @TITO4
+   Spanish revision by @PiLLaO 
+  
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2016 osCommerce
+  Copyright (c) 2017 osCommerce
 
   Released under the GNU General Public License
 */
@@ -26,6 +38,19 @@
       $this->title = MODULE_CONTENT_PRODUCT_INFO_POINTS_TITLE;
       $this->description = MODULE_CONTENT_PRODUCT_INFO_POINTS_DESCRIPTION;
       $this->description .= '<div class="secWarning">' . MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION . '</div>';
+      $this->description .= '<div class="secWarning">' . MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION . '</div>';
+      if (!defined('MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM') || MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_HT_WARNING . '<br>
+                                <a href="modules.php?set=header_tags&module=ht_points_rewards&action=install">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_HT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_ORDER_TOTAL_REDEMPTIONS_SORT_ORDER')) {
+        $this->description .=   '<div class="secWarning">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_OT_WARNING . '<br>
+                                <a href="modules.php?set=order_total&module=ot_redemptions&action=install">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_OT_INSTALL_NOW . '</a></div>';
+      }
+      if (!defined('MODULE_PAYMENT_POINTS_STATUS') || MODULE_PAYMENT_POINTS_STATUS != 'True') {
+        $this->description .=   '<div class="secWarning">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_WARNING . '<br>
+                                <a href="modules.php?set=payment&module=points&action=install">' . MODULE_CONTENT_PRODUCT_INFO_POINTS_PM_INSTALL_NOW . '</a></div>';
+      }
 
       if ( defined('MODULE_CONTENT_PRODUCT_INFO_POINTS_STATUS') ) {
         $this->sort_order = MODULE_CONTENT_PRODUCT_INFO_POINTS_SORT_ORDER;
