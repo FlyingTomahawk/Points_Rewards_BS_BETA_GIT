@@ -165,6 +165,8 @@ C. EDITING OSC FILES.(catalog directory)
 and/or
 D. EDITING OSC FILES.(admin directory).
 
+A backup of your original, unmodified files is store in: admin/backups/points_backups/
+
 2.)
 Access your admin area and install the "Points Redemptions" order total module. (Modules -> Order Total)
 This option must appear after "Sub-Total" and before "Total". 
