@@ -56,8 +56,6 @@ To do list and tasks asigend:
   - move session register 'customer_shopping_points_spending' in checkout_confirmation.php into hook.
   - remove all related and obsolete changes in checkout_payment.php, checkout_confirmation_php and payment class</s>
 
-- revise all html tags for BS integration
-
 - revise and fix "known bugs" asigend to @LeeFoster and @Tsimi
   <s>- 1 fixed 12/09/2017 @LeeFoster and @Tsimi
   - 2 fixed 13/09/2017 @LeeFoster
@@ -80,9 +78,9 @@ To do list and tasks asigend:
   - <s>german asigned @Tsimi 17/09/2017 DONE 2017_10_05
   - spanish asigned @raiwa 17/09/2017 (@Pillao y Augustín) DONE 2017_10_02 revised 2017_10_06 </s>
   
-- <s>add installation checks to all modules DONE @raiwa 2017_10_01</s>
+- <s>add installation checks to all modules DONE @raiwa 2017_10_01
   
-- add version, developer and copyright info to header comments in all files. @Tsimi/@LeeFoster?
+- add version, developer and copyright info to header comments in all files. @Tsimi DONE</s>
 
 - <s>add installation script to header tag module (hooks register and calls, content modules)</s> DONE 2017_09_13 @raiwa
 
