@@ -1,4 +1,4 @@
-############ POINTS AND REWARDS BS #############
+####### POINTS AND REWARDS BS #########
 /*
   $Id$
    originally coded by Ben Zukrel 
@@ -22,54 +22,8 @@
 */
 ##################################################
 
-What does this addon do?
-------------------------------------
-This is a Points and Rewards system, aimed to generate additional sales or at least motivate customers to spend more money at your store. 
-The Points and Rewards system awards shopping points to customers for the amount they spend or for writing reviews or for referring new customers.
-Points are considered as cash when redeemed. Points are by default set to pending status until manually approved by the store owner or admin.
-Once approved, customers can then use those points to pay for their orders during the checkout process.
-
-Admin features
-------------------------------------
-
-* Enable/Disable the Points System. 
-* Enable/Disable the Redemptions System.(maybe you would like to offer a gift and not money back). 
-* Set the number of points awarded for evry $1.00 spent(or whatever based on your currency system). 
-* Set the value of each point(based on your currency system). 
-* Set Points Decimal Places
-* Enable Auto Credit Pending Points and set a days period before the reward points will actually added to customers account. 
-* Enable Auto Expires points and set a month period before points will auto Expires. 
-* Enable Points Expires Auto Reminder and set the numbers of days prior points expiration for the script to run. 
-* Enable/Disable points awarded for shipping fees. 
-* Enable/Disable points awarded for taxes. 
-* Enable/Disable points awarded for discounded products. 
-* Enable/Disable points awarded for order with redeemed points. 
-* Enable/Disable points awarded for Reviews. 
-* Enable/Disable points awarded for Referral. 
-* Enable/Disable Products Restriction. 
-* Set the Products Id allowed when Products Restriction enabled.(unlimited products) 
-* Set the Categories ID allowed When Products Restriction enabled.(unlimited categories path) 
-* Enable/Disable Products Price Restriction. 
-* Enable/Disable points Limitation. and set the number. of points needed before they can be redeemed. 
-* Set the maximum points allowed to be redeemed per order. 
-* Limit Points Redemptions to exact amount. 
-* Restrict Points Redemption For Minimum Purchase Amount. 
-* Enable/Disable Points credit information. shown in products info page. 
-* Enable/Disable Welcome points and set the points amount to be auto-credited for new signed up customers. 
-* Set the numbers of records to show per page at my_points.php page. 
-* Enable/Disable Keeping records of redeemed points.
-
-Customers features
-------------------------------------
-* New signup customers can be awarded with welcome points.
-* Customers can earn points(cash back) for an item purchased at the store.
-* Customers can earn points for writing reviews.
-* Customers can earn referral points.
-* Customers can view their current shopping points balance.
-
-
 ******************* MAKE SURE TO BACKUP YOUR FILES BEFORE ***********************
-This addon has been modified to work with osC BS GOLD and EDGE.
+This addon has been modified to work with the latest osC BS GOLD and EDGE.
 If your osCommerce version is not osC BS GOLD or EDGE, don't even start.
 
 Please use it at your own risk.
@@ -142,12 +96,20 @@ NOTE: If you are using "Modular Product Page by kymation, use these files:
 -- Add this to admin section --------------
 
     admin/customers_points.php
+    admin/customers_points_credit.php (cron script)
+    admin/customers_points_expire.php (cron script)
     admin/customers_points_pending.php
     admin/customers_points_referral.php
     admin/includes/boxes/points_rewards.php
     admin/includes/languages/english/customers_points.php
     admin/includes/languages/english/customers_points_pending.php
     admin/includes/languages/english/customers_points_referral.php
+    admin/includes/languages/english/images/buttons/button_add_points.gif
+    admin/includes/languages/english/images/buttons/button_adjust_points.gif
+    admin/includes/languages/english/images/buttons/button_cancel_points.gif
+    admin/includes/languages/english/images/buttons/button_confirm_points.gif
+    admin/includes/languages/english/images/buttons/button_delete_points.gif
+    admin/includes/languages/english/images/buttons/button_rollback_points.gif
 	
 ====DONE====
 	
@@ -165,7 +127,7 @@ C. EDITING OSC FILES.(catalog directory)
 and/or
 D. EDITING OSC FILES.(admin directory).
 
-A backup of your original, unmodified files is store in: admin/backups/points_backups/
+A backup of your original, unmodified files is stored in: admin/backups/points_backups/
 
 2.)
 Access your admin area and install the "Points Redemptions" order total module. (Modules -> Order Total)
@@ -257,9 +219,9 @@ ADD:
 
 SAVE AND CLOSE!
 
-------------------------------------------------------------------------------------------------------------
-FROM HERE ON EDIT ONLY THE FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+EDIT THE FOLLOWING FILES ONLY FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
+------------------------------------------------------------------------------------------
 
 CATALOG STEP = 5.   open catalog/checkout_confirmation.php
 This will add hook register and call to checkout_confirmation page.
@@ -578,10 +540,10 @@ ADD AFTER IT:
 // EOF POINTS REWARDS BS	
 
 SAVE AND CLOSE!
+------------------------------------------------------------------------------------------
 
----------------------------------------------------------------------------------------------
-EDIT ONLY THE FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
----------------------------------------------------------------------------------------------
+EDIT ONLY FILES FOR WHICH YOU GOT AN ERROR MESSAGE WHEN INSTALLING THE HEADER TAG MODULE
+
 D. EDITING OSC FILES.(admin directory).
 
 ADMIN STEP = 1.   open admin/orders.php
