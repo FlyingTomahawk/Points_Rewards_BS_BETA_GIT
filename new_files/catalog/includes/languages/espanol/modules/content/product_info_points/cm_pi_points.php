@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id cm_pi_description.php
+  $Id cm_pi_points.php
 
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
