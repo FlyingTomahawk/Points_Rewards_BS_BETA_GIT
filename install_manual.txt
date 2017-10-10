@@ -25,7 +25,7 @@
 What does this addon do?
 ------------------------------------
 This is a Points and Rewards system, aimed to generate additional sales or at least motivate customers to spend more money at your store. 
-The Points and Rewards system awards shopping points to customers for the amount they spend or for written reviews or for referring new customers.
+The Points and Rewards system awards shopping points to customers for the amount they spend or for writing reviews or for referring new customers.
 Points are considered as cash when redeemed. Points are by default set to pending status until manually approved by the store owner or admin.
 Once approved, customers can then use those points to pay for their orders during the checkout process.
 
@@ -148,12 +148,6 @@ NOTE: If you are using "Modular Product Page by kymation, use these files:
     admin/includes/languages/english/customers_points.php
     admin/includes/languages/english/customers_points_pending.php
     admin/includes/languages/english/customers_points_referral.php
-    admin/includes/languages/english/images/buttons/button_add_points.gif
-    admin/includes/languages/english/images/buttons/button_adjust_points.gif
-    admin/includes/languages/english/images/buttons/button_cancel_points.gif
-    admin/includes/languages/english/images/buttons/button_confirm_points.gif
-    admin/includes/languages/english/images/buttons/button_delete_points.gif
-    admin/includes/languages/english/images/buttons/button_rollback_points.gif
 	
 ====DONE====
 	
