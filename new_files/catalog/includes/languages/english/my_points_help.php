@@ -56,6 +56,7 @@ define('POINTS_FAQ_14', '14. Products Restrictions');
 define('POINTS_FAQ_15', '15. Products on sale Restrictions');
 define('POINTS_FAQ_16', '16. Conditions of Use');
 define('POINTS_FAQ_17', '17. When Problems Occur');
+define('POINTS_FAQ_18', '18. Guest Orders'); // PWA Guest Checkout support
 
 // Definition of the answer for each of the questions:
 
@@ -192,6 +193,23 @@ Please note, we reserve the right to make changes to this policy at any time wit
 
 // FAQ17
 define('TEXT_FAQ_17', 'For any queries regarding our Reward Point Program, please <a href="' . tep_href_link('contact_us.php') . '"> <u>contact us </u></a>.  Make sure you provide as much information as possible in the e-mail.');
+
+// FAQ18 PWA Guest Checkout support
+define('TEXT_FAQ_18_A', 'If you use the Guest Checkout (Purchase Without Account) option:<br>
+                         <ul>
+                           <li>During your first order you can refer a friend who told you about us. Your friend will receive referral points.</li>
+                           <li>You will receive shopping points, but you will only be able to redeem them if you opt in to convert your guest account into a regular account and set an account password once you finished the order process.</li>
+                          </ul>');
+define('TEXT_FAQ_18_B', 'If you use the Guest Checkout (Purchase Without Account) option:<br>
+                         <ul>
+                           <li>You will receive shopping points, but you will only be able to redeem them if you opt in to convert your guest account into a regular account and set an account password once you finished the order process.</li>
+                         </ul>');
+define('TEXT_FAQ_18_C', 'If you use the Guest Checkout (Purchase Without Account) option:<br>
+                         <ul>
+                           <li>You can refer a friend who told you about us on your first order. Your friend will receive the referral points.</li>
+                           <li>You will not receive shopping points and can\'t redeem points in your next order.</li>
+                         </ul>');
+define('TEXT_FAQ_18_D', 'If you use the Guest Checkout (Purchase Without Account) option, the Points system is not available.');
 
 // Below is the section that will actually displax on the FAQ page
 define('TEXT_INFORMATION', '<a name="Top"></a><span class="pointWarning"><b>Please choose from one of the topics below:</b></span>');

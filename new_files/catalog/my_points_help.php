@@ -301,6 +301,38 @@
       </div>
     </div>
   </div>
+  <?php 
+  // PWA Guest Checkout support BEGIN
+    if ( defined('MODULE_CONTENT_PWA_LOGIN_STATUS') && MODULE_CONTENT_PWA_LOGIN_STATUS == 'True') {
+      ?>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading18">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse18" aria-expanded="false" aria-controls="collapse18">
+             <?php echo POINTS_FAQ_18;?>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse18" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading18">
+          <div class="panel-body">
+          <?php 
+            if ( MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM > 0 && MODULE_CONTENT_PWA_LOGIN_KEEP_ACCOUNT == 'True') {
+              echo TEXT_FAQ_18_A;
+            } else if ( MODULE_CONTENT_PWA_LOGIN_KEEP_ACCOUNT == 'True')  {
+              echo TEXT_FAQ_18_B;
+            } else if ( MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_REFERRAL_SYSTEM > 0 )  {
+              echo TEXT_FAQ_18_C;
+            } else {
+              echo TEXT_FAQ_18_D;
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+      <?php
+    }            
+    // PWA Guest Checkout support END
+  ?>
   
 </div>
 
