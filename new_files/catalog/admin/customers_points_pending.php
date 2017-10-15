@@ -376,6 +376,15 @@
           $sort .= "o.orders_id desc";
      }
      
+      // PWA guest checkout support BEGIN
+      if ( defined('MODULE_CONTENT_PWA_LOGIN_STATUS') && MODULE_CONTENT_PWA_LOGIN_STATUS == 'True' ) {
+        if (tep_db_num_rows(tep_db_query("select * from customers c, orders o where c.customers_id = o.customers_id and c.customers_guest = '0'")) == 0 ) {
+          $order_time_lapse = date('Y-m-d H:i:s', strtotime('-15 minutes'));
+          tep_db_query("delete pp.* from customers_points_pending pp, orders o where pp.orders_id = o.orders_id and o.customers_guest = '1' and o.date_purchased < '" . $order_time_lapse  . "'");
+        }
+      }
+      // PWA guest checkout support END
+
       if (isset($_GET['search']) && tep_not_null($_GET['search'])) {
         $sorders = tep_db_input(tep_db_prepare_input($_GET['search']));
         $pending_points_query_raw = "select o.orders_id, o.customers_id, o.customers_name, o.customers_email_address, o.payment_method, o.date_purchased, o.orders_status, s.orders_status_name, ot.text as order_total, pp.unique_id, pp.points_pending, pp.points_comment, pp.points_status, pp.points_type from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s, customers_points_pending pp where o.orders_id = '" . (int)$sorders . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by orders_id DESC";
@@ -392,15 +401,13 @@
       } else {
         $pending_points_query_raw = "select o.orders_id, o.customers_id, o.customers_name, o.customers_email_address, o.payment_method, o.date_purchased, o.orders_status, s.orders_status_name, ot.text as order_total, pp.unique_id, pp.points_pending, pp.points_comment, pp.points_status, pp.points_type from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s, customers_points_pending pp where points_type = 'SP' and pp.points_status = 1 and (pp.orders_id = o.orders_id and ot.class = 'ot_total' and o.orders_id = ot.orders_id and o.orders_status = s.orders_status_id) and s.language_id = '" . (int)$languages_id . "' order by $sort";
       }
-  
-        
-        
-  
+    
       $pending_points_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $pending_points_query_raw, $pending_points_query_numrows);
       $pending_points_query = tep_db_query($pending_points_query_raw);
       
       while ($pending_points = tep_db_fetch_array($pending_points_query)) {
-    
+   
+      $uInfo = new objectInfo($pending_points);
       if ((!isset($_GET['uID']) || (isset($_GET['uID']) && ($_GET['uID'] == $pending_points['unique_id']))) && !isset($uInfo)) {
           $uInfo = new objectInfo($pending_points);
         }
