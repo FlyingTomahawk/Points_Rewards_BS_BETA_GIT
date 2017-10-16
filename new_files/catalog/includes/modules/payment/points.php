@@ -50,8 +50,12 @@
     }
 
     function update_status() {
-      global $order, $cart, $max_points;
-
+      global $order, $cart, $max_points, $PHP_SELF;
+	  
+      if( basename($PHP_SELF) == 'edit_orders.php' && !function_exists('check_points_redemtion') ) {
+        require_once(DIR_FS_CATALOG . 'includes/functions/redemptions.php'); 
+      }
+	  
       if ( ($this->enabled == true) && ((int)MODULE_PAYMENT_POINTS_ZONE > 0) ) {
         $check_flag = false;
         $check_query = tep_db_query("select zone_id from zones_to_geo_zones where geo_zone_id = '" . MODULE_PAYMENT_POINTS_ZONE . "' and zone_country_id = '" . $order->delivery['country']['id'] . "' order by zone_id");
