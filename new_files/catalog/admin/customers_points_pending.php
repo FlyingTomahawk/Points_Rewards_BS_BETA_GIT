@@ -407,7 +407,6 @@
       
       while ($pending_points = tep_db_fetch_array($pending_points_query)) {
    
-      $uInfo = new objectInfo($pending_points);
       if ((!isset($_GET['uID']) || (isset($_GET['uID']) && ($_GET['uID'] == $pending_points['unique_id']))) && !isset($uInfo)) {
           $uInfo = new objectInfo($pending_points);
         }
