@@ -73,6 +73,18 @@ class hook_admin_orders_points {
       $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
       if (tep_db_num_rows($p_status_query)) {
         echo '<tr><td colspan="2"><strong>' . POINTS_HOOK_ORDERS_ENTRY_NOTIFY_POINTS . '</strong>&nbsp;' . POINTS_HOOK_ORDERS_QUE_POINTS . tep_draw_checkbox_field('confirm_points', '', false) . '&nbsp;' . POINTS_HOOK_ORDERS_QUE_DEL_POINTS . tep_draw_checkbox_field('delete_points', '', false) . '</td></tr>';
+?>
+<script>
+$('select[name="status"]').change(function(){
+  var statusArray = '<?php echo MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_AUTO_TICK_ORDER_STATUS ?>'.split(',');
+  if (statusArray.indexOf($(this).val()) >= 0) {
+    $('input:checkbox[name="confirm_points"]').each(function(){ this.checked = true; });
+  } else {
+    $('input:checkbox[name="confirm_points"]').each(function(){ this.checked = false; });
+  }
+});
+</script>
+<?php
       }
     }
   }
