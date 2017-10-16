@@ -86,7 +86,7 @@
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Decimal Places', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES', '0', 'Pad the points value this amount of decimal places', '6', '5', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Auto Credit Pending Points', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON', '', 'Enable Auto Credit Pending Points and set a days period before the reward points will actually added to customers account.<br>For same day set to 0(zero).<br>To disable this option leave empty.', '6', '6', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Auto Expires Points', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES', '12', 'Set a month period before points will auto Expires.<br>To disable this option leave empty.', '6', '7', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Expires Auto Remainder', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND', '30', 'Enable Points Expires Auto Reminder and set the numbers of days prior points expiration for the script to run.(Auto Expires Points must be enabled)<br>To disable this option leave empty.', '6', '8', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Expires Auto Remainder', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND', '30', 'Enable Points Expires Auto Remainder and set the numbers of days prior points expiration for the script to run.(Auto Expires Points must be enabled)<br>To disable this option leave empty.', '6', '8', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Award points for shipping', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING', 'False', 'Enable customers to earn points for shipping fees?', '6', '9', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Award points for Tax', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX', 'False', 'Enable customers to earn points for Tax?', '6', '10', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Award points for Specials', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SPECIALS', 'True', 'Enable customers to earn points for items already discounted?<br>When set to false, Points awarded only on items with full price', '6', '11', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
@@ -125,7 +125,7 @@
       $this->check_hook_support();
                   
       //loop pages
-      foreach (get_pages() as $page) {
+      foreach (get_pages_pr() as $page) {
     
         $this->create_backup($page);
         
@@ -173,7 +173,7 @@
       }
       
       //loop pages
-      foreach (get_pages() as $page) {
+      foreach (get_pages_pr() as $page) {
 
         // remove points and rewards code in all related pages
         // define points and rewards code for all pages
@@ -331,7 +331,7 @@
     }
 
     // function add points and rewards code to core files  
-    function install_points_hooks($page, $page_array) {
+    private function install_points_hooks($page, $page_array) {
          
       // define points and rewards ref code and added code lines
       $points_code = null;
@@ -522,7 +522,7 @@
     } 
 
     // function check points and rewards hooks register and call installation in core files  
-    function check_points_hooks($page) {
+    private function check_points_hooks($page) {
      
         $page_array = null;
         $error = false;
@@ -553,7 +553,7 @@
     } 
 
     // function check remove points and rewards hooks register and call installation in account files  
-    function check_remove_points_hooks($page, $points_remove_code) {
+    private function check_remove_points_hooks($page, $points_remove_code) {
      
         // check remove
         $page_array = null;
@@ -584,7 +584,7 @@
     } 
 
     // function create htaccess backup  
-    function create_backup($orig_filename) {
+    private function create_backup($orig_filename) {
       $separator = ((substr(DIR_FS_CATALOG, -1) != '/') ? '/' : '');
       $backupDir = DIR_FS_BACKUP . $separator . 'points_backups';
       $backupDir .= '/';
@@ -610,7 +610,7 @@ Deny from all
     } 
 
     // function recover backups if error 
-    function recover_backup($orig_filename) {
+    private function recover_backup($orig_filename) {
       $separator = ((substr(DIR_FS_CATALOG, -1) != '/') ? '/' : '');
       $backupDir = DIR_FS_BACKUP . $separator . 'points_backups';
       $backupDir .= '/';
@@ -623,7 +623,7 @@ Deny from all
     } 
 
    
-    function show_install_message($page, $error) {
+    private function show_install_message($page, $error) {
       global $messageStack;
       if ($error == false) {
         $messageStack->add_session('Points and Rewards codes have been successfully added to the file: "' . $page . '"', 'success');
@@ -634,7 +634,7 @@ Deny from all
       }
     }
   
-    function show_remove_message($page, $error) {
+    private function show_remove_message($page, $error) {
       global $messageStack;
       if ($error == false) {
         $messageStack->add_session('Points and Rewards codes have been successfully removed from the file: "' . $page . '"', 'success');
@@ -646,7 +646,7 @@ Deny from all
     }
    
     // function check if hook support exists  
-    function check_hook_support() {
+    private function check_hook_support() {
       global $messageStack;
      
       if ( file_exists(DIR_FS_CATALOG . 'includes/classes/hooks.php') ) {
@@ -823,7 +823,7 @@ Deny from all
    
   } // end class
 
-  function get_pages() {
+  function get_pages_pr() {
     $pages_array = array('checkout_confirmation.php',
                          'checkout_payment.php',
                          'checkout_process.php',
