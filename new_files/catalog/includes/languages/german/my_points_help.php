@@ -56,6 +56,7 @@ define('POINTS_FAQ_14', '14. Produkt-Einschränkungen');
 define('POINTS_FAQ_15', '15. Sonderangebots-Einschränkungen');
 define('POINTS_FAQ_16', '16. Nutzungsbedingungen');
 define('POINTS_FAQ_17', '17. Falls Probleme auftauchen');
+define('POINTS_FAQ_18', '18. Bestellungen mit Gastkonto'); // PWA Guest Checkout support
 
 // Definition of the answer for each of the questions:
 
@@ -188,6 +189,23 @@ Bitte beachten Sie dass wir jederzeit ohne Vorankündigung die Richtlinien ände
 
 // FAQ17
 define('TEXT_FAQ_17', 'Falls Sie weitere Fragen zu unserem Bonuspunkte System haben nehmen Sie bitte mit uns <a href="' . tep_href_link('contact_us.php') . '"> <u>Kontakt</u></a> auf.');
+
+// FAQ18 PWA Guest Checkout support
+define('TEXT_FAQ_18_A', 'Wenn Sie die Option "Gast Checkout (Purchase Without Account)" verwenden:<br>
+                         <ul>
+                           <li>Während Ihrer ersten Bestellung können Sie einen Freund oder Verwandten vermitteln, der Ihnen von uns erzählt hat. Dein Freund erhält dann Empfehlungspunkte.</li>
+                           <li>Sie erhalten Bonuspunkte, die Sie jedoch nur einlösen können, wenn Sie Ihr Gastkonto in ein reguläres Konto umwandeln und nach Abschluss des Bestellvorgangs ein Kontopasswort festlegen.</li>
+                          </ul>');
+define('TEXT_FAQ_18_B', 'Wenn Sie die Option "Gast Checkout (Purchase Without Account)" verwenden:<br>
+                         <ul>
+                           <li>Sie erhalten Bonuspunkte, die Sie jedoch nur einlösen können, wenn Sie Ihr Gastkonto in ein reguläres Konto umwandeln und nach Abschluss des Bestellvorgangs ein Kontopasswort festlegen.</li>
+                         </ul>');
+define('TEXT_FAQ_18_C', 'Wenn Sie die Option "Gast Checkout (Purchase Without Account)" verwenden:<br>
+                         <ul>
+                           <li>Während Ihrer ersten Bestellung können Sie einen Freund oder Verwandten vermitteln, der Ihnen von uns erzählt hat. Dein Freund erhält dann Empfehlungspunkte.</li>
+                           <li>Sie erhalten keine Bonuspunkte und können keine Punkte bei Ihrer nächsten Bestellung einlösen.</li>
+                         </ul>');
+define('TEXT_FAQ_18_D', 'Wenn Sie die Option "Gast Checkout (Purchase Without Account)" verwenden, ist das Punkte-System nicht verfügbar.');
 
 // Below is the section that will actually displax on the FAQ page
 define('TEXT_INFORMATION', '<a name="Top"></a><span class="pointWarning"><b>Bitte wählen Sie aus einem der folgenden Themen:</b></span>');
