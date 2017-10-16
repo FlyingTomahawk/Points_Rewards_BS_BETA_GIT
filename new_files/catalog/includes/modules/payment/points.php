@@ -50,9 +50,9 @@
     }
 
     function update_status() {
-      global $order, $cart, $max_points, $PHP_SELF;
+      global $order, $cart, $max_points;
 	  
-      if( basename($PHP_SELF) == 'edit_orders.php' && !function_exists('check_points_redemtion') ) {
+      if( !function_exists('check_points_redemtion') ) {
         require_once(DIR_FS_CATALOG . 'includes/functions/redemptions.php'); 
       }
 	  
