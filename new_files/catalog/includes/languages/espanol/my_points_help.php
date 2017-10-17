@@ -1,4 +1,4 @@
-<?php
+ <?php
 /*
   $Id$
    originally coded by Ben Zukrel 
@@ -56,6 +56,7 @@ define('POINTS_FAQ_14', '14. Restricciones de uso para algunos Productos');
 define('POINTS_FAQ_15', '15. Products on sale Restrictions');
 define('POINTS_FAQ_16', '16. Condiciones de Uso');
 define('POINTS_FAQ_17', '17. Cuando hay Problemas...');
+define('POINTS_FAQ_18', '18. Pedidos sin cuenta de cliente'); // PWA Guest Checkout support
 
 
 // Definition of the answer for each of the questions:
@@ -193,6 +194,23 @@ Por favor, tenga en cuenta que nos reservamos el derecho a realizar cambios a nu
 
 // FAQ17
 define('TEXT_FAQ_17', 'Para cualquier aclaración sobre nuestro Programa de premios en Puntos, por favor, <a href="' . tep_href_link('contact_us.php') . '"> <u>contacte con nosotros</u></a>. Asegúrese de facilitarnos toda la información posible en su email.');
+
+// FAQ18 PWA Guest Checkout support
+define('TEXT_FAQ_18_A', 'Si usa la opción Compra de Invitados (Comprar sin Cuenta de Cliente):<br>
+                         <ul>
+                           <li>Durante su primer pedido puede referir a un amigo que le informó sobre nosotros. Su amigo recibirá puntos por referencias.</li>
+                           <li>Recibirá puntos por compra, pero solo podrá canjearlos si opta por convertir su Cuenta de Invitado en una Cuenta Regular y establece una contraseña de cuenta una vez que haya finalizado el proceso de compra.</li>
+                          </ul>');
+define('TEXT_FAQ_18_B', 'Si usa la opción Compra de Invitados (Comprar sin Cuenta de Cliente):<br>
+                         <ul>
+                           <li>Recibirá puntos por compra, pero solo podrá canjearlos si opta por convertir su Cuenta de Invitado en una Cuenta Regular y establece una contraseña de cuenta una vez que haya finalizado el proceso de compra.</li>
+                         </ul>');
+define('TEXT_FAQ_18_C', 'Si usa la opción Compra de Invitados (Comprar sin Cuenta de Cliente):<br>
+                         <ul>
+                           <li>Durante su primer pedido puede referir a un amigo que le informó sobre nosotros. Su amigo recibirá puntos por referencias.</li>
+                           <li>No recibirá puntos por compra y no podrá canjear puntos en su siguiente compra.</li>
+                         </ul>');
+define('TEXT_FAQ_18_D', 'Si usa la opción Compra de Invitados (Comprar sin Cuenta de Cliente), el sistema de puntos no está diponible para Usted.');
 
 // Below is the section that will actually displax on the FAQ page
 define('TEXT_INFORMATION', '<a name="Top"></a><span class="pointWarning"><b>Por favor, escoja alguna de las cuestiones siguientes:</b></span>');
