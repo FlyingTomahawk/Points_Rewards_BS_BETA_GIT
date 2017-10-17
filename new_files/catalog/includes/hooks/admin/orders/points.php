@@ -31,24 +31,22 @@ class hook_admin_orders_points {
     require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/hooks/admin/orders/points_hooks.php');
     
     if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
-      if ((isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on'))||(isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on'))) {
+      if ( (isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on')) || (isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on')) ) {
         $comments = POINTS_HOOK_ORDERS_CONFIRMED_POINTS  . $comments;
         $customer_query = tep_db_query("select customer_id, points_pending from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
         $customer_points = tep_db_fetch_array($customer_query);
         if (tep_db_num_rows($customer_query)) {
-          if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
-            $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
-            tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
-          } else {
-            tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
-          }
-  
-          if (isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on')) {
+          if ( isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on') ) {
             tep_db_query("delete from customers_points_pending where orders_id = '" . (int)$oID . "' and points_type = 'SP' limit 1");
             $sql = "optimize table customers_points_pending";
           }
-  
-          if (isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on')) {
+          if ( isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on') ) {
+            if (tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES)) {
+              $expire  = date('Y-m-d', strtotime('+ '. MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES .' month'));
+              tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."', customers_points_expires = '". $expire ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
+            } else {
+              tep_db_query("update customers set customers_shopping_points = customers_shopping_points + '". $customer_points['points_pending'] ."' where customers_id = '". (int)$customer_points['customer_id'] ."'");
+            }
             tep_db_query("update customers_points_pending set points_status = 2 where orders_id = '" . (int)$oID . "' and points_type = 'SP' limit 1");
             $sql = "optimize table customers_points_pending";
           }
@@ -79,7 +77,18 @@ $('select[name="status"]').change(function(){
   var statusArray = '<?php echo MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_AUTO_TICK_ORDER_STATUS ?>'.split(',');
   if (statusArray.indexOf($(this).val()) >= 0) {
     $('input:checkbox[name="confirm_points"]').each(function(){ this.checked = true; });
+    $('input:checkbox[name="delete_points"]').each(function(){ this.checked = false; });
   } else {
+    $('input:checkbox[name="confirm_points"]').each(function(){ this.checked = false; });
+  }
+});
+$('input:checkbox[name="confirm_points"]').on("click", function (){
+  if (this.checked == true) {
+    $('input:checkbox[name="delete_points"]').each(function(){ this.checked = false; });
+  }
+});
+$('input:checkbox[name="delete_points"]').on("click", function (){
+  if (this.checked == true) {
     $('input:checkbox[name="confirm_points"]').each(function(){ this.checked = false; });
   }
 });
