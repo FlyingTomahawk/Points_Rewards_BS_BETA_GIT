@@ -5,6 +5,7 @@ UPDATE VERSION 1.1
 To do list and tasks asigned:
 
 <s>
+    
 - add support for PWA Guest Checkout DONE
 
 - add compatibility for order editor and others to point payment module DONE
