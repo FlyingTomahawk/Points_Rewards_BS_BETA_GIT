@@ -1,8 +1,9 @@
 <?php
 /*
-  $Id: points_hooks.php
-  $Loc: catalog/includes/languages/english/hooks/admin/points/
-
+  $Id: points.php
+  $Loc: catalog/includes/languages/english/hooks/admin/orders/
+  
+   Version: 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
@@ -24,8 +25,8 @@
 */
 
 // used in orders.php
-define('POINTS_HOOK_ORDERS_ENTRY_NOTIFY_POINTS', 'Offene Punkte bestätigen:');
-define('POINTS_HOOK_ORDERS_QUE_POINTS', 'und Que');
-define('POINTS_HOOK_ORDERS_QUE_DEL_POINTS', 'und löschen:');
-define('POINTS_HOOK_ORDERS_CONFIRMED_POINTS', 'Punkte bestätigt.  ');
+define('POINTS_HOOK_ORDERS_ENTRY_NOTIFY_POINTS', 'Pending Shopping Points for this order:');
+define('POINTS_HOOK_ORDERS_QUE_POINTS', 'Validate');
+define('POINTS_HOOK_ORDERS_QUE_DEL_POINTS', 'Delete');
+define('POINTS_HOOK_ORDERS_CONFIRMED_POINTS', 'Points Confirmed.  ');
 
