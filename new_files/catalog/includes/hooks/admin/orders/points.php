@@ -30,7 +30,7 @@ class hook_admin_orders_points {
     
     require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/hooks/admin/orders/points.php');
     
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
+    if ( MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True' && MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON != 'True' ) {
       if ( (isset($_POST['confirm_points']) && ($_POST['confirm_points'] == 'on')) || (isset($_POST['delete_points']) && ($_POST['delete_points'] == 'on')) ) {
         $customer_query = tep_db_query("select customer_id, points_pending from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
         $customer_points = tep_db_fetch_array($customer_query);
@@ -67,7 +67,7 @@ class hook_admin_orders_points {
         
     require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/hooks/admin/orders/points.php');
 
-    if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && !tep_not_null(MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON)) {
+    if ( MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True' && MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON != 'True' ) {
       $p_status_query = tep_db_query("select points_status from customers_points_pending where points_status = 1 and points_type = 'SP' and orders_id = '" . (int)$oID . "' limit 1");
       if (tep_db_num_rows($p_status_query)) {
         echo '<tr>

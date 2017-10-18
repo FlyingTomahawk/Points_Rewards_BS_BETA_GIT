@@ -167,7 +167,7 @@
 	  
 	  $points_awarded = ($points_type != 'SP') ? $points_toadd : $points_toadd * MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_PER_AMOUNT_PURCHASE;
 	  
-	  if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON == '0') {
+	  if (MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON == 'True') {
 		  $sql_data_array = array('customer_id' => (int)$customer_id,
 		                          'orders_id' => (int)$insert_id,
 		                          'points_pending' => $points_awarded,

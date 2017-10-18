@@ -32,7 +32,7 @@ class hook_shop_checkout_payment_points {
   function listen_CheckoutPaymentPoints() {
     global $cart, $order, $language;
         
-    require('includes/languages/' . $language . '/hs/shop/checkout_payment/points.php');
+    require('includes/languages/' . $language . '/hooks/shop/checkout_payment/points.php');
 
     if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
       $cart_show_total= $cart->show_total();
