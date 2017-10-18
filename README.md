@@ -4,7 +4,8 @@ UPDATE VERSION 1.1
 
 To do list and tasks asigned:
 
-<s>- add support for PWA Guest Checkout DONE
+<s>
+- add support for PWA Guest Checkout DONE
 
 - add compatibility for order editor and others to point payment module DONE
 
@@ -14,7 +15,8 @@ To do list and tasks asigned:
 
 - update admin/orders checkboxes, auto tick by status, toggle checkboxes, rename lablels DONE
 
-- add update instructions 1.0 to 1.1 DONE</s>
+- add update instructions 1.0 to 1.1 DONE
+</s>
 
 - fix spanish language files asigned @Tito4
 
