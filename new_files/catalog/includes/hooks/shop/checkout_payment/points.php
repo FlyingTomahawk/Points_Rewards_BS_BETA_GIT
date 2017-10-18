@@ -32,11 +32,12 @@ class hook_shop_checkout_payment_points {
   function listen_CheckoutPaymentPoints() {
     global $cart, $order, $language;
         
-    require('includes/languages/' . $language . '/hooks/shop/checkout_payment/points.php');
+    require('includes/languages/' . $language . '/hs/shop/checkout_payment/points.php');
 
     if ((MODULE_HEADER_TAGS_POINTS_REWARDS_USE_POINTS_SYSTEM == 'True') && (MODULE_HEADER_TAGS_POINTS_REWARDS_USE_REDEEM_SYSTEM == 'True')) {
       $cart_show_total= $cart->show_total();
-
+      echo points_selection($cart_show_total);
+      
       // PWA guest checkout support BEGIN
       if ( defined('MODULE_CONTENT_PWA_LOGIN_STATUS') && MODULE_CONTENT_PWA_LOGIN_STATUS == 'True' && tep_session_is_registered('customer_is_guest') ) {
         $orders_check_query = tep_db_query("select count(*) as total from orders o, orders_status s where o.customers_email_address = '" . $order->customer['email_address'] . "'");
