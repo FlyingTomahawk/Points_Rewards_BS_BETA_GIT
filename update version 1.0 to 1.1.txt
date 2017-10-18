@@ -1,0 +1,59 @@
+
+******************* MAKE SURE TO BACKUP YOUR FILES BEFORE ***********************
+This addon has been modified to work with osC BS GOLD and EDGE.
+If your osCommerce version is not osC BS GOLD or EDGE, don't even start.
+
+Please use it at your own risk.
+------------------------------------------------------------------------------------------
+
+
+####### STEP BY STEP UPDATE VERSION 1.0 TO 1.1 ################
+
+A. UNINSTALL POINTS AND REWARDS HEADER TAG MODULE.
+B. UPLOAD AND REPLACE MODIFIED POINTS AND REWARDS FILES
+C. DELETE OBSOLETE POINTS AND REWARDS FILES
+D. REINSTALL POINTS AND REWARDS HEADER TAG MODULE.
+
+
+A. UNINSTALL POINTS AND REWARDS HEADER TAG MODULE.
+
+Access your admin area, (Modules -> Header Tags)
+Write down, copy or do a screenshot of your customized settings, the update will reset all settings to default.
+Uninstall the "Points and Rewards" header tags module. 
+
+B. UPDATE POINTS AND REWARDS FILES
+
+-- Upload and replace this to catalog section --------------
+
+    catalog/includes/functions/redemptions.php
+    catalog/includes/hooks/admin/orders/points.php
+    catalog/includes/hooks/shop/checkout_payment/points.php
+    catalog/includes/languages/english/my_points_help.php [and your other store languages]
+    catalog/includes/languages/english/hooks/admin/orders/points.php [and your other store languages]
+    catalog/includes/modules/header_tags/ht_points_rewards.php
+    catalog/includes/modules/payment/points.php
+====DONE====
+
+-- Upload and replace this to admin section --------------
+
+    admin/customers_points_pending.php
+====DONE====
+
+******************************************************************************************
+
+C. DELETE OBSOLETE POINTS AND REWARDS FILES
+
+-- Delete this in catalog section --------------
+
+    catalog/includes/languages/english/hooks/admin/orders/points.php [and your other store languages]
+====DONE====
+
+******************************************************************************************
+
+D. REINSTALL POINTS AND REWARDS HEADER TAG MODULE.
+
+Access your admin area, install and setup the "Points and Rewards" header tags module. (Modules -> Header Tags)
+
+***************************************************************
+THAT'S IT!
+***************************************************************
