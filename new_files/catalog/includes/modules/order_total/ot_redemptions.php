@@ -54,7 +54,7 @@
 // if customer is using points to pay   
         if (isset($customer_shopping_points_spending) && is_numeric($customer_shopping_points_spending) && ($customer_shopping_points_spending > 0)) {
 	      
-	        $order->info['total'] = $this->format_raw($order->info['total'] - tep_calc_shopping_pvalue($customer_shopping_points_spending));
+	        $order->info['total'] = $currencies->format_raw($order->info['total'] - tep_calc_shopping_pvalue($customer_shopping_points_spending));
 	        $order->info['payment_method'] = ( $order->info['total'] > 0) ? $order->info['payment_method'] . '+' . str_replace(':', '', MODULE_ORDER_TOTAL_REDEMPTIONS_POINTS) : str_replace(':', '', MODULE_ORDER_TOTAL_REDEMPTIONS_POINTS);
 	      
 	        $this->output[] = array('title' =>''. MODULE_ORDER_TOTAL_REDEMPTIONS_TEXT . ':',
