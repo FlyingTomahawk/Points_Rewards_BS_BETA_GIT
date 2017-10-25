@@ -1,6 +1,8 @@
 ############ POINTS AND REWARDS BS #############
 /*
   $Id$
+   
+   Version 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
@@ -29,6 +31,18 @@ The Points and Rewards system awards shopping points to customers for the amount
 Points are considered as cash when redeemed. Points are by default set to pending status until manually approved by the store owner or admin.
 Once approved, customers can then use those points to pay for their orders during the checkout process.
 
+Change log
+-----------
+
+Version 1.1
+
+ - Added PWA Guest Checkout support
+ - Added Order Editor support to points payment module
+ - Added auto tick checkbox by order status feature (multiple choices possible, use comma to spearate ID numbers)
+ - Renamed function names and converted to private functions (HT module)
+ - Bug fix for wrong order total calculation when product value is over $1000
+ 
+
 Admin features
 ------------------------------------
 
@@ -40,6 +54,7 @@ Admin features
 * Enable Auto Credit Pending Points and set a days period before the reward points will actually added to customers account. 
 * Enable Auto Expires points and set a month period before points will auto Expires. 
 * Enable Points Expires Auto Reminder and set the numbers of days prior points expiration for the script to run. 
+* Set order status ID for auto tick Validate checkbox feature in orders.php page. For multiple IDs separate with comma.
 * Enable/Disable points awarded for shipping fees. 
 * Enable/Disable points awarded for taxes. 
 * Enable/Disable points awarded for discounded products. 
@@ -176,6 +191,9 @@ YOU MUST change your value for "Total" sort order to any number higher then 4 (e
 3.)
 Access your admin area and install the "Points" payment method module. (Modules -> Payment)
 
+4.)
+Access your admin area and install the "My Points and Redemptions" module. (Modules -> Content)
+This will show the My Points and Redemptions block on the My Account page.
 
 ******************************************************************************************
 
@@ -202,7 +220,7 @@ ADD AFTER IT:
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-CATALOG STEP = 2.   catalog/languages/english/includes/modules/boxes/bm_information.php
+CATALOG STEP = 2.   catalog/includes/languages/english/modules/boxes/bm_information.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/bm_information.php
@@ -240,7 +258,7 @@ ADD AFTER IT:
 
 SAVE AND CLOSE!
 ------------------------------------------------------------------------------------------
-CATALOG STEP = 4.   catalog/languages/english/includes/modules/content/footer/cm_information_links.php
+CATALOG STEP = 4.   catalog/includes/languages/english/modules/content/footer/cm_information_links.php
 
 If your file is unmodified, you are save to upload and replace the following file:
 modified_core_files/catalog/includes/modules/boxes/bm_information.php
@@ -646,10 +664,6 @@ This will add the points credit information on the product info page.
 Access your admin area and install the "Shopping Cart with Points" box module. (Modules -> Boxes)
 This will display points info inside the shopping cart box.(customers must login).
 This will only show up when a customer points is bigger then 0
-
-4.)
-Access your admin area and install the "My Points and Redemptions" module. (Modules -> Content)
-This will show the My Points and Redemptions block on the My Account page.
 
 ***************************************************************
 THAT'S IT!
