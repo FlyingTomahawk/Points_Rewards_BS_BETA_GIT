@@ -1,6 +1,9 @@
 <?php
 /*
-  $Id$
+  $Id: ht_points_rewards.php 
+  $Loc: catalog/includes/modules/header_tags/
+  
+   Version: 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
@@ -86,7 +89,7 @@
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Decimal Places', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_DECIMAL_PLACES', '0', 'Pad the points value this amount of decimal places', '6', '5', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Auto Credit Pending Points', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_ON', 'False', 'Enable Auto Credit Shopping Points to add shopping points on checkout success to the customer account.', '6', '6', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Auto Expires Points', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_AUTO_EXPIRES', '12', 'Set a month period before points will auto Expires.<br>To disable this option leave empty.', '6', '7', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Expires Auto Remainder', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND', '30', 'Enable Points Expires Auto Remainder and set the numbers of days prior points expiration for the script to run.(Auto Expires Points must be enabled)<br>To disable this option leave empty.', '6', '8', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Points Expires Auto Reminder', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_POINTS_EXPIRES_REMIND', '30', 'Enable Points Expires Auto Reminder and set the numbers of days prior points expiration for the script to run.(Auto Expires Points must be enabled)<br>To disable this option leave empty.', '6', '8', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Auto tick que in order', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_AUTO_TICK_ORDER_STATUS', '3', 'Enable Auto Tick Que pending points in order page if one of the listed Order Status IDs is selceted.<br>Comma separated list of Order Status IDs.<br>To disable this option leave empty.', '6', '8', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Award points for shipping', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_SHIPPING', 'False', 'Enable customers to earn points for shipping fees?', '6', '9', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Award points for Tax', 'MODULE_HEADER_TAGS_POINTS_REWARDS_POINTS_USE_POINTS_FOR_TAX', 'False', 'Enable customers to earn points for Tax?', '6', '10', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");

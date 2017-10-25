@@ -3,6 +3,7 @@
   $Id: points.php
   $Loc: catalog/includes/hooks/admin/orders/
    
+   Version: 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi

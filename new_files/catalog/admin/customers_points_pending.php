@@ -1,6 +1,9 @@
 <?php
 /*
-  $Id$
+  $Id: customers_points_pending.php
+  $Loc: catalog/admin/ 
+  
+   Version: 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi

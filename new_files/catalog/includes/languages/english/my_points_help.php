@@ -1,6 +1,9 @@
 <?php
 /*
-  $Id$
+  $Id: my_points_help.php
+  $Loc: catalog/includes/languages/english/
+  
+   Version: 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
