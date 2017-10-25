@@ -25,8 +25,8 @@
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_HEADER', 'Canjeo de Puntos');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_DESCRIPTION', 'Canjeo de Puntos');
 
-  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_WARNING', '<strong>Módulo de Cabezera de Puntos y Premios</strong> no está instalado. Es requerido.');
-  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_INSTALL_NOW', '<u>Instalar ahora el Módulo de Cabezera de Puntos y Premios</u>');
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_WARNING', '<strong>Módulo de Cabecera de Puntos y Premios</strong> no está instalado. Es requerido.');
+  define('MODULE_ORDER_TOTAL_REDEMPTIONS_HT_INSTALL_NOW', '<u>Instalar ahora el Módulo de Cabecera de Puntos y Premios</u>');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_PM_WARNING', '<strong>Módulo de pago por Puntos</strong> no está instalado. Es requerido.');
   define('MODULE_ORDER_TOTAL_REDEMPTIONS_PM_INSTALL_NOW', '<u>Instalar ahora el módulo de pago por Puntos</u>');
 

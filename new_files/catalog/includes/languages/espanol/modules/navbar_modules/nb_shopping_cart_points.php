@@ -25,8 +25,8 @@
   define('MODULE_NAVBAR_SHOPPING_CART_POINTS_TITLE', 'Carrito con Puntos');
   define('MODULE_NAVBAR_SHOPPING_CART_POINTS_DESCRIPTION', 'Mostrar Carrito con Puntos en la Barra de Navegación');
   
-  define('MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_WARNING', '<strong>Módulo de Cabezera de Puntos y Premios</strong> no está instalado. Es requerido.');
-  define('MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_INSTALL_NOW', '<u>Instalar ahora el Módulo de Cabezera de Puntos y Premios</u>');
+  define('MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_WARNING', '<strong>Módulo de Cabecera de Puntos y Premios</strong> no está instalado. Es requerido.');
+  define('MODULE_NAVBAR_SHOPPING_CART_POINTS_HT_INSTALL_NOW', '<u>Instalar ahora el Módulo de Cabecera de Puntos y Premios</u>');
   define('MODULE_NAVBAR_SHOPPING_CART_POINTS_OT_WARNING', '<strong>El módulo total de pedido de Canjeo de Puntos</strong> no está instalado. Es requerido.');
   define('MODULE_NAVBAR_SHOPPING_CART_POINTS_OT_INSTALL_NOW', '<u>Instalar ahora el módulo total de pedido de Canjeo de Puntos</u>');
   define('MODULE_NAVBAR_SHOPPING_CART_POINTS_PM_WARNING', '<strong>Módulo de pago por Puntos</strong> no está instalado. Es requerido.');

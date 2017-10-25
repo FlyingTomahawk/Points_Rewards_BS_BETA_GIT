@@ -53,7 +53,7 @@ define('POINTS_FAQ_11', '11. ¿Obtendré Puntos al hacer compras usando los punt
 define('POINTS_FAQ_12', '12. Obtener Puntos por Referencias a amigos');
 define('POINTS_FAQ_13', '13. Obtener Puntos por escribir Comentarios');
 define('POINTS_FAQ_14', '14. Restricciones de uso para algunos Productos');
-define('POINTS_FAQ_15', '15. Products on sale Restrictions');
+define('POINTS_FAQ_15', '15. Restricciones de uso para algunos Productos en Oferta');
 define('POINTS_FAQ_16', '16. Condiciones de Uso');
 define('POINTS_FAQ_17', '17. Cuando hay Problemas...');
 define('POINTS_FAQ_18', '18. Pedidos sin cuenta de cliente'); // PWA Guest Checkout support
@@ -176,7 +176,7 @@ define('TEXT_FAQ_14_D', '<br>Le recomendamos encarecidamente que compruebe con f
 define('TEXT_FAQ_15_A', 'Actualmente no se pueden adquirir productos rebajados con su saldo en puntos.
 	                       <br><br>Recomendamos encarecidamente que visite esta página con frecuencia, ya que podemos realizar cambios al respecto.');
 
-define('TEXT_FAQ_15_B', 'Actualmente no hay restricciones aplicables al tipo de productos que se puedan comprar usando su saldo de puntos.
+define('TEXT_FAQ_15_B', 'Actualmente no hay restricciones aplicables al tipo de productos en oferta que se puedan comprar usando su saldo de puntos.
 	                       <br><br>Recomendamos encarecidamente que visite esta página con frecuencia, ya que podemos realizar cambios al respecto.');
 
 // FAQ16
