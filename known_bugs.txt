@@ -61,3 +61,7 @@ only one/last products/categories were shown
 10.) FIXED!
 
 e-mails not sent in admin/customers_points.php and admin/customers_points_pending.php
+
+11.) FIXED!
+
+When products value exceeds $1000 and points are redeemed order total shows the wrong total amount.
