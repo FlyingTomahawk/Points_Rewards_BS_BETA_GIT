@@ -19,12 +19,15 @@ To do list and tasks asigned:
 - add update instructions 1.0 to 1.1 DONE
 
 - fix spanish language files DONE @Tito4
-</s>
 
-<s> - fix filepath tipo in install instructions asigned @Tsimi DONE </s>
 
-<s> - add add-on support info to install instructions asigned @Tsimi DONE </s>
+- fix filepath tipo in install instructions DONE @Tsimi
+
+- add add-on support info to install instructions DONE @Tsimi
     
-<s> - add version info to header comments of updated files asigned @Tsimi DONE </s>
+- add version info to header comments of updated files DONE @Tsimi
+
+- bug 11 fix 
+</s>
 
 - release version 1.1 asigned @Tsimi
