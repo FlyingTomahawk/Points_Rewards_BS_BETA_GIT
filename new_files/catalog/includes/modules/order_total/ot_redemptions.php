@@ -1,6 +1,9 @@
 <?php
 /*
-  $Id$
+  $Id: ot_redemptions.php
+  $Loc: catalog/includes/modules/order_total/
+  
+   Version 1.1
    originally coded by Ben Zukrel 
    Improved and converted for osC Bootstrap by
    @Tsimi
@@ -51,7 +54,7 @@
 // if customer is using points to pay   
         if (isset($customer_shopping_points_spending) && is_numeric($customer_shopping_points_spending) && ($customer_shopping_points_spending > 0)) {
 	      
-	        $order->info['total'] = number_format($order->info['total'] - tep_calc_shopping_pvalue($customer_shopping_points_spending), 4);
+	        $order->info['total'] = $this->format_raw($order->info['total'] - tep_calc_shopping_pvalue($customer_shopping_points_spending));
 	        $order->info['payment_method'] = ( $order->info['total'] > 0) ? $order->info['payment_method'] . '+' . str_replace(':', '', MODULE_ORDER_TOTAL_REDEMPTIONS_POINTS) : str_replace(':', '', MODULE_ORDER_TOTAL_REDEMPTIONS_POINTS);
 	      
 	        $this->output[] = array('title' =>''. MODULE_ORDER_TOTAL_REDEMPTIONS_TEXT . ':',
@@ -79,6 +82,20 @@
 
     function remove() {
         tep_db_query("delete from configuration where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+    }
+
+	function format_raw($number, $currency_code = '', $currency_value = '') {
+      global $currencies, $currency;
+
+      if (empty($currency_code) || !$currencies->is_set($currency_code)) {
+        $currency_code = $currency;
+      }
+
+      if (empty($currency_value) || !is_numeric($currency_value)) {
+        $currency_value = $currencies->currencies[$currency_code]['value'];
+      }
+
+      return number_format(tep_round($number * $currency_value, $currencies->currencies[$currency_code]['decimal_places']), $currencies->currencies[$currency_code]['decimal_places'], '.', '');
     }
   }
 ?>
