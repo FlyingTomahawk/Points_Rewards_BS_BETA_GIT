@@ -28,8 +28,7 @@ What does this addon do?
 ------------------------------------
 This is a Points and Rewards system, aimed to generate additional sales or at least motivate customers to spend more money at your store. 
 The Points and Rewards system awards shopping points to customers for the amount they spend or for writing reviews or for referring new customers.
-Points are considered as cash when redeemed. Points are by default set to pending status until manually approved by the store owner or admin.
-Once approved, customers can then use those points to pay for their orders during the checkout process.
+Points are considered as cash when redeemed. Customers can then use those points to pay for their orders during the checkout process.
 
 Change log
 -----------
@@ -38,8 +37,8 @@ Version 1.1
 
  - Added PWA Guest Checkout support
  - Added Order Editor support to points payment module
+ - Added SWC (Sloppy Words Cleaner) support by renaming function names and converted to private functions (HT module) 
  - Added auto tick checkbox by order status feature (multiple choices possible, use comma to spearate ID numbers)
- - Renamed function names and converted to private functions (HT module)
  - Bug fix for wrong order total calculation when product value is over $1000
  
 
